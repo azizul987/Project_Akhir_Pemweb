@@ -1,7 +1,15 @@
 // base/_typography.scss
 
-h1, h2, h3, h4, h5, 
-.h1, .h2, .h3, .h4, .h5 {
+h1,
+h2,
+h3,
+h4,
+h5,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
   font-family: $headings-font-family; // Mengambil dari _variables.scss
   font-weight: 700;
   color: $white; // Variabel bawaan Bootstrap
@@ -19,7 +27,7 @@ p {
 a {
   text-decoration: none;
   transition: color 0.2s ease;
-  
+
   &:hover {
     color: $secondary;
   }

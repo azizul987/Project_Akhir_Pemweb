@@ -1,12 +1,14 @@
 .navbar {
-  background-color: var(--nav-bg, rgba(5,5,7,0.8)) !important;
+  background-color: var(--nav-bg, rgba(5, 5, 7, 0.8)) !important;
   border-bottom: 1px solid var(--nav-border, $glass-border);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   position: sticky;
   top: 0;
   z-index: 1000;
-  transition: background-color 180ms ease, border-color 180ms ease;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
 
   .nav-logo {
     width: 36px;
@@ -18,7 +20,9 @@
   .nav-link {
     font-weight: 500;
     color: var(--nav-text, rgba($light, 0.8)) !important;
-    transition: color 160ms ease, background-color 160ms ease;
+    transition:
+      color 160ms ease,
+      background-color 160ms ease;
 
     &:hover {
       color: var(--nav-link-hover, $secondary) !important;

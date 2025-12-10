@@ -6,7 +6,7 @@
   border-radius: 0.5rem;
   padding: 0.8rem 1rem;
   transition: all 0.3s ease;
-  
+
   &:focus {
     background-color: var(--glass-bg);
     border-color: $primary;
@@ -21,8 +21,8 @@
   // Light Mode Specific Overrides for Better Contrast
   body.light & {
     background-color: rgba(0, 0, 0, 0.06); // Slightly darker grey background
-    border-color: rgba(0, 0, 0, 0.15);     // Visible border
-    color: var(--text);                    // Dark text
+    border-color: rgba(0, 0, 0, 0.15); // Visible border
+    color: var(--text); // Dark text
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06); // Inner shadow for depth
 
     &:focus {

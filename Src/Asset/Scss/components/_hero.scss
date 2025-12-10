@@ -1,7 +1,15 @@
 .hero {
   background-image:
-    radial-gradient(600px 300px at 10% 10%, rgba(111,66,193,0.02), transparent 15%),
-    radial-gradient(500px 220px at 90% 80%, rgba(13,202,240,0.01), transparent 12%);
+    radial-gradient(
+      600px 300px at 10% 10%,
+      rgba(111, 66, 193, 0.02),
+      transparent 15%
+    ),
+    radial-gradient(
+      500px 220px at 90% 80%,
+      rgba(13, 202, 240, 0.01),
+      transparent 12%
+    );
   background-repeat: no-repeat;
 }
 
@@ -11,6 +19,7 @@
   border: 1px solid var(--glass-border);
 }
 
-.hero h1, .hero h1 span {
+.hero h1,
+.hero h1 span {
   color: var(--text) !important;
 }

@@ -11868,13 +11868,22 @@ body {
   scroll-behavior: smooth;
 }
 
-.text-muted-custom, .muted {
+.text-muted-custom,
+.muted {
   color: rgba(231, 233, 238, 0.7) !important;
   font-weight: 300;
 }
 
 h1,
-.h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
+.h1,
+h2,
+h3,
+h4,
+h5,
+.h2,
+.h3,
+.h4,
+.h5 {
   font-family: "Outfit", sans-serif;
   font-weight: 700;
   color: #fff;
@@ -11940,7 +11949,9 @@ a:hover {
   border: 1px solid var(--glass-border);
 }
 
-.hero h1, .hero .h1, .hero h1 span, .hero .h1 span {
+.hero h1, .hero .h1,
+.hero h1 span,
+.hero .h1 span {
   color: var(--text) !important;
 }
 
@@ -12041,7 +12052,8 @@ body.light .glass-input::placeholder {
   color: rgba(0, 0, 0, 0.5);
 }
 
-html, body {
+html,
+body {
   background-color: var(--bg);
   background-image: var(--bg-image);
   background-repeat: no-repeat;
@@ -12062,7 +12074,9 @@ body.light .nav-logo.tint {
 
 /* Fallback tanpa backdrop-filter */
 @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
-  .about-box, .site-footer, .card {
+  .about-box,
+  .site-footer,
+  .card {
     background: var(--surface);
   }
 }
@@ -12121,11 +12135,11 @@ body.light .nav-logo.tint {
   --color-dark: #050507;
   --bg: #050507;
   --text: #e7e9ee;
-  --muted: rgba(255,255,255,0.65);
-  --surface: rgba(0,0,0,0.12);
+  --muted: rgba(255, 255, 255, 0.65);
+  --surface: rgba(0, 0, 0, 0.12);
   --glass-bg: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
-  --shadow-soft: 0 6px 24px rgba(2,6,23,0.06);
+  --shadow-soft: 0 6px 24px rgba(2, 6, 23, 0.06);
   --bg-image: none;
 }
 
@@ -12136,11 +12150,24 @@ html.light {
   --surface: rgba(255, 255, 255, 0.92);
   --glass-bg: rgba(255, 255, 255, 0.78);
   --glass-border: rgba(15, 23, 42, 0.06);
-  --shadow-soft: 0 12px 36px rgba(10,18,34,0.08);
+  --shadow-soft: 0 12px 36px rgba(10, 18, 34, 0.08);
   --bg-image:
-    linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(250,251,253,1) 28%, rgba(244,246,249,1) 100%),
-    radial-gradient(700px 320px at 12% 18%, rgba(111,66,193,0.035), transparent 24%),
-    radial-gradient(520px 260px at 88% 82%, rgba(13,202,240,0.018), transparent 20%);
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(250, 251, 253, 1) 28%,
+      rgba(244, 246, 249, 1) 100%
+    ),
+    radial-gradient(
+      700px 320px at 12% 18%,
+      rgba(111, 66, 193, 0.035),
+      transparent 24%
+    ),
+    radial-gradient(
+      520px 260px at 88% 82%,
+      rgba(13, 202, 240, 0.018),
+      transparent 20%
+    );
   --card-elevation: 0 8px 28px rgba(10, 18, 34, 0.06);
   --nav-bg: rgba(255, 255, 255, 0.95);
   --nav-text: #0b1a28;
@@ -12148,12 +12175,18 @@ html.light {
   --nav-link-hover: #ff7a59;
   --nav-border: rgba(15, 23, 42, 0.06);
 }
-html.light .h2, html.light .h2.text-white,
-html.light .hero .display-4, html.light .hero .display-5, html.light .hero .hero-title,
-html.light .about-box h2, html.light .about-box h3, html.light .about-box .h3,
+html.light .h2,
+html.light .h2.text-white,
+html.light .hero .display-4,
+html.light .hero .display-5,
+html.light .hero .hero-title,
+html.light .about-box h2,
+html.light .about-box h3,
+html.light .about-box .h3,
 html.light .card h5,
 html.light .card .h5,
-html.light .site-footer p, html.light .site-footer .small,
+html.light .site-footer p,
+html.light .site-footer .small,
 html.light .text-white {
   color: var(--text) !important;
 }
@@ -12181,14 +12214,16 @@ html.light .card .text-muted-custom {
 html.dark {
   --bg: #0b1220;
   --text: #e7e9ee;
-  --muted: rgba(231,233,238,0.75);
-  --surface: rgba(255,255,255,0.02);
-  --glass-bg: rgba(255,255,255,0.04);
-  --glass-border: rgba(255,255,255,0.08);
-  --shadow-soft: 0 6px 30px rgba(2,6,23,0.6);
+  --muted: rgba(231, 233, 238, 0.75);
+  --surface: rgba(255, 255, 255, 0.02);
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --shadow-soft: 0 6px 30px rgba(2, 6, 23, 0.6);
   --bg-image: none;
 }
-html.dark .about-box, html.dark .site-footer, html.dark .card {
+html.dark .about-box,
+html.dark .site-footer,
+html.dark .card {
   background-color: var(--surface);
   background-image: none !important;
   border: 1px solid var(--glass-border);

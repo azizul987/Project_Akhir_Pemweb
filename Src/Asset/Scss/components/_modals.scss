@@ -1,0 +1,30 @@
+.glass-modal {
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  color: var(--text);
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+  .modal-header,
+  .modal-footer {
+    border-color: var(--glass-border);
+  }
+
+  .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%); // Make close button white-ish in dark mode
+  }
+
+  // Light Mode Overrides
+  body.light & {
+    background-color: rgba(255, 255, 255, 0.85);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: var(--text);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+
+    .btn-close {
+      filter: none;
+    }
+  }
+}

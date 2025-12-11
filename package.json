@@ -7,17 +7,16 @@
     "watch-css": "sass --watch src/assets/scss/styles.scss:dist/assets/css/styles.css",
     "copy-html": "cpx \"src/*.html\" dist",
     "copy-js": "cpx \"src/assets/js/**\" dist/assets/js",
-    "copy-assets": "cpx \"src/assets/images/**\" dist/assets/images", 
+    "copy-assets": "cpx \"src/assets/images/**\" dist/assets/images",
     "build": "npm run build-css && npm run copy-html && npm run copy-js && npm run copy-assets",
     "format": "prettier --write ."
   },
-  "dependencies": {  },
   "devDependencies": {
+    "autoprefixer": "10.4.22",
     "cpx2": "^8.0.0",
-    "prettier": "^3.7.4",
     "postcss": "^8.5.6",
     "postcss-cli": "11.0.1",
-    "autoprefixer": "10.4.22",
-    "sass": "^1.95.1"
+    "prettier": "^3.7.4",
+    "sass": "^1.96.0"
   }
 }

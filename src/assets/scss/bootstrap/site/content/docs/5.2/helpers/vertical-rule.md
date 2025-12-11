@@ -4,7 +4,7 @@ title: Vertical rule
 description: Use the custom vertical rule helper to create vertical dividers like the `<hr>` element.
 group: helpers
 toc: true
-added: "5.1"
+added: '5.1'
 ---
 
 ## How it works
@@ -20,12 +20,14 @@ Customize them with additional styles as needed.
 ## Example
 
 {{< example >}}
+
 <div class="vr"></div>
 {{< /example >}}
 
 Vertical rules scale their height in flex layouts:
 
 {{< example >}}
+
 <div class="d-flex" style="height: 200px;">
   <div class="vr"></div>
 </div>
@@ -36,6 +38,7 @@ Vertical rules scale their height in flex layouts:
 They can also be used in [stacks]({{< docsref "/helpers/stacks" >}}):
 
 {{< example >}}
+
 <div class="hstack gap-3">
   <div class="bg-light border">First item</div>
   <div class="bg-light border ms-auto">Second item</div>

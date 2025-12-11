@@ -4,9 +4,9 @@ title: Get started with Bootstrap
 description: Bootstrap is a powerful, feature-packed frontend toolkit. Build anything—from prototype to production—in minutes.
 group: getting-started
 aliases:
-  - "/docs/5.2/getting-started/"
-  - "/docs/getting-started/"
-  - "/getting-started/"
+  - '/docs/5.2/getting-started/'
+  - '/docs/getting-started/'
+  - '/getting-started/'
 toc: true
 ---
 
@@ -22,8 +22,8 @@ Get started by including Bootstrap's production-ready CSS and JavaScript via CDN
    <!doctype html>
    <html lang="en">
      <head>
-       <meta charset="utf-8">
-       <meta name="viewport" content="width=device-width, initial-scale=1">
+       <meta charset="utf-8" />
+       <meta name="viewport" content="width=device-width, initial-scale=1" />
        <title>Bootstrap demo</title>
      </head>
      <body>
@@ -106,7 +106,7 @@ Curious which components explicitly require our JavaScript and Popper? Click the
 
 ## Important globals
 
-Bootstrap employs a handful of important global styles and settings, all of which are almost exclusively geared towards the *normalization* of cross browser styles. Let's dive in.
+Bootstrap employs a handful of important global styles and settings, all of which are almost exclusively geared towards the _normalization_ of cross browser styles. Let's dive in.
 
 ### HTML5 doctype
 
@@ -121,10 +121,10 @@ Bootstrap requires the use of the HTML5 doctype. Without it, you'll see some fun
 
 ### Responsive meta tag
 
-Bootstrap is developed *mobile first*, a strategy in which we optimize code for mobile devices first and then scale up components as necessary using CSS media queries. To ensure proper rendering and touch zooming for all devices, add the responsive viewport meta tag to your `<head>`.
+Bootstrap is developed _mobile first_, a strategy in which we optimize code for mobile devices first and then scale up components as necessary using CSS media queries. To ensure proper rendering and touch zooming for all devices, add the responsive viewport meta tag to your `<head>`.
 
 ```html
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 ```
 
 You can see an example of this in action in the [quick start](#quick-start).

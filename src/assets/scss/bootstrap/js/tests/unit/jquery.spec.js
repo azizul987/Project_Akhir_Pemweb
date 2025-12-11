@@ -41,14 +41,15 @@ describe('jQuery', () => {
   })
 
   it('should use jQuery event system', () => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       fixtureEl.innerHTML = [
         '<div class="alert">',
         '  <button type="button" data-bs-dismiss="alert">x</button>',
-        '</div>'
+        '</div>',
       ].join('')
 
-      $(fixtureEl).find('.alert')
+      $(fixtureEl)
+        .find('.alert')
         .one('closed.bs.alert', () => {
           expect($(fixtureEl).find('.alert')).toHaveSize(0)
           resolve()

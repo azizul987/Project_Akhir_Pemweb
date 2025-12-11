@@ -43,7 +43,7 @@ In your `custom.scss`, you'll import Bootstrap's source Sass files. You have two
 
 // Include any default variable overrides here (though functions won't be available)
 
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import '../node_modules/bootstrap/scss/bootstrap';
 
 // Then add additional custom code here
 ```
@@ -53,31 +53,31 @@ In your `custom.scss`, you'll import Bootstrap's source Sass files. You have two
 // Option B: Include parts of Bootstrap
 
 // 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
-@import "../node_modules/bootstrap/scss/functions";
+@import '../node_modules/bootstrap/scss/functions';
 
 // 2. Include any default variable overrides here
 
 // 3. Include remainder of required Bootstrap stylesheets
-@import "../node_modules/bootstrap/scss/variables";
+@import '../node_modules/bootstrap/scss/variables';
 
 // 4. Include any default map overrides here
 
 // 5. Include remainder of required parts
-@import "../node_modules/bootstrap/scss/maps";
-@import "../node_modules/bootstrap/scss/mixins";
-@import "../node_modules/bootstrap/scss/root";
+@import '../node_modules/bootstrap/scss/maps';
+@import '../node_modules/bootstrap/scss/mixins';
+@import '../node_modules/bootstrap/scss/root';
 
 // 6. Optionally include any other parts as needed
-@import "../node_modules/bootstrap/scss/utilities";
-@import "../node_modules/bootstrap/scss/reboot";
-@import "../node_modules/bootstrap/scss/type";
-@import "../node_modules/bootstrap/scss/images";
-@import "../node_modules/bootstrap/scss/containers";
-@import "../node_modules/bootstrap/scss/grid";
-@import "../node_modules/bootstrap/scss/helpers";
+@import '../node_modules/bootstrap/scss/utilities';
+@import '../node_modules/bootstrap/scss/reboot';
+@import '../node_modules/bootstrap/scss/type';
+@import '../node_modules/bootstrap/scss/images';
+@import '../node_modules/bootstrap/scss/containers';
+@import '../node_modules/bootstrap/scss/grid';
+@import '../node_modules/bootstrap/scss/helpers';
 
 // 7. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`
-@import "../node_modules/bootstrap/scss/utilities/api";
+@import '../node_modules/bootstrap/scss/utilities/api';
 
 // 8. Add additional custom code here
 ```
@@ -96,21 +96,21 @@ Here's an example that changes the `background-color` and `color` for the `<body
 
 ```scss
 // Required
-@import "../node_modules/bootstrap/scss/functions";
+@import '../node_modules/bootstrap/scss/functions';
 
 // Default variable overrides
 $body-bg: #000;
 $body-color: #111;
 
 // Required
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/maps";
-@import "../node_modules/bootstrap/scss/mixins";
-@import "../node_modules/bootstrap/scss/root";
+@import '../node_modules/bootstrap/scss/variables';
+@import '../node_modules/bootstrap/scss/maps';
+@import '../node_modules/bootstrap/scss/mixins';
+@import '../node_modules/bootstrap/scss/root';
 
 // Optional Bootstrap components here
-@import "../node_modules/bootstrap/scss/reboot";
-@import "../node_modules/bootstrap/scss/type";
+@import '../node_modules/bootstrap/scss/reboot';
+@import '../node_modules/bootstrap/scss/type';
 // etc
 ```
 
@@ -139,8 +139,8 @@ Later on, these variables are set in Bootstrap's `$theme-colors` map:
 
 ```scss
 $theme-colors: (
-  "primary": $primary,
-  "danger": $danger
+  'primary': $primary,
+  'danger': $danger,
 );
 ```
 
@@ -151,7 +151,7 @@ Add new colors to `$theme-colors`, or any other map, by creating a new Sass map 
 ```scss
 // Create your own map
 $custom-colors: (
-  "custom-color": #900
+  'custom-color': #900,
 );
 
 // Merge the maps
@@ -164,18 +164,18 @@ To remove colors from `$theme-colors`, or any other map, use `map-remove`. Be aw
 
 ```scss
 // Required
-@import "../node_modules/bootstrap/scss/functions";
-@import "../node_modules/bootstrap/scss/variables";
+@import '../node_modules/bootstrap/scss/functions';
+@import '../node_modules/bootstrap/scss/variables';
 
-$theme-colors: map-remove($theme-colors, "info", "light", "dark");
+$theme-colors: map-remove($theme-colors, 'info', 'light', 'dark');
 
-@import "../node_modules/bootstrap/scss/maps";
-@import "../node_modules/bootstrap/scss/mixins";
-@import "../node_modules/bootstrap/scss/root";
+@import '../node_modules/bootstrap/scss/maps';
+@import '../node_modules/bootstrap/scss/mixins';
+@import '../node_modules/bootstrap/scss/root';
 
 // Optional
-@import "../node_modules/bootstrap/scss/reboot";
-@import "../node_modules/bootstrap/scss/type";
+@import '../node_modules/bootstrap/scss/reboot';
+@import '../node_modules/bootstrap/scss/type';
 // etc
 ```
 
@@ -257,7 +257,7 @@ We use the `add` and `subtract` functions to wrap the CSS `calc` function. The p
 Example where the calc is valid:
 
 ```scss
-$border-radius: .25rem;
+$border-radius: 0.25rem;
 $border-width: 1px;
 
 .element {
@@ -274,7 +274,7 @@ $border-width: 1px;
 Example where the calc is invalid:
 
 ```scss
-$border-radius: .25rem;
+$border-radius: 0.25rem;
 $border-width: 0;
 
 .element {

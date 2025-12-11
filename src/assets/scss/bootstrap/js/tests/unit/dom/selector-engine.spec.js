@@ -37,13 +37,15 @@ describe('SelectorEngine', () => {
         '    <a href="#" class="active">link</a>',
         '  </li>',
         '  <li></li>',
-        '</ul>'
+        '</ul>',
       ].join('')
 
       const listEl = fixtureEl.querySelector('ul')
       const aActive = fixtureEl.querySelector('.active')
 
-      expect(SelectorEngine.find(':scope > li > .active', listEl)).toEqual([aActive])
+      expect(SelectorEngine.find(':scope > li > .active', listEl)).toEqual([
+        aActive,
+      ])
     })
   })
 
@@ -64,7 +66,7 @@ describe('SelectorEngine', () => {
         '  <li></li>',
         '  <li></li>',
         '  <li></li>',
-        '</ul>'
+        '</ul>',
       ].join('')
 
       const list = fixtureEl.querySelector('ul')
@@ -83,7 +85,8 @@ describe('SelectorEngine', () => {
 
   describe('prev', () => {
     it('should return previous element', () => {
-      fixtureEl.innerHTML = '<div class="test"></div><button class="btn"></button>'
+      fixtureEl.innerHTML =
+        '<div class="test"></div><button class="btn"></button>'
 
       const btn = fixtureEl.querySelector('.btn')
       const divTest = fixtureEl.querySelector('.test')
@@ -95,7 +98,7 @@ describe('SelectorEngine', () => {
       fixtureEl.innerHTML = [
         '<div class="test"></div>',
         '<span></span>',
-        '<button class="btn"></button>'
+        '<button class="btn"></button>',
       ].join('')
 
       const btn = fixtureEl.querySelector('.btn')
@@ -110,7 +113,7 @@ describe('SelectorEngine', () => {
         '<div class="test"></div>',
         '<!-- Comment-->',
         'Text',
-        '<button class="btn"></button>'
+        '<button class="btn"></button>',
       ].join('')
 
       const btn = fixtureEl.querySelector('.btn')
@@ -122,7 +125,8 @@ describe('SelectorEngine', () => {
 
   describe('next', () => {
     it('should return next element', () => {
-      fixtureEl.innerHTML = '<div class="test"></div><button class="btn"></button>'
+      fixtureEl.innerHTML =
+        '<div class="test"></div><button class="btn"></button>'
 
       const btn = fixtureEl.querySelector('.btn')
       const divTest = fixtureEl.querySelector('.test')
@@ -134,7 +138,7 @@ describe('SelectorEngine', () => {
       fixtureEl.innerHTML = [
         '<div class="test"></div>',
         '<span></span>',
-        '<button class="btn"></button>'
+        '<button class="btn"></button>',
       ].join('')
 
       const btn = fixtureEl.querySelector('.btn')
@@ -149,7 +153,7 @@ describe('SelectorEngine', () => {
         '<!-- Comment-->',
         'Text',
         '<button class="btn"></button>',
-        '<button class="btn"></button>'
+        '<button class="btn"></button>',
       ].join('')
 
       const btn = fixtureEl.querySelector('.btn')
@@ -169,7 +173,7 @@ describe('SelectorEngine', () => {
         '<input>',
         '<textarea></textarea>',
         '<select></select>',
-        '<details>lorem</details>'
+        '<details>lorem</details>',
       ].join('')
 
       const expectedElements = [
@@ -178,26 +182,30 @@ describe('SelectorEngine', () => {
         fixtureEl.querySelector('input'),
         fixtureEl.querySelector('textarea'),
         fixtureEl.querySelector('select'),
-        fixtureEl.querySelector('details')
+        fixtureEl.querySelector('details'),
       ]
 
-      expect(SelectorEngine.focusableChildren(fixtureEl)).toEqual(expectedElements)
+      expect(SelectorEngine.focusableChildren(fixtureEl)).toEqual(
+        expectedElements
+      )
     })
 
     it('should return any element with non negative tab index', () => {
       fixtureEl.innerHTML = [
         '<div tabindex>lorem</div>',
         '<div tabindex="0">lorem</div>',
-        '<div tabindex="10">lorem</div>'
+        '<div tabindex="10">lorem</div>',
       ].join('')
 
       const expectedElements = [
         fixtureEl.querySelector('[tabindex]'),
         fixtureEl.querySelector('[tabindex="0"]'),
-        fixtureEl.querySelector('[tabindex="10"]')
+        fixtureEl.querySelector('[tabindex="10"]'),
       ]
 
-      expect(SelectorEngine.focusableChildren(fixtureEl)).toEqual(expectedElements)
+      expect(SelectorEngine.focusableChildren(fixtureEl)).toEqual(
+        expectedElements
+      )
     })
 
     it('should return not return elements with negative tab index', () => {
@@ -205,15 +213,21 @@ describe('SelectorEngine', () => {
 
       const expectedElements = []
 
-      expect(SelectorEngine.focusableChildren(fixtureEl)).toEqual(expectedElements)
+      expect(SelectorEngine.focusableChildren(fixtureEl)).toEqual(
+        expectedElements
+      )
     })
 
     it('should return contenteditable elements', () => {
       fixtureEl.innerHTML = '<div contenteditable="true">lorem</div>'
 
-      const expectedElements = [fixtureEl.querySelector('[contenteditable="true"]')]
+      const expectedElements = [
+        fixtureEl.querySelector('[contenteditable="true"]'),
+      ]
 
-      expect(SelectorEngine.focusableChildren(fixtureEl)).toEqual(expectedElements)
+      expect(SelectorEngine.focusableChildren(fixtureEl)).toEqual(
+        expectedElements
+      )
     })
 
     it('should not return disabled elements', () => {
@@ -221,7 +235,9 @@ describe('SelectorEngine', () => {
 
       const expectedElements = []
 
-      expect(SelectorEngine.focusableChildren(fixtureEl)).toEqual(expectedElements)
+      expect(SelectorEngine.focusableChildren(fixtureEl)).toEqual(
+        expectedElements
+      )
     })
 
     it('should not return invisible elements', () => {
@@ -229,8 +245,9 @@ describe('SelectorEngine', () => {
 
       const expectedElements = []
 
-      expect(SelectorEngine.focusableChildren(fixtureEl)).toEqual(expectedElements)
+      expect(SelectorEngine.focusableChildren(fixtureEl)).toEqual(
+        expectedElements
+      )
     })
   })
 })
-

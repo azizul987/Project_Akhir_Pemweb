@@ -72,7 +72,7 @@ describe('Base Component', () => {
       it('should accept element, either passed as a CSS selector or DOM element', () => {
         fixtureEl.innerHTML = [
           '<div id="foo"></div>',
-          '<div id="bar"></div>'
+          '<div id="bar"></div>',
         ].join('')
 
         const el = fixtureEl.querySelector('#foo')
@@ -80,7 +80,9 @@ describe('Base Component', () => {
         const selectorInstance = new DummyClass('#bar')
 
         expect(elInstance._element).toEqual(el)
-        expect(selectorInstance._element).toEqual(fixtureEl.querySelector('#bar'))
+        expect(selectorInstance._element).toEqual(
+          fixtureEl.querySelector('#bar')
+        )
       })
 
       it('should not initialize and add element record to Data (caching), if argument `element` is not an HTML element', () => {
@@ -132,7 +134,7 @@ describe('Base Component', () => {
 
         const fakejQueryObject = {
           0: element,
-          jquery: 'foo'
+          jquery: 'foo',
         }
 
         expect(DummyClass.getInstance(fakejQueryObject)).toEqual(instance)
@@ -152,8 +154,12 @@ describe('Base Component', () => {
         createInstance()
 
         expect(DummyClass.getOrCreateInstance(element)).toEqual(instance)
-        expect(DummyClass.getInstance(element)).toEqual(DummyClass.getOrCreateInstance(element, {}))
-        expect(DummyClass.getOrCreateInstance(element)).toBeInstanceOf(DummyClass)
+        expect(DummyClass.getInstance(element)).toEqual(
+          DummyClass.getOrCreateInstance(element, {})
+        )
+        expect(DummyClass.getOrCreateInstance(element)).toBeInstanceOf(
+          DummyClass
+        )
       })
 
       it('should return new instance when there is no alert instance', () => {
@@ -161,7 +167,9 @@ describe('Base Component', () => {
         element = fixtureEl.querySelector('#foo')
 
         expect(DummyClass.getInstance(element)).toBeNull()
-        expect(DummyClass.getOrCreateInstance(element)).toBeInstanceOf(DummyClass)
+        expect(DummyClass.getOrCreateInstance(element)).toBeInstanceOf(
+          DummyClass
+        )
       })
     })
   })

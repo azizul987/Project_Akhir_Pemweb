@@ -1,46 +1,46 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('contactForm');
-  if (!form) return;
+  const form = document.getElementById('contactForm')
+  if (!form) return
 
-  const nameEl = document.getElementById('name');
-  const emailEl = document.getElementById('email');
-  const subjectEl = document.getElementById('subject');
-  const messageEl = document.getElementById('message');
+  const nameEl = document.getElementById('name')
+  const emailEl = document.getElementById('email')
+  const subjectEl = document.getElementById('subject')
+  const messageEl = document.getElementById('message')
 
   // Modal element
-  const successModalEl = document.getElementById('successModal');
-  let successModal;
+  const successModalEl = document.getElementById('successModal')
+  let successModal
   if (successModalEl) {
-    successModal = new bootstrap.Modal(successModalEl);
+    successModal = new bootstrap.Modal(successModalEl)
   }
 
   form.addEventListener('submit', function (e) {
-    e.preventDefault();
+    e.preventDefault()
 
-    const name = nameEl.value.trim();
-    const email = emailEl.value.trim();
-    const subject = subjectEl.value.trim();
-    const message = messageEl.value.trim();
+    const name = nameEl.value.trim()
+    const email = emailEl.value.trim()
+    const subject = subjectEl.value.trim()
+    const message = messageEl.value.trim()
 
     // Basic Validation
     if (!name || !email || !subject || !message) {
-      alert('Harap Lengkapi Data');
-      return;
+      alert('Harap Lengkapi Data')
+      return
     }
 
     if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
-      alert('Email Tidak Valid');
-      return;
+      alert('Email Tidak Valid')
+      return
     }
 
     // Show Success Modal
     if (successModal) {
-      successModal.show();
-      form.reset();
+      successModal.show()
+      form.reset()
     } else {
       // Fallback if modal is missing for some reason
-      alert('Pesan Berhasil Dikirim');
-      form.reset();
+      alert('Pesan Berhasil Dikirim')
+      form.reset()
     }
-  });
-});
+  })
+})

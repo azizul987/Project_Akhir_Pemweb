@@ -1,7 +1,5 @@
 {
-  "extends": [
-    "stylelint-config-twbs-bootstrap"
-  ],
+  "extends": ["stylelint-config-twbs-bootstrap"],
   "rules": {
     "at-rule-no-vendor-prefix": null,
     "comment-empty-line-before": null,

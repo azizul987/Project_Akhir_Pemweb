@@ -116,9 +116,7 @@
     "zindex"
   ],
   "language": "en-US",
-  "files": [
-    "**/*.md"
-  ],
+  "files": ["**/*.md"],
   "ignorePaths": [
     ".cspell.json",
     "dist/",

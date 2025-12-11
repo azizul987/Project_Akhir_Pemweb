@@ -3,7 +3,7 @@ layout: docs
 title: Migrating to v5
 description: Track and review changes to the Bootstrap source files, documentation, and components to help you migrate from v4 to v5.
 group: migration
-aliases: "/migration/"
+aliases: '/migration/'
 toc: true
 ---
 

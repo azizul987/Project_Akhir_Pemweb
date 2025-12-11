@@ -1,6 +1,11 @@
 import Carousel from '../../src/carousel'
 import EventHandler from '../../src/dom/event-handler'
-import { clearFixture, createEvent, getFixture, jQueryMock } from '../helpers/fixture'
+import {
+  clearFixture,
+  createEvent,
+  getFixture,
+  jQueryMock,
+} from '../helpers/fixture'
 import { isRTL, noop } from '../../src/util/index'
 import Swipe from '../../src/util/swipe'
 
@@ -64,21 +69,23 @@ describe('Carousel', () => {
     })
 
     it('should start cycling if `ride`===`carousel`', () => {
-      fixtureEl.innerHTML = '<div id="myCarousel" class="carousel slide" data-bs-ride="carousel"></div>'
+      fixtureEl.innerHTML =
+        '<div id="myCarousel" class="carousel slide" data-bs-ride="carousel"></div>'
 
       const carousel = new Carousel('#myCarousel')
       expect(carousel._interval).not.toBeNull()
     })
 
     it('should not start cycling if `ride`!==`carousel`', () => {
-      fixtureEl.innerHTML = '<div id="myCarousel" class="carousel slide" data-bs-ride="true"></div>'
+      fixtureEl.innerHTML =
+        '<div id="myCarousel" class="carousel slide" data-bs-ride="true"></div>'
 
       const carousel = new Carousel('#myCarousel')
       expect(carousel._interval).toBeNull()
     })
 
     it('should go to next item if right arrow key is pressed', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div id="myCarousel" class="carousel slide">',
           '  <div class="carousel-inner">',
@@ -86,18 +93,20 @@ describe('Carousel', () => {
           '    <div id="item2" class="carousel-item">item 2</div>',
           '    <div class="carousel-item">item 3</div>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const carouselEl = fixtureEl.querySelector('#myCarousel')
         const carousel = new Carousel(carouselEl, {
-          keyboard: true
+          keyboard: true,
         })
 
         const spy = spyOn(carousel, '_keydown').and.callThrough()
 
         carouselEl.addEventListener('slid.bs.carousel', () => {
-          expect(fixtureEl.querySelector('.active')).toEqual(fixtureEl.querySelector('#item2'))
+          expect(fixtureEl.querySelector('.active')).toEqual(
+            fixtureEl.querySelector('#item2')
+          )
           expect(spy).toHaveBeenCalled()
           resolve()
         })
@@ -116,14 +125,18 @@ describe('Carousel', () => {
         '    <div class="carousel-item active">item 1</div>',
         '    <div id="item2" class="carousel-item">item 2</div>',
         '  </div>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const spy = spyOn(EventHandler, 'trigger').and.callThrough()
       const carouselEl = fixtureEl.querySelector('#myCarousel')
       // eslint-disable-next-line no-new
       new Carousel('#myCarousel')
-      expect(spy).not.toHaveBeenCalledWith(carouselEl, 'keydown.bs.carousel', jasmine.any(Function))
+      expect(spy).not.toHaveBeenCalledWith(
+        carouselEl,
+        'keydown.bs.carousel',
+        jasmine.any(Function)
+      )
     })
 
     it('should ignore mouse events if data-bs-pause=false', () => {
@@ -133,18 +146,22 @@ describe('Carousel', () => {
         '    <div class="carousel-item active">item 1</div>',
         '    <div id="item2" class="carousel-item">item 2</div>',
         '  </div>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const spy = spyOn(EventHandler, 'trigger').and.callThrough()
       const carouselEl = fixtureEl.querySelector('#myCarousel')
       // eslint-disable-next-line no-new
       new Carousel('#myCarousel')
-      expect(spy).not.toHaveBeenCalledWith(carouselEl, 'hover.bs.carousel', jasmine.any(Function))
+      expect(spy).not.toHaveBeenCalledWith(
+        carouselEl,
+        'hover.bs.carousel',
+        jasmine.any(Function)
+      )
     })
 
     it('should go to previous item if left arrow key is pressed', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div id="myCarousel" class="carousel slide">',
           '  <div class="carousel-inner">',
@@ -152,18 +169,20 @@ describe('Carousel', () => {
           '    <div class="carousel-item active">item 2</div>',
           '    <div class="carousel-item">item 3</div>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const carouselEl = fixtureEl.querySelector('#myCarousel')
         const carousel = new Carousel(carouselEl, {
-          keyboard: true
+          keyboard: true,
         })
 
         const spy = spyOn(carousel, '_keydown').and.callThrough()
 
         carouselEl.addEventListener('slid.bs.carousel', () => {
-          expect(fixtureEl.querySelector('.active')).toEqual(fixtureEl.querySelector('#item1'))
+          expect(fixtureEl.querySelector('.active')).toEqual(
+            fixtureEl.querySelector('#item1')
+          )
           expect(spy).toHaveBeenCalled()
           resolve()
         })
@@ -176,7 +195,7 @@ describe('Carousel', () => {
     })
 
     it('should not prevent keydown if key is not ARROW_LEFT or ARROW_RIGHT', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div id="myCarousel" class="carousel slide">',
           '  <div class="carousel-inner">',
@@ -184,17 +203,17 @@ describe('Carousel', () => {
           '    <div class="carousel-item">item 2</div>',
           '    <div class="carousel-item">item 3</div>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const carouselEl = fixtureEl.querySelector('#myCarousel')
         const carousel = new Carousel(carouselEl, {
-          keyboard: true
+          keyboard: true,
         })
 
         const spy = spyOn(carousel, '_keydown').and.callThrough()
 
-        carouselEl.addEventListener('keydown', event => {
+        carouselEl.addEventListener('keydown', (event) => {
           expect(spy).toHaveBeenCalled()
           expect(event.defaultPrevented).toBeFalse()
           resolve()
@@ -218,25 +237,28 @@ describe('Carousel', () => {
         '    <div class="carousel-item"></div>',
         '    <div class="carousel-item">item 3</div>',
         '  </div>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const carouselEl = fixtureEl.querySelector('#myCarousel')
       const input = fixtureEl.querySelector('input')
       const textarea = fixtureEl.querySelector('textarea')
       const carousel = new Carousel(carouselEl, {
-        keyboard: true
+        keyboard: true,
       })
 
       const spyKeydown = spyOn(carousel, '_keydown').and.callThrough()
       const spySlide = spyOn(carousel, '_slide')
 
-      const keydown = createEvent('keydown', { bubbles: true, cancelable: true })
+      const keydown = createEvent('keydown', {
+        bubbles: true,
+        cancelable: true,
+      })
       keydown.key = 'ArrowRight'
       Object.defineProperty(keydown, 'target', {
         value: input,
         writable: true,
-        configurable: true
+        configurable: true,
       })
 
       input.dispatchEvent(keydown)
@@ -248,7 +270,7 @@ describe('Carousel', () => {
       spySlide.calls.reset()
 
       Object.defineProperty(keydown, 'target', {
-        value: textarea
+        value: textarea,
       })
       textarea.dispatchEvent(keydown)
 
@@ -277,7 +299,7 @@ describe('Carousel', () => {
     })
 
     it('should wrap around from end to start when wrap option is true', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div id="myCarousel" class="carousel slide">',
           '  <div class="carousel-inner">',
@@ -285,14 +307,15 @@ describe('Carousel', () => {
           '    <div id="two" class="carousel-item"></div>',
           '    <div id="three" class="carousel-item">item 3</div>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const carouselEl = fixtureEl.querySelector('#myCarousel')
         const carousel = new Carousel(carouselEl, { wrap: true })
-        const getActiveId = () => carouselEl.querySelector('.carousel-item.active').getAttribute('id')
+        const getActiveId = () =>
+          carouselEl.querySelector('.carousel-item.active').getAttribute('id')
 
-        carouselEl.addEventListener('slid.bs.carousel', event => {
+        carouselEl.addEventListener('slid.bs.carousel', (event) => {
           const activeId = getActiveId()
 
           if (activeId === 'two') {
@@ -326,7 +349,7 @@ describe('Carousel', () => {
           '    <div id="two" class="carousel-item"></div>',
           '    <div id="three" class="carousel-item">item 3</div>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const carouselEl = fixtureEl.querySelector('#myCarousel')
@@ -354,7 +377,7 @@ describe('Carousel', () => {
       const spy = spyOn(Carousel.prototype, '_addTouchEventListeners')
 
       const carousel = new Carousel(carouselEl, {
-        touch: false
+        touch: false,
       })
 
       expect(spy).not.toHaveBeenCalled()
@@ -394,7 +417,7 @@ describe('Carousel', () => {
     })
 
     it('should allow swiperight and call _slide (prev) with pointer events', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         if (!supportPointerEvent) {
           expect().nothing()
           resolve()
@@ -415,7 +438,7 @@ describe('Carousel', () => {
           '      <img alt="">',
           '    </div>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const carouselEl = fixtureEl.querySelector('.carousel')
@@ -424,7 +447,7 @@ describe('Carousel', () => {
 
         const spy = spyOn(carousel, '_slide').and.callThrough()
 
-        carouselEl.addEventListener('slid.bs.carousel', event => {
+        carouselEl.addEventListener('slid.bs.carousel', (event) => {
           expect(item).toHaveClass('active')
           expect(spy).toHaveBeenCalledWith('prev')
           expect(event.direction).toEqual('right')
@@ -435,13 +458,13 @@ describe('Carousel', () => {
 
         Simulator.gestures.swipe(carouselEl, {
           deltaX: 300,
-          deltaY: 0
+          deltaY: 0,
         })
       })
     })
 
     it('should allow swipeleft and call next with pointer events', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         if (!supportPointerEvent) {
           expect().nothing()
           resolve()
@@ -462,7 +485,7 @@ describe('Carousel', () => {
           '      <img alt="">',
           '    </div>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const carouselEl = fixtureEl.querySelector('.carousel')
@@ -471,7 +494,7 @@ describe('Carousel', () => {
 
         const spy = spyOn(carousel, '_slide').and.callThrough()
 
-        carouselEl.addEventListener('slid.bs.carousel', event => {
+        carouselEl.addEventListener('slid.bs.carousel', (event) => {
           expect(item).not.toHaveClass('active')
           expect(spy).toHaveBeenCalledWith('next')
           expect(event.direction).toEqual('left')
@@ -483,13 +506,13 @@ describe('Carousel', () => {
         Simulator.gestures.swipe(carouselEl, {
           pos: [300, 10],
           deltaX: -300,
-          deltaY: 0
+          deltaY: 0,
         })
       })
     })
 
     it('should allow swiperight and call _slide (prev) with touch events', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         Simulator.setType('touch')
         clearPointerEvents()
         document.documentElement.ontouchstart = noop
@@ -504,7 +527,7 @@ describe('Carousel', () => {
           '      <img alt="">',
           '    </div>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const carouselEl = fixtureEl.querySelector('.carousel')
@@ -513,7 +536,7 @@ describe('Carousel', () => {
 
         const spy = spyOn(carousel, '_slide').and.callThrough()
 
-        carouselEl.addEventListener('slid.bs.carousel', event => {
+        carouselEl.addEventListener('slid.bs.carousel', (event) => {
           expect(item).toHaveClass('active')
           expect(spy).toHaveBeenCalledWith('prev')
           expect(event.direction).toEqual('right')
@@ -524,13 +547,13 @@ describe('Carousel', () => {
 
         Simulator.gestures.swipe(carouselEl, {
           deltaX: 300,
-          deltaY: 0
+          deltaY: 0,
         })
       })
     })
 
     it('should allow swipeleft and call _slide (next) with touch events', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         Simulator.setType('touch')
         clearPointerEvents()
         document.documentElement.ontouchstart = noop
@@ -545,7 +568,7 @@ describe('Carousel', () => {
           '      <img alt="">',
           '    </div>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const carouselEl = fixtureEl.querySelector('.carousel')
@@ -554,7 +577,7 @@ describe('Carousel', () => {
 
         const spy = spyOn(carousel, '_slide').and.callThrough()
 
-        carouselEl.addEventListener('slid.bs.carousel', event => {
+        carouselEl.addEventListener('slid.bs.carousel', (event) => {
           expect(item).not.toHaveClass('active')
           expect(spy).toHaveBeenCalledWith('next')
           expect(event.direction).toEqual('left')
@@ -566,13 +589,13 @@ describe('Carousel', () => {
         Simulator.gestures.swipe(carouselEl, {
           pos: [300, 10],
           deltaX: -300,
-          deltaY: 0
+          deltaY: 0,
         })
       })
     })
 
     it('should not slide when swiping and carousel is sliding', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         Simulator.setType('touch')
         clearPointerEvents()
         document.documentElement.ontouchstart = noop
@@ -587,7 +610,7 @@ describe('Carousel', () => {
           '      <img alt="">',
           '    </div>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const carouselEl = fixtureEl.querySelector('.carousel')
@@ -598,13 +621,13 @@ describe('Carousel', () => {
 
         Simulator.gestures.swipe(carouselEl, {
           deltaX: 300,
-          deltaY: 0
+          deltaY: 0,
         })
 
         Simulator.gestures.swipe(carouselEl, {
           pos: [300, 10],
           deltaX: -300,
-          deltaY: 0
+          deltaY: 0,
         })
 
         setTimeout(() => {
@@ -617,7 +640,7 @@ describe('Carousel', () => {
     })
 
     it('should not allow pinch with touch events', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         Simulator.setType('touch')
         clearPointerEvents()
         document.documentElement.ontouchstart = noop
@@ -627,22 +650,26 @@ describe('Carousel', () => {
         const carouselEl = fixtureEl.querySelector('.carousel')
         const carousel = new Carousel(carouselEl)
 
-        Simulator.gestures.swipe(carouselEl, {
-          pos: [300, 10],
-          deltaX: -300,
-          deltaY: 0,
-          touches: 2
-        }, () => {
-          restorePointerEvents()
-          delete document.documentElement.ontouchstart
-          expect(carousel._swipeHelper._deltaX).toEqual(0)
-          resolve()
-        })
+        Simulator.gestures.swipe(
+          carouselEl,
+          {
+            pos: [300, 10],
+            deltaX: -300,
+            deltaY: 0,
+            touches: 2,
+          },
+          () => {
+            restorePointerEvents()
+            delete document.documentElement.ontouchstart
+            expect(carousel._swipeHelper._deltaX).toEqual(0)
+            resolve()
+          }
+        )
       })
     })
 
     it('should call pause method on mouse over with pause equal to hover', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div class="carousel"></div>'
 
         const carouselEl = fixtureEl.querySelector('.carousel')
@@ -661,7 +688,7 @@ describe('Carousel', () => {
     })
 
     it('should call `maybeEnableCycle` on mouse out with pause equal to hover', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div class="carousel" data-bs-ride="true"></div>'
 
         const carouselEl = fixtureEl.querySelector('.carousel')
@@ -698,7 +725,7 @@ describe('Carousel', () => {
     })
 
     it('should not fire slid when slide is prevented', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div></div>'
 
         const carouselEl = fixtureEl.querySelector('div')
@@ -712,7 +739,7 @@ describe('Carousel', () => {
           }, 20)
         }
 
-        carouselEl.addEventListener('slide.bs.carousel', event => {
+        carouselEl.addEventListener('slide.bs.carousel', (event) => {
           event.preventDefault()
           doneTest()
         })
@@ -726,7 +753,7 @@ describe('Carousel', () => {
     })
 
     it('should fire slide event with: direction, relatedTarget, from and to', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div id="myCarousel" class="carousel slide">',
           '  <div class="carousel-inner">',
@@ -734,13 +761,13 @@ describe('Carousel', () => {
           '    <div class="carousel-item">item 2</div>',
           '    <div class="carousel-item">item 3</div>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const carouselEl = fixtureEl.querySelector('#myCarousel')
         const carousel = new Carousel(carouselEl, {})
 
-        const onSlide = event => {
+        const onSlide = (event) => {
           expect(event.direction).toEqual('left')
           expect(event.relatedTarget).toHaveClass('carousel-item')
           expect(event.from).toEqual(0)
@@ -752,7 +779,7 @@ describe('Carousel', () => {
           carousel.prev()
         }
 
-        const onSlide2 = event => {
+        const onSlide2 = (event) => {
           expect(event.direction).toEqual('right')
           resolve()
         }
@@ -763,7 +790,7 @@ describe('Carousel', () => {
     })
 
     it('should fire slid event with: direction, relatedTarget, from and to', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div id="myCarousel" class="carousel slide">',
           '  <div class="carousel-inner">',
@@ -771,13 +798,13 @@ describe('Carousel', () => {
           '    <div class="carousel-item">item 2</div>',
           '    <div class="carousel-item">item 3</div>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const carouselEl = fixtureEl.querySelector('#myCarousel')
         const carousel = new Carousel(carouselEl, {})
 
-        const onSlid = event => {
+        const onSlid = (event) => {
           expect(event.direction).toEqual('left')
           expect(event.relatedTarget).toHaveClass('carousel-item')
           expect(event.from).toEqual(0)
@@ -789,7 +816,7 @@ describe('Carousel', () => {
           carousel.prev()
         }
 
-        const onSlid2 = event => {
+        const onSlid2 = (event) => {
           expect(event.direction).toEqual('right')
           resolve()
         }
@@ -807,7 +834,7 @@ describe('Carousel', () => {
         '    <div id="secondItem" class="carousel-item">item 2</div>',
         '    <div class="carousel-item">item 3</div>',
         '  </div>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const carouselEl = fixtureEl.querySelector('#myCarousel')
@@ -826,7 +853,7 @@ describe('Carousel', () => {
         '    <div class="carousel-item active">item 1</div>',
         '    <div class="carousel-item">item 2</div>',
         '  </div>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const carouselEl = fixtureEl.querySelector('#myCarousel')
@@ -842,7 +869,7 @@ describe('Carousel', () => {
     })
 
     it('should update indicators if present', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div id="myCarousel" class="carousel slide">',
           '  <div class="carousel-indicators">',
@@ -855,7 +882,7 @@ describe('Carousel', () => {
           '    <div class="carousel-item" data-bs-interval="7">item 2</div>',
           '    <div class="carousel-item">item 3</div>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const carouselEl = fixtureEl.querySelector('#myCarousel')
@@ -885,7 +912,7 @@ describe('Carousel', () => {
         '  </div>',
         '  <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev"></button>',
         '  <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next"></button>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const carouselEl = fixtureEl.querySelector('#carousel')
@@ -911,7 +938,7 @@ describe('Carousel', () => {
       fixtureEl.innerHTML = [
         '<div style="display: none;">',
         '  <div class="carousel"></div>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const carouselEl = fixtureEl.querySelector('.carousel')
@@ -943,7 +970,7 @@ describe('Carousel', () => {
 
   describe('pause', () => {
     it('should trigger transitionend if the carousel have carousel-item-next or carousel-item-prev class, cause is sliding', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div id="myCarousel" class="carousel slide">',
           '  <div class="carousel-inner">',
@@ -953,7 +980,7 @@ describe('Carousel', () => {
           '  </div>',
           '  <div class="carousel-control-prev"></div>',
           '  <div class="carousel-control-next"></div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const carouselEl = fixtureEl.querySelector('#myCarousel')
@@ -982,7 +1009,7 @@ describe('Carousel', () => {
         '  </div>',
         '  <div class="carousel-control-prev"></div>',
         '  <div class="carousel-control-next"></div>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const carouselEl = fixtureEl.querySelector('#myCarousel')
@@ -1005,7 +1032,7 @@ describe('Carousel', () => {
         '  </div>',
         '  <div class="carousel-control-prev"></div>',
         '  <div class="carousel-control-next"></div>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const carouselEl = fixtureEl.querySelector('#myCarousel')
@@ -1030,13 +1057,13 @@ describe('Carousel', () => {
         '    <div id="secondItem" class="carousel-item" data-bs-interval="9385">item 2</div>',
         '    <div class="carousel-item">item 3</div>',
         '  </div>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const carouselEl = fixtureEl.querySelector('#myCarousel')
       const secondItemEl = fixtureEl.querySelector('#secondItem')
       const carousel = new Carousel(carouselEl, {
-        interval: 1814
+        interval: 1814,
       })
 
       expect(carousel._config.interval).toEqual(1814)
@@ -1054,7 +1081,7 @@ describe('Carousel', () => {
 
   describe('to', () => {
     it('should go directly to the provided index', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div id="myCarousel" class="carousel slide">',
           '  <div class="carousel-inner">',
@@ -1062,25 +1089,29 @@ describe('Carousel', () => {
           '    <div class="carousel-item">item 2</div>',
           '    <div id="item3" class="carousel-item">item 3</div>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const carouselEl = fixtureEl.querySelector('#myCarousel')
         const carousel = new Carousel(carouselEl, {})
 
-        expect(fixtureEl.querySelector('.active')).toEqual(fixtureEl.querySelector('#item1'))
+        expect(fixtureEl.querySelector('.active')).toEqual(
+          fixtureEl.querySelector('#item1')
+        )
 
         carousel.to(2)
 
         carouselEl.addEventListener('slid.bs.carousel', () => {
-          expect(fixtureEl.querySelector('.active')).toEqual(fixtureEl.querySelector('#item3'))
+          expect(fixtureEl.querySelector('.active')).toEqual(
+            fixtureEl.querySelector('#item3')
+          )
           resolve()
         })
       })
     })
 
     it('should return to a previous slide if the provided index is lower than the current', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div id="myCarousel" class="carousel slide">',
           '  <div class="carousel-inner">',
@@ -1088,18 +1119,22 @@ describe('Carousel', () => {
           '    <div id="item2" class="carousel-item">item 2</div>',
           '    <div id="item3" class="carousel-item active">item 3</div>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const carouselEl = fixtureEl.querySelector('#myCarousel')
         const carousel = new Carousel(carouselEl, {})
 
-        expect(fixtureEl.querySelector('.active')).toEqual(fixtureEl.querySelector('#item3'))
+        expect(fixtureEl.querySelector('.active')).toEqual(
+          fixtureEl.querySelector('#item3')
+        )
 
         carousel.to(1)
 
         carouselEl.addEventListener('slid.bs.carousel', () => {
-          expect(fixtureEl.querySelector('.active')).toEqual(fixtureEl.querySelector('#item2'))
+          expect(fixtureEl.querySelector('.active')).toEqual(
+            fixtureEl.querySelector('#item2')
+          )
           resolve()
         })
       })
@@ -1113,7 +1148,7 @@ describe('Carousel', () => {
         '    <div class="carousel-item" data-bs-interval="7">item 2</div>',
         '    <div class="carousel-item">item 3</div>',
         '  </div>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const carouselEl = fixtureEl.querySelector('#myCarousel')
@@ -1140,7 +1175,7 @@ describe('Carousel', () => {
         '    <div class="carousel-item" data-bs-interval="7">item 2</div>',
         '    <div class="carousel-item">item 3</div>',
         '  </div>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const carouselEl = fixtureEl.querySelector('#myCarousel')
@@ -1154,7 +1189,7 @@ describe('Carousel', () => {
     })
 
     it('should wait before performing to if a slide is sliding', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div id="myCarousel" class="carousel slide">',
           '  <div class="carousel-inner">',
@@ -1162,7 +1197,7 @@ describe('Carousel', () => {
           '    <div class="carousel-item" data-bs-interval="7">item 2</div>',
           '    <div class="carousel-item">item 3</div>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const carouselEl = fixtureEl.querySelector('#myCarousel')
@@ -1261,11 +1296,14 @@ describe('Carousel', () => {
         '    <div class="carousel-item" data-bs-interval="7">item 2</div>',
         '    <div class="carousel-item">item 3</div>',
         '  </div>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const carouselEl = fixtureEl.querySelector('#myCarousel')
-      const addEventSpy = spyOn(carouselEl, 'addEventListener').and.callThrough()
+      const addEventSpy = spyOn(
+        carouselEl,
+        'addEventListener'
+      ).and.callThrough()
       const removeEventSpy = spyOn(EventHandler, 'off').and.callThrough()
 
       // Headless browser does not support touch events, so need to fake it
@@ -1273,22 +1311,25 @@ describe('Carousel', () => {
       document.documentElement.ontouchstart = noop
 
       const carousel = new Carousel(carouselEl)
-      const swipeHelperSpy = spyOn(carousel._swipeHelper, 'dispose').and.callThrough()
+      const swipeHelperSpy = spyOn(
+        carousel._swipeHelper,
+        'dispose'
+      ).and.callThrough()
 
       const expectedArgs = [
         ['keydown', jasmine.any(Function), jasmine.any(Boolean)],
         ['mouseover', jasmine.any(Function), jasmine.any(Boolean)],
         ['mouseout', jasmine.any(Function), jasmine.any(Boolean)],
-        ...(carousel._swipeHelper._supportPointerEvents ?
-          [
-            ['pointerdown', jasmine.any(Function), jasmine.any(Boolean)],
-            ['pointerup', jasmine.any(Function), jasmine.any(Boolean)]
-          ] :
-          [
-            ['touchstart', jasmine.any(Function), jasmine.any(Boolean)],
-            ['touchmove', jasmine.any(Function), jasmine.any(Boolean)],
-            ['touchend', jasmine.any(Function), jasmine.any(Boolean)]
-          ])
+        ...(carousel._swipeHelper._supportPointerEvents
+          ? [
+              ['pointerdown', jasmine.any(Function), jasmine.any(Boolean)],
+              ['pointerup', jasmine.any(Function), jasmine.any(Boolean)],
+            ]
+          : [
+              ['touchstart', jasmine.any(Function), jasmine.any(Boolean)],
+              ['touchmove', jasmine.any(Function), jasmine.any(Boolean)],
+              ['touchend', jasmine.any(Function), jasmine.any(Boolean)],
+            ]),
       ]
 
       expect(addEventSpy.calls.allArgs()).toEqual(expectedArgs)
@@ -1296,7 +1337,10 @@ describe('Carousel', () => {
       carousel.dispose()
 
       expect(carousel._swipeHelper).toBeNull()
-      expect(removeEventSpy).toHaveBeenCalledWith(carouselEl, Carousel.EVENT_KEY)
+      expect(removeEventSpy).toHaveBeenCalledWith(
+        carouselEl,
+        Carousel.EVENT_KEY
+      )
       expect(swipeHelperSpy).toHaveBeenCalled()
 
       delete document.documentElement.ontouchstart
@@ -1331,7 +1375,9 @@ describe('Carousel', () => {
       const carousel = new Carousel(div)
 
       expect(Carousel.getOrCreateInstance(div)).toEqual(carousel)
-      expect(Carousel.getInstance(div)).toEqual(Carousel.getOrCreateInstance(div, {}))
+      expect(Carousel.getInstance(div)).toEqual(
+        Carousel.getOrCreateInstance(div, {})
+      )
       expect(Carousel.getOrCreateInstance(div)).toBeInstanceOf(Carousel)
     })
 
@@ -1351,7 +1397,7 @@ describe('Carousel', () => {
 
       expect(Carousel.getInstance(div)).toBeNull()
       const carousel = Carousel.getOrCreateInstance(div, {
-        interval: 1
+        interval: 1,
       })
       expect(carousel).toBeInstanceOf(Carousel)
 
@@ -1363,12 +1409,12 @@ describe('Carousel', () => {
 
       const div = fixtureEl.querySelector('div')
       const carousel = new Carousel(div, {
-        interval: 1
+        interval: 1,
       })
       expect(Carousel.getInstance(div)).toEqual(carousel)
 
       const carousel2 = Carousel.getOrCreateInstance(div, {
-        interval: 2
+        interval: 2,
       })
       expect(carousel).toBeInstanceOf(Carousel)
       expect(carousel2).toEqual(carousel)
@@ -1450,7 +1496,7 @@ describe('Carousel', () => {
     })
 
     it('should create carousel and go to the next slide on click (with real button controls)', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div id="myCarousel" class="carousel slide">',
           '  <div class="carousel-inner">',
@@ -1460,7 +1506,7 @@ describe('Carousel', () => {
           '  </div>',
           '  <button class="carousel-control-prev" data-bs-target="#myCarousel" type="button" data-bs-slide="prev"></button>',
           '  <button id="next" class="carousel-control-next" data-bs-target="#myCarousel" type="button" data-bs-slide="next"></button>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const next = fixtureEl.querySelector('#next')
@@ -1476,7 +1522,7 @@ describe('Carousel', () => {
     })
 
     it('should create carousel and go to the next slide on click (using links as controls)', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div id="myCarousel" class="carousel slide">',
           '  <div class="carousel-inner">',
@@ -1486,7 +1532,7 @@ describe('Carousel', () => {
           '  </div>',
           '  <a class="carousel-control-prev" href="#myCarousel" role="button" data-bs-slide="prev"></a>',
           '  <a id="next" class="carousel-control-next" href="#myCarousel" role="button" data-bs-slide="next"></a>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const next = fixtureEl.querySelector('#next')
@@ -1502,7 +1548,7 @@ describe('Carousel', () => {
     })
 
     it('should create carousel and go to the next slide on click with data-bs-slide-to', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div id="myCarousel" class="carousel slide" data-bs-ride="true">',
           '  <div class="carousel-inner">',
@@ -1511,7 +1557,7 @@ describe('Carousel', () => {
           '    <div class="carousel-item">item 3</div>',
           '  </div>',
           '  <div id="next" data-bs-target="#myCarousel" data-bs-slide-to="1"></div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const next = fixtureEl.querySelector('#next')
@@ -1537,7 +1583,7 @@ describe('Carousel', () => {
         '  </div>',
         '  <button class="carousel-control-prev" data-bs-target="#myCarousel" type="button" data-bs-slide="prev"></button>',
         '  <button id="next" class="carousel-control-next" type="button" data-bs-slide="next"></button>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const next = fixtureEl.querySelector('#next')
@@ -1557,7 +1603,7 @@ describe('Carousel', () => {
         '  </div>',
         '  <button class="carousel-control-prev" data-bs-target="#myCarousel" type="button" data-bs-slide="prev"></button>',
         '  <button id="next" class="carousel-control-next" data-bs-target="#myCarousel" type="button" data-bs-slide="next"></button>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const next = fixtureEl.querySelector('#next')

@@ -1,6 +1,6 @@
 ---
 layout: docs
-title: "Bootstrap & Webpack"
+title: 'Bootstrap & Webpack'
 description: The official guide for how to include and bundle Bootstrap's CSS and JavaScript in your project using Webpack.
 group: getting-started
 toc: true
@@ -84,13 +84,13 @@ With dependencies installed and our project folder ready for us to start coding,
      entry: './src/js/main.js',
      output: {
        filename: 'main.js',
-       path: path.resolve(__dirname, 'dist')
+       path: path.resolve(__dirname, 'dist'),
      },
      devServer: {
        static: path.resolve(__dirname, 'dist'),
        port: 8080,
-       hot: true
-     }
+       hot: true,
+     },
    }
    ```
 
@@ -100,8 +100,8 @@ With dependencies installed and our project folder ready for us to start coding,
    <!doctype html>
    <html lang="en">
      <head>
-       <meta charset="utf-8">
-       <meta name="viewport" content="width=device-width, initial-scale=1">
+       <meta charset="utf-8" />
+       <meta name="viewport" content="width=device-width, initial-scale=1" />
        <title>Bootstrap w/ Webpack</title>
      </head>
      <body>
@@ -124,7 +124,7 @@ With dependencies installed and our project folder ready for us to start coding,
      "scripts": {
        "start": "webpack serve --mode development",
        "test": "echo \"Error: no test specified\" && exit 1"
-     },
+     }
      // ...
    }
    ```
@@ -152,12 +152,12 @@ Importing Bootstrap into Webpack requires the loaders we installed in the first 
      entry: './src/js/main.js',
      output: {
        filename: 'main.js',
-       path: path.resolve(__dirname, 'dist')
+       path: path.resolve(__dirname, 'dist'),
      },
      devServer: {
        static: path.resolve(__dirname, 'dist'),
        port: 8080,
-       hot: true
+       hot: true,
      },
      module: {
        rules: [
@@ -165,28 +165,26 @@ Importing Bootstrap into Webpack requires the loaders we installed in the first 
            test: /\.(scss)$/,
            use: [
              {
-               loader: 'style-loader'
+               loader: 'style-loader',
              },
              {
-               loader: 'css-loader'
+               loader: 'css-loader',
              },
              {
                loader: 'postcss-loader',
                options: {
                  postcssOptions: {
-                   plugins: () => [
-                     require('autoprefixer')
-                   ]
-                 }
-               }
+                   plugins: () => [require('autoprefixer')],
+                 },
+               },
              },
              {
-               loader: 'sass-loader'
-             }
-           ]
-         }
-       ]
-     }
+               loader: 'sass-loader',
+             },
+           ],
+         },
+       ],
+     },
    }
    ```
 
@@ -196,14 +194,15 @@ Importing Bootstrap into Webpack requires the loaders we installed in the first 
 
    ```scss
    // Import all of Bootstrap's CSS
-   @import "~bootstrap/scss/bootstrap";
+   @import '~bootstrap/scss/bootstrap';
    ```
 
-   *You can also import our stylesheets individually if you want. [Read our Sass import docs]({{< docsref "/customize/sass#importing" >}}) for details.*
+   _You can also import our stylesheets individually if you want. [Read our Sass import docs]({{< docsref "/customize/sass#importing" >}}) for details._
 
 3. **Next we load the CSS and import Bootstrap's JavaScript.** Add the following to `src/js/main.js` to load the CSS and import all of Bootstrap's JS. Popper will be imported automatically through Bootstrap.
 
    <!-- eslint-skip -->
+
    ```js
    // Import our custom CSS
    import '../scss/styles.scss'
@@ -215,6 +214,7 @@ Importing Bootstrap into Webpack requires the loaders we installed in the first 
    You can also import JavaScript plugins individually as needed to keep bundle sizes down:
 
    <!-- eslint-skip -->
+
    ```js
    import Alert from 'bootstrap/js/dist/alert'
 
@@ -222,7 +222,7 @@ Importing Bootstrap into Webpack requires the loaders we installed in the first 
    import { Tooltip, Toast, Popover } from 'bootstrap'
    ```
 
-   *[Read our JavaScript docs]({{< docsref "/getting-started/javascript/" >}}) for more information on how to use Bootstrap's plugins.*
+   _[Read our JavaScript docs]({{< docsref "/getting-started/javascript/" >}}) for more information on how to use Bootstrap's plugins._
 
 4. **And you're done! 🎉** With Bootstrap's source Sass and JS fully loaded, your local development server should now look like this.
 
@@ -254,7 +254,7 @@ Then instantiate and use the plugin in the Webpack configuration:
 @@ -1,8 +1,10 @@
 +const miniCssExtractPlugin = require('mini-css-extract-plugin')
  const path = require('path')
- 
+
  module.exports = {
    mode: 'development',
    entry: './src/js/main.js',

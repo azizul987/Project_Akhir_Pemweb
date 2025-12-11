@@ -19,11 +19,11 @@
 
   > ul li,
   > ol li {
-    margin-bottom: .25rem;
+    margin-bottom: 0.25rem;
 
     // stylelint-disable selector-max-type, selector-max-compound-selectors
     > p ~ ul {
-      margin-top: -.5rem;
+      margin-top: -0.5rem;
       margin-bottom: 1rem;
     }
     // stylelint-enable selector-max-type, selector-max-compound-selectors
@@ -33,7 +33,7 @@
   > .table,
   > .table-responsive .table {
     margin-bottom: 1.5rem;
-    @include font-size(.875rem);
+    @include font-size(0.875rem);
 
     @include media-breakpoint-down(lg) {
       &.table-bordered {
@@ -102,14 +102,14 @@
 .icon-link {
   display: flex;
   align-items: center;
-  text-decoration-color: rgba($primary, .5);
-  text-underline-offset: .5rem;
+  text-decoration-color: rgba($primary, 0.5);
+  text-underline-offset: 0.5rem;
   backface-visibility: hidden;
 
   .bi {
     width: 1.5em;
     height: 1.5em;
-    transition: .2s ease-in-out transform; // stylelint-disable-line property-disallowed-list
+    transition: 0.2s ease-in-out transform; // stylelint-disable-line property-disallowed-list
   }
 
   &:hover {

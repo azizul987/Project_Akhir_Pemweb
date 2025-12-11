@@ -24,21 +24,17 @@ const cssFiles = [
   'bootstrap.min.css',
   'bootstrap.min.css.map',
   'bootstrap.rtl.min.css',
-  'bootstrap.rtl.min.css.map'
+  'bootstrap.rtl.min.css.map',
 ]
-const jsFiles = [
-  'bootstrap.bundle.min.js',
-  'bootstrap.bundle.min.js.map'
-]
-const imgFiles = [
-  'bootstrap-logo.svg',
-  'bootstrap-logo-white.svg'
-]
+const jsFiles = ['bootstrap.bundle.min.js', 'bootstrap.bundle.min.js.map']
+const imgFiles = ['bootstrap-logo.svg', 'bootstrap-logo-white.svg']
 
 sh.config.fatal = true
 
 if (!sh.test('-d', rootDocsDir)) {
-  throw new Error(`The "${rootDocsDir}" folder does not exist, did you forget building the docs?`)
+  throw new Error(
+    `The "${rootDocsDir}" folder does not exist, did you forget building the docs?`
+  )
 }
 
 // switch to the root dir
@@ -52,7 +48,7 @@ sh.mkdir('-p', [
   distFolder,
   `${distFolder}/assets/brand/`,
   `${distFolder}/assets/dist/css/`,
-  `${distFolder}/assets/dist/js/`
+  `${distFolder}/assets/dist/js/`,
 ])
 
 sh.cp('-Rf', `${docsDir}/examples/*`, distFolder)
@@ -73,7 +69,8 @@ sh.rm(`${distFolder}/index.html`)
 
 // get all examples' HTML files
 for (const file of sh.find(`${distFolder}/**/*.html`)) {
-  const fileContents = sh.cat(file)
+  const fileContents = sh
+    .cat(file)
     .toString()
     .replace(new RegExp(`"/docs/${versionShort}/`, 'g'), '"../')
     .replace(/"..\/dist\//g, '"../assets/dist/')

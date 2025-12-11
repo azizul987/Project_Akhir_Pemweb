@@ -1,6 +1,12 @@
 import Offcanvas from '../../src/offcanvas'
 import EventHandler from '../../src/dom/event-handler'
-import { clearBodyAndDocument, clearFixture, createEvent, getFixture, jQueryMock } from '../helpers/fixture'
+import {
+  clearBodyAndDocument,
+  clearFixture,
+  createEvent,
+  getFixture,
+  jQueryMock,
+} from '../helpers/fixture'
 import { isVisible } from '../../src/util/index'
 import ScrollBarHelper from '../../src/util/scrollbar'
 
@@ -44,7 +50,7 @@ describe('Offcanvas', () => {
       fixtureEl.innerHTML = [
         '<div class="offcanvas">',
         '  <a href="#" data-bs-dismiss="offcanvas">Close</a>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const offCanvasEl = fixtureEl.querySelector('.offcanvas')
@@ -105,7 +111,7 @@ describe('Offcanvas', () => {
     })
 
     it('should not hide if esc is pressed but with keyboard = false', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div class="offcanvas"></div>'
 
         const offCanvasEl = fixtureEl.querySelector('.offcanvas')
@@ -115,7 +121,10 @@ describe('Offcanvas', () => {
 
         const spy = spyOn(offCanvas, 'hide')
         const hidePreventedSpy = jasmine.createSpy('hidePrevented')
-        offCanvasEl.addEventListener('hidePrevented.bs.offcanvas', hidePreventedSpy)
+        offCanvasEl.addEventListener(
+          'hidePrevented.bs.offcanvas',
+          hidePreventedSpy
+        )
 
         offCanvasEl.addEventListener('shown.bs.offcanvas', () => {
           expect(offCanvas._config.keyboard).toBeFalse()
@@ -131,17 +140,26 @@ describe('Offcanvas', () => {
     })
 
     it('should not hide if user clicks on static backdrop', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div class="offcanvas"></div>'
 
         const offCanvasEl = fixtureEl.querySelector('div')
         const offCanvas = new Offcanvas(offCanvasEl, { backdrop: 'static' })
 
-        const clickEvent = new Event('mousedown', { bubbles: true, cancelable: true })
-        const spyClick = spyOn(offCanvas._backdrop._config, 'clickCallback').and.callThrough()
+        const clickEvent = new Event('mousedown', {
+          bubbles: true,
+          cancelable: true,
+        })
+        const spyClick = spyOn(
+          offCanvas._backdrop._config,
+          'clickCallback'
+        ).and.callThrough()
         const spyHide = spyOn(offCanvas._backdrop, 'hide').and.callThrough()
         const hidePreventedSpy = jasmine.createSpy('hidePrevented')
-        offCanvasEl.addEventListener('hidePrevented.bs.offcanvas', hidePreventedSpy)
+        offCanvasEl.addEventListener(
+          'hidePrevented.bs.offcanvas',
+          hidePreventedSpy
+        )
 
         offCanvasEl.addEventListener('shown.bs.offcanvas', () => {
           expect(spyClick).toEqual(jasmine.any(Function))
@@ -156,8 +174,8 @@ describe('Offcanvas', () => {
       })
     })
 
-    it('should call `hide` on resize, if element\'s position is not fixed any more', () => {
-      return new Promise(resolve => {
+    it("should call `hide` on resize, if element's position is not fixed any more", () => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div class="offcanvas-lg"></div>'
 
         const offCanvasEl = fixtureEl.querySelector('div')
@@ -193,7 +211,8 @@ describe('Offcanvas', () => {
     })
 
     it('should read data attributes and override default config', () => {
-      fixtureEl.innerHTML = '<div class="offcanvas" data-bs-scroll="true" data-bs-backdrop="false" data-bs-keyboard="false"></div>'
+      fixtureEl.innerHTML =
+        '<div class="offcanvas" data-bs-scroll="true" data-bs-backdrop="false" data-bs-keyboard="false"></div>'
 
       const offCanvasEl = fixtureEl.querySelector('.offcanvas')
       const offCanvas = new Offcanvas(offCanvasEl)
@@ -205,13 +224,14 @@ describe('Offcanvas', () => {
     })
 
     it('given a config object must override data attributes', () => {
-      fixtureEl.innerHTML = '<div class="offcanvas" data-bs-scroll="true" data-bs-backdrop="false" data-bs-keyboard="false"></div>'
+      fixtureEl.innerHTML =
+        '<div class="offcanvas" data-bs-scroll="true" data-bs-backdrop="false" data-bs-keyboard="false"></div>'
 
       const offCanvasEl = fixtureEl.querySelector('.offcanvas')
       const offCanvas = new Offcanvas(offCanvasEl, {
         backdrop: true,
         keyboard: true,
-        scroll: false
+        scroll: false,
       })
       expect(offCanvas._config.backdrop).toBeTrue()
       expect(offCanvas._config.keyboard).toBeTrue()
@@ -221,11 +241,17 @@ describe('Offcanvas', () => {
 
   describe('options', () => {
     it('if scroll is enabled, should allow body to scroll while offcanvas is open', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div class="offcanvas"></div>'
 
-        const spyHide = spyOn(ScrollBarHelper.prototype, 'hide').and.callThrough()
-        const spyReset = spyOn(ScrollBarHelper.prototype, 'reset').and.callThrough()
+        const spyHide = spyOn(
+          ScrollBarHelper.prototype,
+          'hide'
+        ).and.callThrough()
+        const spyReset = spyOn(
+          ScrollBarHelper.prototype,
+          'reset'
+        ).and.callThrough()
         const offCanvasEl = fixtureEl.querySelector('.offcanvas')
         const offCanvas = new Offcanvas(offCanvasEl, { scroll: true })
 
@@ -242,11 +268,17 @@ describe('Offcanvas', () => {
     })
 
     it('if scroll is disabled, should call ScrollBarHelper to handle scrollBar on body', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div class="offcanvas"></div>'
 
-        const spyHide = spyOn(ScrollBarHelper.prototype, 'hide').and.callThrough()
-        const spyReset = spyOn(ScrollBarHelper.prototype, 'reset').and.callThrough()
+        const spyHide = spyOn(
+          ScrollBarHelper.prototype,
+          'hide'
+        ).and.callThrough()
+        const spyReset = spyOn(
+          ScrollBarHelper.prototype,
+          'reset'
+        ).and.callThrough()
         const offCanvasEl = fixtureEl.querySelector('.offcanvas')
         const offCanvas = new Offcanvas(offCanvasEl, { scroll: false })
 
@@ -263,17 +295,25 @@ describe('Offcanvas', () => {
     })
 
     it('should hide a shown element if user click on backdrop', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div class="offcanvas"></div>'
 
         const offCanvasEl = fixtureEl.querySelector('div')
         const offCanvas = new Offcanvas(offCanvasEl, { backdrop: true })
 
-        const clickEvent = new Event('mousedown', { bubbles: true, cancelable: true })
-        const spy = spyOn(offCanvas._backdrop._config, 'clickCallback').and.callThrough()
+        const clickEvent = new Event('mousedown', {
+          bubbles: true,
+          cancelable: true,
+        })
+        const spy = spyOn(
+          offCanvas._backdrop._config,
+          'clickCallback'
+        ).and.callThrough()
 
         offCanvasEl.addEventListener('shown.bs.offcanvas', () => {
-          expect(offCanvas._backdrop._config.clickCallback).toEqual(jasmine.any(Function))
+          expect(offCanvas._backdrop._config.clickCallback).toEqual(
+            jasmine.any(Function)
+          )
 
           offCanvas._backdrop._getElement().dispatchEvent(clickEvent)
         })
@@ -288,13 +328,13 @@ describe('Offcanvas', () => {
     })
 
     it('should not trap focus if scroll is allowed', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div class="offcanvas"></div>'
 
         const offCanvasEl = fixtureEl.querySelector('.offcanvas')
         const offCanvas = new Offcanvas(offCanvasEl, {
           scroll: true,
-          backdrop: false
+          backdrop: false,
         })
 
         const spy = spyOn(offCanvas._focustrap, 'activate').and.callThrough()
@@ -309,13 +349,13 @@ describe('Offcanvas', () => {
     })
 
     it('should trap focus if scroll is allowed OR backdrop is enabled', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div class="offcanvas"></div>'
 
         const offCanvasEl = fixtureEl.querySelector('.offcanvas')
         const offCanvas = new Offcanvas(offCanvasEl, {
           scroll: true,
-          backdrop: true
+          backdrop: true,
         })
 
         const spy = spyOn(offCanvas._focustrap, 'activate').and.callThrough()
@@ -345,7 +385,7 @@ describe('Offcanvas', () => {
     })
 
     it('should call hide method if show class is present', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div class="offcanvas"></div>'
 
         const offCanvasEl = fixtureEl.querySelector('.offcanvas')
@@ -368,7 +408,7 @@ describe('Offcanvas', () => {
 
   describe('show', () => {
     it('should add `showing` class during opening and `show` class on end', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div class="offcanvas"></div>'
         const offCanvasEl = fixtureEl.querySelector('.offcanvas')
         const offCanvas = new Offcanvas(offCanvasEl)
@@ -406,7 +446,7 @@ describe('Offcanvas', () => {
     })
 
     it('should show a hidden element', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div class="offcanvas"></div>'
 
         const offCanvasEl = fixtureEl.querySelector('div')
@@ -438,7 +478,7 @@ describe('Offcanvas', () => {
           }, 10)
         }
 
-        offCanvasEl.addEventListener('show.bs.offcanvas', event => {
+        offCanvasEl.addEventListener('show.bs.offcanvas', (event) => {
           event.preventDefault()
           expectEnd()
         })
@@ -452,7 +492,7 @@ describe('Offcanvas', () => {
     })
 
     it('on window load, should make visible an offcanvas element, if its markup contains class "show"', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div class="offcanvas show"></div>'
 
         const offCanvasEl = fixtureEl.querySelector('div')
@@ -471,7 +511,7 @@ describe('Offcanvas', () => {
     })
 
     it('should trap focus', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div class="offcanvas"></div>'
 
         const offCanvasEl = fixtureEl.querySelector('.offcanvas')
@@ -491,7 +531,7 @@ describe('Offcanvas', () => {
 
   describe('hide', () => {
     it('should add `hiding` class during closing and remover `show` & `hiding` classes on end', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div class="offcanvas"></div>'
         const offCanvasEl = fixtureEl.querySelector('.offcanvas')
         const offCanvas = new Offcanvas(offCanvasEl)
@@ -531,7 +571,7 @@ describe('Offcanvas', () => {
     })
 
     it('should hide a shown element', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div class="offcanvas"></div>'
 
         const offCanvasEl = fixtureEl.querySelector('div')
@@ -566,7 +606,7 @@ describe('Offcanvas', () => {
           }, 10)
         }
 
-        offCanvasEl.addEventListener('hide.bs.offcanvas', event => {
+        offCanvasEl.addEventListener('hide.bs.offcanvas', (event) => {
           event.preventDefault()
           expectEnd()
         })
@@ -580,7 +620,7 @@ describe('Offcanvas', () => {
     })
 
     it('should release focus trap', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div class="offcanvas"></div>'
 
         const offCanvasEl = fixtureEl.querySelector('div')
@@ -623,10 +663,10 @@ describe('Offcanvas', () => {
 
   describe('data-api', () => {
     it('should not prevent event for input', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<input type="checkbox" data-bs-toggle="offcanvas" data-bs-target="#offcanvasdiv1">',
-          '<div id="offcanvasdiv1" class="offcanvas"></div>'
+          '<div id="offcanvasdiv1" class="offcanvas"></div>',
         ].join('')
 
         const target = fixtureEl.querySelector('input')
@@ -645,7 +685,7 @@ describe('Offcanvas', () => {
     it('should not call toggle on disabled elements', () => {
       fixtureEl.innerHTML = [
         '<a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasdiv1" class="disabled"></a>',
-        '<div id="offcanvasdiv1" class="offcanvas"></div>'
+        '<div id="offcanvasdiv1" class="offcanvas"></div>',
       ].join('')
 
       const target = fixtureEl.querySelector('a')
@@ -658,11 +698,11 @@ describe('Offcanvas', () => {
     })
 
     it('should call hide first, if another offcanvas is open', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<button id="btn2" data-bs-toggle="offcanvas" data-bs-target="#offcanvas2"></button>',
           '<div id="offcanvas1" class="offcanvas"></div>',
-          '<div id="offcanvas2" class="offcanvas"></div>'
+          '<div id="offcanvas2" class="offcanvas"></div>',
         ].join('')
 
         const trigger2 = fixtureEl.querySelector('#btn2')
@@ -682,10 +722,10 @@ describe('Offcanvas', () => {
     })
 
     it('should focus on trigger element after closing offcanvas', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<button id="btn" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"></button>',
-          '<div id="offcanvas" class="offcanvas"></div>'
+          '<div id="offcanvas" class="offcanvas"></div>',
         ].join('')
 
         const trigger = fixtureEl.querySelector('#btn')
@@ -708,10 +748,10 @@ describe('Offcanvas', () => {
     })
 
     it('should not focus on trigger element after closing offcanvas, if it is not visible', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<button id="btn" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"></button>',
-          '<div id="offcanvas" class="offcanvas"></div>'
+          '<div id="offcanvas" class="offcanvas"></div>',
         ].join('')
 
         const trigger = fixtureEl.querySelector('#btn')
@@ -864,7 +904,9 @@ describe('Offcanvas', () => {
       const offcanvas = new Offcanvas(div)
 
       expect(Offcanvas.getOrCreateInstance(div)).toEqual(offcanvas)
-      expect(Offcanvas.getInstance(div)).toEqual(Offcanvas.getOrCreateInstance(div, {}))
+      expect(Offcanvas.getInstance(div)).toEqual(
+        Offcanvas.getOrCreateInstance(div, {})
+      )
       expect(Offcanvas.getOrCreateInstance(div)).toBeInstanceOf(Offcanvas)
     })
 
@@ -884,7 +926,7 @@ describe('Offcanvas', () => {
 
       expect(Offcanvas.getInstance(div)).toBeNull()
       const offcanvas = Offcanvas.getOrCreateInstance(div, {
-        scroll: true
+        scroll: true,
       })
       expect(offcanvas).toBeInstanceOf(Offcanvas)
 
@@ -896,12 +938,12 @@ describe('Offcanvas', () => {
 
       const div = fixtureEl.querySelector('div')
       const offcanvas = new Offcanvas(div, {
-        scroll: true
+        scroll: true,
       })
       expect(Offcanvas.getInstance(div)).toEqual(offcanvas)
 
       const offcanvas2 = Offcanvas.getOrCreateInstance(div, {
-        scroll: false
+        scroll: false,
       })
       expect(offcanvas).toBeInstanceOf(Offcanvas)
       expect(offcanvas2).toEqual(offcanvas)

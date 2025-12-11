@@ -39,7 +39,7 @@ describe('Alert', () => {
       fixtureEl.innerHTML = [
         '<div class="alert">',
         '  <button type="button" data-bs-dismiss="alert">x</button>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const button = document.querySelector('button')
@@ -52,7 +52,7 @@ describe('Alert', () => {
       fixtureEl.innerHTML = [
         '<div class="alert">',
         '  <button type="button" data-bs-target=".alert" data-bs-dismiss="alert">x</button>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const button = document.querySelector('button')
@@ -64,7 +64,7 @@ describe('Alert', () => {
 
   describe('close', () => {
     it('should close an alert', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         const spy = jasmine.createSpy('spy', getTransitionDurationFromElement)
         fixtureEl.innerHTML = '<div class="alert"></div>'
 
@@ -82,7 +82,7 @@ describe('Alert', () => {
     })
 
     it('should close alert with fade class', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div class="alert fade"></div>'
 
         const alertEl = document.querySelector('.alert')
@@ -109,7 +109,7 @@ describe('Alert', () => {
         const alertEl = getAlert()
         const alert = new Alert(alertEl)
 
-        alertEl.addEventListener('close.bs.alert', event => {
+        alertEl.addEventListener('close.bs.alert', (event) => {
           event.preventDefault()
           setTimeout(() => {
             expect(getAlert()).not.toBeNull()

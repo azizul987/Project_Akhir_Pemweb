@@ -16,11 +16,11 @@ const plugins = [
     // Only transpile our source code
     exclude: 'node_modules/**',
     // Include the helpers in the bundle, at most one copy of each
-    babelHelpers: 'bundled'
-  })
+    babelHelpers: 'bundled',
+  }),
 ]
 const globals = {
-  '@popperjs/core': 'Popper'
+  '@popperjs/core': 'Popper',
 }
 
 if (BUNDLE) {
@@ -31,7 +31,7 @@ if (BUNDLE) {
   plugins.push(
     replace({
       'process.env.NODE_ENV': '"production"',
-      preventAssignment: true
+      preventAssignment: true,
     }),
     nodeResolve()
   )
@@ -44,10 +44,10 @@ const rollupConfig = {
     file: path.resolve(__dirname, `../dist/js/${fileDestination}.js`),
     format: ESM ? 'esm' : 'umd',
     globals,
-    generatedCode: 'es2015'
+    generatedCode: 'es2015',
   },
   external,
-  plugins
+  plugins,
 }
 
 if (!ESM) {

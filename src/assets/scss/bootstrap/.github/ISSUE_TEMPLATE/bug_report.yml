@@ -1,8 +1,8 @@
 name: Report a bug
 description: Tell us about a bug or issue you may have identified in Bootstrap.
-title: "Provide a general summary of the issue"
+title: 'Provide a general summary of the issue'
 labels: [bug]
-assignees: "-"
+assignees: '-'
 body:
   - type: checkboxes
     attributes:
@@ -57,6 +57,6 @@ body:
     id: version
     attributes:
       label: What version of Bootstrap are you using?
-      placeholder: "e.g., v5.1.0 or v4.5.2"
+      placeholder: 'e.g., v5.1.0 or v4.5.2'
     validations:
       required: true

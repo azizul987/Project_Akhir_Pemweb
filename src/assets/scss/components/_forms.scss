@@ -1,5 +1,4 @@
 .glass-input {
-  // Default (Dark Mode)
   background-color: var(--glass-bg);
   border: 1px solid var(--glass-border);
   color: var(--text);
@@ -18,20 +17,20 @@
     color: var(--muted);
   }
 
-  // Light Mode Specific Overrides for Better Contrast
+  
   body.light & {
-    background-color: rgba(0, 0, 0, 0.06); // Slightly darker grey background
-    border-color: rgba(0, 0, 0, 0.15); // Visible border
-    color: var(--text); // Dark text
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06); // Inner shadow for depth
+    background-color: rgba(0, 0, 0, 0.06); 
+    border-color: rgba(0, 0, 0, 0.15);
+    color: var(--text); 
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06); 
 
     &:focus {
-      background-color: #ffffff; // White on focus
+      background-color: #ffffff; 
       box-shadow: 0 0 0 0.25rem rgba($primary, 0.15);
     }
 
     &::placeholder {
-      color: rgba(0, 0, 0, 0.5); // Darker placeholder
+      color: rgba(0, 0, 0, 0.5); 
     }
   }
 }

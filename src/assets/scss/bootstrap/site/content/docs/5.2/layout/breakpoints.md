@@ -3,7 +3,7 @@ layout: docs
 title: Breakpoints
 description: Breakpoints are customizable widths that determine how your responsive layout behaves across device or viewport sizes in Bootstrap.
 group: layout
-aliases: "/docs/5.2/layout/"
+aliases: '/docs/5.2/layout/'
 toc: true
 ---
 
@@ -29,7 +29,6 @@ Bootstrap includes six default breakpoints, sometimes referred to as _grid tiers
 | Extra large | `xl` | &ge;1200px |
 | Extra extra large | `xxl` | &ge;1400px |
 {{< /bs-table >}}
-
 
 Each breakpoint was chosen to comfortably hold containers whose widths are multiples of 12. Breakpoints are also representative of a subset of common device sizes and viewport dimensions—they don't specifically target every use case or device. Instead, the ranges provide a strong and consistent foundation to build on for nearly any device.
 
@@ -94,7 +93,7 @@ These Sass mixins translate in our compiled CSS using the values declared in our
 
 ### Max-width
 
-We occasionally use media queries that go in the other direction (the given screen size *or smaller*):
+We occasionally use media queries that go in the other direction (the given screen size _or smaller_):
 
 ```scss
 // No media query necessary for xs breakpoint as it's effectively `@media (max-width: 0) { ... }`

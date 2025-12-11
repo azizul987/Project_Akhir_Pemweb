@@ -37,8 +37,12 @@ Got all that? Great, let's see how they work with some examples.
 As mentioned above, you must initialize tooltips before they can be used. One way to initialize all tooltips on a page would be to select them by their `data-bs-toggle` attribute, like so:
 
 ```js
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+const tooltipTriggerList = document.querySelectorAll(
+  '[data-bs-toggle="tooltip"]'
+)
+const tooltipList = [...tooltipTriggerList].map(
+  (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+)
 ```
 
 ### Tooltips on links
@@ -46,6 +50,7 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 Hover over the links below to see tooltips:
 
 {{< example class="tooltip-demo" stackblitz_add_js="true" >}}
+
 <p class="muted">Placeholder text to demonstrate some <a href="#" data-bs-toggle="tooltip" data-bs-title="Default tooltip">inline links</a> with tooltips. This is now just filler, no killer. Content placed here just to mimic the presence of <a href="#" data-bs-toggle="tooltip" data-bs-title="Another tooltip">real text</a>. And all that just to give you an idea of how tooltips would look when used in real-world situations. So hopefully you've now seen how <a href="#" data-bs-toggle="tooltip" data-bs-title="Another one here too">these tooltips on links</a> can work in practice, once you use them on <a href="#" data-bs-toggle="tooltip" data-bs-title="The last tip!">your own</a> site or project.
 </p>
 {{< /example >}}
@@ -62,13 +67,12 @@ You can customize the appearance of tooltips using [CSS variables](#variables). 
 
 {{< scss-docs name="custom-tooltip" file="site/assets/scss/_component-examples.scss" >}}
 
-
 {{< example class="tooltip-demo" stackblitz_add_js="true" >}}
 <button type="button" class="btn btn-secondary"
         data-bs-toggle="tooltip" data-bs-placement="top"
         data-bs-custom-class="custom-tooltip"
         data-bs-title="This top tooltip is themed via CSS variables.">
-  Custom tooltip
+Custom tooltip
 </button>
 {{< /example >}}
 
@@ -87,16 +91,40 @@ Hover over the buttons below to see the four tooltips directions: top, right, bo
 </div>
 
 ```html
-<button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Tooltip on top">
+<button
+  type="button"
+  class="btn btn-secondary"
+  data-bs-toggle="tooltip"
+  data-bs-placement="top"
+  data-bs-title="Tooltip on top"
+>
   Tooltip on top
 </button>
-<button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Tooltip on right">
+<button
+  type="button"
+  class="btn btn-secondary"
+  data-bs-toggle="tooltip"
+  data-bs-placement="right"
+  data-bs-title="Tooltip on right"
+>
   Tooltip on right
 </button>
-<button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tooltip on bottom">
+<button
+  type="button"
+  class="btn btn-secondary"
+  data-bs-toggle="tooltip"
+  data-bs-placement="bottom"
+  data-bs-title="Tooltip on bottom"
+>
   Tooltip on bottom
 </button>
-<button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Tooltip on left">
+<button
+  type="button"
+  class="btn btn-secondary"
+  data-bs-toggle="tooltip"
+  data-bs-placement="left"
+  data-bs-title="Tooltip on left"
+>
   Tooltip on left
 </button>
 ```
@@ -104,7 +132,13 @@ Hover over the buttons below to see the four tooltips directions: top, right, bo
 And with custom HTML added:
 
 ```html
-<button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
+<button
+  type="button"
+  class="btn btn-secondary"
+  data-bs-toggle="tooltip"
+  data-bs-html="true"
+  data-bs-title="<em>Tooltip</em> <u>with</u> <b>HTML</b>"
+>
   Tooltip with HTML
 </button>
 ```
@@ -146,15 +180,17 @@ const tooltip = new bootstrap.Tooltip(exampleEl, options)
 ```
 
 {{< callout warning >}}
+
 ##### Overflow `auto` and `scroll`
 
 Tooltip position attempts to automatically change when a **parent container** has `overflow: auto` or `overflow: scroll` like our `.table-responsive`, but still keeps the original placement's positioning. To resolve this, set the [`boundary` option](https://popper.js.org/docs/v2/modifiers/flip/#boundary) (for the flip modifier using the `popperConfig` option) to any HTMLElement to override the default value, `'clippingParents'`, such as `document.body`:
 
 ```js
 const tooltip = new bootstrap.Tooltip('#example', {
-  boundary: document.body // or document.querySelector('#boundary')
+  boundary: document.body, // or document.querySelector('#boundary')
 })
 ```
+
 {{< /callout >}}
 
 ### Markup
@@ -162,6 +198,7 @@ const tooltip = new bootstrap.Tooltip('#example', {
 The required markup for a tooltip is only a `data` attribute and `title` on the HTML element you wish to have a tooltip. The generated markup of a tooltip is rather simple, though it does require a position (by default, set to `top` by the plugin).
 
 {{< callout warning >}}
+
 ##### Making tooltips work for keyboard and assistive technology users
 
 You should only add tooltips to HTML elements that are traditionally keyboard-focusable and interactive (such as links or form controls). Although arbitrary HTML elements (such as `<span>`s) can be made focusable by adding the `tabindex="0"` attribute, this will add potentially annoying and confusing tab stops on non-interactive elements for keyboard users, and most assistive technologies currently do not announce the tooltip in this situation. Additionally, do not rely solely on `hover` as the trigger for your tooltip, as this will make your tooltips impossible to trigger for keyboard users.
@@ -169,14 +206,14 @@ You should only add tooltips to HTML elements that are traditionally keyboard-fo
 
 ```html
 <!-- HTML to write -->
-<a href="#" data-bs-toggle="tooltip" data-bs-title="Some tooltip text!">Hover over me</a>
+<a href="#" data-bs-toggle="tooltip" data-bs-title="Some tooltip text!"
+  >Hover over me</a
+>
 
 <!-- Generated markup by the plugin -->
 <div class="tooltip bs-tooltip-top" role="tooltip">
   <div class="tooltip-arrow"></div>
-  <div class="tooltip-inner">
-    Some tooltip text!
-  </div>
+  <div class="tooltip-inner">Some tooltip text!</div>
 </div>
 ```
 
@@ -202,7 +239,6 @@ Elements with the `disabled` attribute aren't interactive, meaning users cannot 
 Note that for security reasons the `sanitize`, `sanitizeFn`, and `allowList` options cannot be supplied using data attributes.
 {{< /callout >}}
 
-
 {{< bs-table "table" >}}
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -226,6 +262,7 @@ Note that for security reasons the `sanitize`, `sanitizeFn`, and `allowList` opt
 {{< /bs-table >}}
 
 {{< callout info >}}
+
 #### Data attributes for individual tooltips
 
 Options for individual tooltips can alternatively be specified through the use of data attributes, as explained above.
@@ -239,7 +276,7 @@ const tooltip = new bootstrap.Tooltip(element, {
     // const newPopperConfig = {...}
     // use defaultBsPopperConfig if needed...
     // return newPopperConfig
-  }
+  },
 })
 ```
 
@@ -255,8 +292,8 @@ const tooltip = new bootstrap.Tooltip(element, {
 | `disable` | Removes the ability for an element's tooltip to be shown. The tooltip will only be able to be shown if it is re-enabled. |
 | `dispose` | Hides and destroys an element's tooltip (Removes stored data on the DOM element). Tooltips that use delegation (which are created using [the `selector` option](#options)) cannot be individually destroyed on descendant trigger elements. |
 | `enable` | Gives an element's tooltip the ability to be shown. **Tooltips are enabled by default.** |
-| `getInstance` | *Static* method which allows you to get the tooltip instance associated with a DOM element, or create a new one in case it wasn't initialized. |
-| `getOrCreateInstance` | *Static* method which allows you to get the tooltip instance associated with a DOM element, or create a new one in case it wasn't initialized. |
+| `getInstance` | _Static_ method which allows you to get the tooltip instance associated with a DOM element, or create a new one in case it wasn't initialized. |
+| `getOrCreateInstance` | _Static_ method which allows you to get the tooltip instance associated with a DOM element, or create a new one in case it wasn't initialized. |
 | `hide` | Hides an element's tooltip. **Returns to the caller before the tooltip has actually been hidden** (i.e. before the `hidden.bs.tooltip` event occurs). This is considered a "manual" triggering of the tooltip. |
 | `setContent` | Gives a way to change the tooltip's content after its initialization. |
 | `show` | Reveals an element's tooltip. **Returns to the caller before the tooltip has actually been shown** (i.e. before the `shown.bs.tooltip` event occurs). This is considered a "manual" triggering of the tooltip. Tooltips with zero-length titles are never displayed. |
@@ -270,7 +307,6 @@ const tooltip = bootstrap.Tooltip.getInstance('#example') // Returns a Bootstrap
 
 // setContent example
 tooltip.setContent({ '.tooltip-inner': 'another title' })
-
 ```
 
 {{< callout info >}}

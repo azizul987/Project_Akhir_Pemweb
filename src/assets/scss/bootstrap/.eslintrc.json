@@ -10,10 +10,7 @@
   "rules": {
     "arrow-body-style": "off",
     "capitalized-comments": "off",
-    "comma-dangle": [
-      "error",
-      "never"
-    ],
+    "comma-dangle": ["error", "never"],
     "indent": [
       "error",
       2,
@@ -22,14 +19,8 @@
         "SwitchCase": 1
       }
     ],
-    "max-params": [
-      "warn",
-      5
-    ],
-    "multiline-ternary": [
-      "error",
-      "always-multiline"
-    ],
+    "max-params": ["warn", 5],
+    "multiline-ternary": ["error", "always-multiline"],
     "new-cap": [
       "error",
       {
@@ -38,18 +29,9 @@
     ],
     "no-console": "error",
     "no-negated-condition": "off",
-    "object-curly-spacing": [
-      "error",
-      "always"
-    ],
-    "operator-linebreak": [
-      "error",
-      "after"
-    ],
-    "semi": [
-      "error",
-      "never"
-    ],
+    "object-curly-spacing": ["error", "always"],
+    "operator-linebreak": ["error", "after"],
+    "semi": ["error", "never"],
     "unicorn/explicit-length-check": "off",
     "unicorn/no-array-callback-reference": "off",
     "unicorn/no-array-method-this-argument": "off",

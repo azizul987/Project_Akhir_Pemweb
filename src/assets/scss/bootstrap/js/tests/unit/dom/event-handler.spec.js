@@ -26,7 +26,7 @@ describe('EventHandler', () => {
     })
 
     it('should add event listener', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div></div>'
 
         const div = fixtureEl.querySelector('div')
@@ -41,7 +41,7 @@ describe('EventHandler', () => {
     })
 
     it('should add namespaced event listener', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div></div>'
 
         const div = fixtureEl.querySelector('div')
@@ -56,7 +56,7 @@ describe('EventHandler', () => {
     })
 
     it('should add native namespaced event listener', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div></div>'
 
         const div = fixtureEl.querySelector('div')
@@ -71,7 +71,7 @@ describe('EventHandler', () => {
     })
 
     it('should handle event delegation', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         EventHandler.on(document, 'click', '.test', () => {
           expect().nothing()
           resolve()
@@ -86,7 +86,7 @@ describe('EventHandler', () => {
     })
 
     it('should handle mouseenter/mouseleave like the native counterpart', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div class="outer">',
           '<div class="inner">',
@@ -95,7 +95,7 @@ describe('EventHandler', () => {
           '</div>',
           '</div>',
           '<div class="sibling"></div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const outer = fixtureEl.querySelector('.outer')
@@ -123,15 +123,19 @@ describe('EventHandler', () => {
         })
 
         const moveMouse = (from, to) => {
-          from.dispatchEvent(new MouseEvent('mouseout', {
-            bubbles: true,
-            relatedTarget: to
-          }))
+          from.dispatchEvent(
+            new MouseEvent('mouseout', {
+              bubbles: true,
+              relatedTarget: to,
+            })
+          )
 
-          to.dispatchEvent(new MouseEvent('mouseover', {
-            bubbles: true,
-            relatedTarget: from
-          }))
+          to.dispatchEvent(
+            new MouseEvent('mouseover', {
+              bubbles: true,
+              relatedTarget: from,
+            })
+          )
         }
 
         // from outer to deep and back to outer (nested)
@@ -158,7 +162,7 @@ describe('EventHandler', () => {
 
   describe('one', () => {
     it('should call listener just once', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div></div>'
 
         let called = 0
@@ -166,7 +170,7 @@ describe('EventHandler', () => {
         const obj = {
           oneListener() {
             called++
-          }
+          },
         }
 
         EventHandler.one(div, 'bootstrap', obj.oneListener)
@@ -182,7 +186,7 @@ describe('EventHandler', () => {
     })
 
     it('should call delegated listener just once', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div></div>'
 
         let called = 0
@@ -190,7 +194,7 @@ describe('EventHandler', () => {
         const obj = {
           oneListener() {
             called++
-          }
+          },
         }
 
         EventHandler.one(fixtureEl, 'bootstrap', 'div', obj.oneListener)
@@ -217,7 +221,7 @@ describe('EventHandler', () => {
     })
 
     it('should remove a listener', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div></div>'
         const div = fixtureEl.querySelector('div')
 
@@ -240,7 +244,7 @@ describe('EventHandler', () => {
     })
 
     it('should remove all the events', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div></div>'
         const div = fixtureEl.querySelector('div')
 
@@ -265,7 +269,7 @@ describe('EventHandler', () => {
     })
 
     it('should remove all the namespaced listeners if namespace is passed', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div></div>'
         const div = fixtureEl.querySelector('div')
 
@@ -292,7 +296,7 @@ describe('EventHandler', () => {
     })
 
     it('should remove the namespaced listeners', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div></div>'
         const div = fixtureEl.querySelector('div')
 
@@ -321,7 +325,7 @@ describe('EventHandler', () => {
     })
 
     it('should remove the all the namespaced listeners for native events', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div></div>'
         const div = fixtureEl.querySelector('div')
 
@@ -346,7 +350,7 @@ describe('EventHandler', () => {
     })
 
     it('should remove the specified namespaced listeners for native events', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div></div>'
         const div = fixtureEl.querySelector('div')
 
@@ -444,18 +448,18 @@ describe('EventHandler', () => {
 
   describe('general functionality', () => {
     it('should hydrate properties, and make them configurable', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div id="div1">',
           '   <div id="div2"></div>',
           '   <div id="div3"></div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const div1 = fixtureEl.querySelector('#div1')
         const div2 = fixtureEl.querySelector('#div2')
 
-        EventHandler.on(div1, 'click', event => {
+        EventHandler.on(div1, 'click', (event) => {
           expect(event.currentTarget).toBe(div2)
           expect(event.delegateTarget).toBe(div1)
           expect(event.originalTarget).toBeNull()
@@ -464,7 +468,7 @@ describe('EventHandler', () => {
             configurable: true,
             get() {
               return div1
-            }
+            },
           })
 
           expect(event.currentTarget).toBe(div1)
@@ -472,7 +476,10 @@ describe('EventHandler', () => {
         })
 
         expect(() => {
-          EventHandler.trigger(div1, 'click', { originalTarget: null, currentTarget: div2 })
+          EventHandler.trigger(div1, 'click', {
+            originalTarget: null,
+            currentTarget: div2,
+          })
         }).not.toThrowError(TypeError)
       })
     })

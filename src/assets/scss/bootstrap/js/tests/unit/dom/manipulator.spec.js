@@ -34,7 +34,8 @@ describe('Manipulator', () => {
 
   describe('removeDataAttribute', () => {
     it('should only remove bs-prefixed data attribute', () => {
-      fixtureEl.innerHTML = '<div data-bs-key="value" data-key-bs="postfixed" data-key="value"></div>'
+      fixtureEl.innerHTML =
+        '<div data-bs-key="value" data-key-bs="postfixed" data-key="value"></div>'
 
       const div = fixtureEl.querySelector('div')
 
@@ -61,31 +62,34 @@ describe('Manipulator', () => {
     })
 
     it('should get only bs-prefixed data attributes without bs namespace', () => {
-      fixtureEl.innerHTML = '<div data-bs-toggle="tabs" data-bs-target="#element" data-another="value" data-target-bs="#element" data-in-bs-out="in-between"></div>'
+      fixtureEl.innerHTML =
+        '<div data-bs-toggle="tabs" data-bs-target="#element" data-another="value" data-target-bs="#element" data-in-bs-out="in-between"></div>'
 
       const div = fixtureEl.querySelector('div')
 
       expect(Manipulator.getDataAttributes(div)).toEqual({
         toggle: 'tabs',
-        target: '#element'
+        target: '#element',
       })
     })
 
     it('should omit `bs-config` data attribute', () => {
-      fixtureEl.innerHTML = '<div data-bs-toggle="tabs" data-bs-target="#element" data-bs-config=\'{"testBool":false}\'></div>'
+      fixtureEl.innerHTML =
+        '<div data-bs-toggle="tabs" data-bs-target="#element" data-bs-config=\'{"testBool":false}\'></div>'
 
       const div = fixtureEl.querySelector('div')
 
       expect(Manipulator.getDataAttributes(div)).toEqual({
         toggle: 'tabs',
-        target: '#element'
+        target: '#element',
       })
     })
   })
 
   describe('getDataAttribute', () => {
     it('should only get bs-prefixed data attribute', () => {
-      fixtureEl.innerHTML = '<div data-bs-key="value" data-test-bs="postFixed" data-toggle="tab"></div>'
+      fixtureEl.innerHTML =
+        '<div data-bs-key="value" data-test-bs="postFixed" data-toggle="tab"></div>'
 
       const div = fixtureEl.querySelector('div')
 
@@ -117,13 +121,20 @@ describe('Manipulator', () => {
     })
 
     it('should normalize json data', () => {
-      fixtureEl.innerHTML = '<div data-bs-test=\'{"delay":{"show":100,"hide":10}}\'></div>'
+      fixtureEl.innerHTML =
+        '<div data-bs-test=\'{"delay":{"show":100,"hide":10}}\'></div>'
 
       const div = fixtureEl.querySelector('div')
 
-      expect(Manipulator.getDataAttribute(div, 'test')).toEqual({ delay: { show: 100, hide: 10 } })
+      expect(Manipulator.getDataAttribute(div, 'test')).toEqual({
+        delay: { show: 100, hide: 10 },
+      })
 
-      const objectData = { 'Super Hero': ['Iron Man', 'Super Man'], testNum: 90, url: 'http://localhost:8080/test?foo=bar' }
+      const objectData = {
+        'Super Hero': ['Iron Man', 'Super Man'],
+        testNum: 90,
+        url: 'http://localhost:8080/test?foo=bar',
+      }
       const dataStr = JSON.stringify(objectData)
       div.setAttribute('data-bs-test', encodeURIComponent(dataStr))
       expect(Manipulator.getDataAttribute(div, 'test')).toEqual(objectData)

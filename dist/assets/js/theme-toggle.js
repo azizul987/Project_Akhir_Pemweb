@@ -167,10 +167,10 @@
     }
   }
 
-  // Expose API
+
   win.ThemeToggle = { init }
 })(window)
-// Auto init ketika DOM siap
+
 document.addEventListener('DOMContentLoaded', function () {
   if (window.ThemeToggle) {
     window.ThemeToggle.init({

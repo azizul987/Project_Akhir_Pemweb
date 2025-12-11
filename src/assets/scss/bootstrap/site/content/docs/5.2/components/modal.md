@@ -64,13 +64,20 @@ Below is a _static_ modal example (meaning its `position` and `display` have bee
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <p>Modal body text goes here.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
@@ -112,23 +119,39 @@ Toggle a working modal demo by clicking the button below. It will slide down and
 
 ```html
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+>
   Launch demo modal
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
+      <div class="modal-body">...</div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
@@ -166,23 +189,41 @@ When backdrop is set to static, the modal will not close when clicking outside o
 
 ```html
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+<button
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#staticBackdrop"
+>
   Launch static backdrop modal
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
+      <div class="modal-body">...</div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
         <button type="button" class="btn btn-primary">Understood</button>
       </div>
     </div>
@@ -248,9 +289,7 @@ You can also create a scrollable modal that allows scroll the modal body by addi
 
 ```html
 <!-- Scrollable modal -->
-<div class="modal-dialog modal-dialog-scrollable">
-  ...
-</div>
+<div class="modal-dialog modal-dialog-scrollable">...</div>
 ```
 
 ### Vertically centered
@@ -306,9 +345,7 @@ Add `.modal-dialog-centered` to `.modal-dialog` to vertically center the modal.
 
 ```html
 <!-- Vertically centered modal -->
-<div class="modal-dialog modal-dialog-centered">
-  ...
-</div>
+<div class="modal-dialog modal-dialog-centered">...</div>
 
 <!-- Vertically centered scrollable modal -->
 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -351,10 +388,26 @@ Add `.modal-dialog-centered` to `.modal-dialog` to vertically center the modal.
 ```html
 <div class="modal-body">
   <h2 class="fs-5">Popover in a modal</h2>
-  <p>This <a href="#" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">button</a> triggers a popover on click.</p>
-  <hr>
+  <p>
+    This
+    <a
+      href="#"
+      role="button"
+      class="btn btn-secondary"
+      data-bs-toggle="popover"
+      title="Popover title"
+      data-bs-content="Popover body content is set in this attribute."
+      >button</a
+    >
+    triggers a popover on click.
+  </p>
+  <hr />
   <h2 class="fs-5">Tooltips in a modal</h2>
-  <p><a href="#" data-bs-toggle="tooltip" title="Tooltip">This link</a> and <a href="#" data-bs-toggle="tooltip" title="Tooltip">that link</a> have tooltips on hover.</p>
+  <p>
+    <a href="#" data-bs-toggle="tooltip" title="Tooltip">This link</a> and
+    <a href="#" data-bs-toggle="tooltip" title="Tooltip">that link</a> have
+    tooltips on hover.
+  </p>
 </div>
 ```
 
@@ -429,12 +482,8 @@ Utilize the Bootstrap grid system within a modal by nesting `.container-fluid` w
       <div class="col-sm-9">
         Level 1: .col-sm-9
         <div class="row">
-          <div class="col-8 col-sm-6">
-            Level 2: .col-8 .col-sm-6
-          </div>
-          <div class="col-4 col-sm-6">
-            Level 2: .col-4 .col-sm-6
-          </div>
+          <div class="col-8 col-sm-6">Level 2: .col-8 .col-sm-6</div>
+          <div class="col-4 col-sm-6">Level 2: .col-4 .col-sm-6</div>
         </div>
       </div>
     </div>
@@ -483,7 +532,7 @@ Below is a live demo followed by example HTML and JavaScript. For more informati
 
 ```js
 const exampleModal = document.getElementById('exampleModal')
-exampleModal.addEventListener('show.bs.modal', event => {
+exampleModal.addEventListener('show.bs.modal', (event) => {
   // Button that triggered the modal
   const button = event.relatedTarget
   // Extract info from data-bs-* attributes
@@ -505,6 +554,7 @@ exampleModal.addEventListener('show.bs.modal', event => {
 Toggle between multiple modals with some clever placement of the `data-bs-target` and `data-bs-toggle` attributes. For example, you could toggle a password reset modal from within an already open sign in modal. **Please note multiple modals cannot be open at the same time**—this method simply toggles between two separate modals.
 
 {{< example >}}
+
 <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -663,9 +713,7 @@ Another override is the option to pop up a modal that covers the user viewport, 
 
 ```html
 <!-- Full screen modal -->
-<div class="modal-dialog modal-fullscreen-sm-down">
-  ...
-</div>
+<div class="modal-dialog modal-fullscreen-sm-down">...</div>
 ```
 
 <div class="modal fade" id="exampleModalFullscreen" tabindex="-1" aria-labelledby="exampleModalFullscreenLabel" aria-hidden="true">
@@ -803,7 +851,9 @@ The modal plugin toggles your hidden content on demand, via data attributes or J
 Activate a modal without writing JavaScript. Set `data-bs-toggle="modal"` on a controller element, like a button, along with a `data-bs-target="#foo"` or `href="#foo"` to target a specific modal to toggle.
 
 ```html
-<button type="button" data-bs-toggle="modal" data-bs-target="#myModal">Launch modal</button>
+<button type="button" data-bs-toggle="modal" data-bs-target="#myModal">
+  Launch modal
+</button>
 ```
 
 #### Dismiss
@@ -850,7 +900,7 @@ Activates your content as a modal. Accepts an optional options `object`.
 
 ```js
 const myModal = new bootstrap.Modal('#myModal', {
-  keyboard: false
+  keyboard: false,
 })
 ```
 
@@ -858,8 +908,8 @@ const myModal = new bootstrap.Modal('#myModal', {
 | Method | Description |
 | --- | --- |
 | `dispose` | Destroys an element's modal. (Removes stored data on the DOM element) |
-| `getInstance` | *Static* method which allows you to get the modal instance associated with a DOM element. |
-| `getOrCreateInstance` | *Static* method which allows you to get the modal instance associated with a DOM element, or create a new one in case it wasn't initialized. |
+| `getInstance` | _Static_ method which allows you to get the modal instance associated with a DOM element. |
+| `getOrCreateInstance` | _Static_ method which allows you to get the modal instance associated with a DOM element, or create a new one in case it wasn't initialized. |
 | `handleUpdate` | Manually readjust the modal's position if the height of a modal changes while it is open (i.e. in case a scrollbar appears). |
 | `hide` | Manually hides a modal. **Returns to the caller before the modal has actually been hidden** (i.e. before the `hidden.bs.modal` event occurs). |
 | `show` | Manually opens a modal. **Returns to the caller before the modal has actually been shown** (i.e. before the `shown.bs.modal` event occurs). Also, you can pass a DOM element as an argument that can be received in the modal events (as the `relatedTarget` property). (i.e. `const modalToggle = document.getElementById('toggleMyModal'); myModal.show(modalToggle)`. |
@@ -882,7 +932,7 @@ Bootstrap's modal class exposes a few events for hooking into modal functionalit
 
 ```js
 const myModalEl = document.getElementById('myModal')
-myModalEl.addEventListener('hidden.bs.modal', event => {
+myModalEl.addEventListener('hidden.bs.modal', (event) => {
   // do something...
 })
 ```

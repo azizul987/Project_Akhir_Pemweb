@@ -3,7 +3,7 @@ name: cspell
 on:
   push:
     branches-ignore:
-      - "dependabot/**"
+      - 'dependabot/**'
   pull_request:
   workflow_dispatch:
 
@@ -22,7 +22,7 @@ jobs:
       - name: Run cspell
         uses: streetsidesoftware/cspell-action@v2
         with:
-          config: ".cspell.json"
-          files: "**/*.md"
+          config: '.cspell.json'
+          files: '**/*.md'
           inline: error
           incremental_files_only: false

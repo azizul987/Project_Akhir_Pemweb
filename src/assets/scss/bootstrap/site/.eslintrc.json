@@ -3,9 +3,7 @@
     "browser": true,
     "node": false
   },
-  "plugins": [
-    "markdown"
-  ],
+  "plugins": ["markdown"],
   "overrides": [
     {
       // 2. Enable the Markdown processor for all .md files.
@@ -16,9 +14,7 @@
       // In v2, configuration for fenced code blocks is separate from the
       // containing Markdown file. Each code block has a virtual filename
       // appended to the Markdown file's path.
-      "files": [
-        "./**/*.md/*.js"
-      ],
+      "files": ["./**/*.md/*.js"],
       // Configuration for fenced code blocks goes with the override for
       // the code block's virtual filename, for example:
       "parserOptions": {

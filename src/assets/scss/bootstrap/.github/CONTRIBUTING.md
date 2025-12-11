@@ -10,7 +10,6 @@ the developers managing and developing this open source project. In return,
 they should reciprocate that respect in addressing your issue or assessing
 patches and features.
 
-
 ## Using the issue tracker
 
 The [issue tracker](https://github.com/twbs/bootstrap/issues) is
@@ -18,18 +17,17 @@ the preferred channel for [bug reports](#bug-reports), [features requests](#feat
 and [submitting pull requests](#pull-requests), but please respect the following
 restrictions:
 
-* Please **do not** use the issue tracker for personal support requests. Stack Overflow ([`bootstrap-5`](https://stackoverflow.com/questions/tagged/bootstrap-5) tag), [our GitHub Discussions](https://github.com/twbs/bootstrap/discussions) or [IRC](/README.md#community) are better places to get help.
+- Please **do not** use the issue tracker for personal support requests. Stack Overflow ([`bootstrap-5`](https://stackoverflow.com/questions/tagged/bootstrap-5) tag), [our GitHub Discussions](https://github.com/twbs/bootstrap/discussions) or [IRC](/README.md#community) are better places to get help.
 
-* Please **do not** derail or troll issues. Keep the discussion on topic and
+- Please **do not** derail or troll issues. Keep the discussion on topic and
   respect the opinions of others.
 
-* Please **do not** post comments consisting solely of "+1" or ":thumbsup:".
+- Please **do not** post comments consisting solely of "+1" or ":thumbsup:".
   Use [GitHub's "reactions" feature](https://blog.github.com/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/)
   instead. We reserve the right to delete comments which violate this rule.
 
-* Please **do not** open issues regarding the official themes offered on <https://themes.getbootstrap.com/>.
+- Please **do not** open issues regarding the official themes offered on <https://themes.getbootstrap.com/>.
   Instead, please email any questions or feedback regarding those themes to `themes AT getbootstrap DOT com`.
-
 
 ## Issues and labels
 
@@ -47,7 +45,6 @@ Our bug tracker utilizes several labels to help organize and identify issues. He
 - `meta` - Issues with the project itself or our GitHub repository.
 
 For a complete look at our labels, see the [project labels page](https://github.com/twbs/bootstrap/labels).
-
 
 ## Bug reports
 
@@ -68,7 +65,6 @@ Guidelines for bug reports:
 3. **Isolate the problem** &mdash; ideally create a [reduced test
    case](https://css-tricks.com/reduced-test-cases/) and a live example.
    These [v4 CodePen](https://codepen.io/team/bootstrap/pen/yLabNQL) and [v5 CodePen](https://codepen.io/team/bootstrap/pen/qBamdLj) are helpful templates.
-
 
 A good bug report shouldn't leave others needing to chase you up for more
 information. Please try to be as detailed as possible in your report. What is
@@ -99,21 +95,19 @@ Example:
 
 Sometimes bugs reported to us are actually caused by bugs in the browser(s) themselves, not bugs in Bootstrap per se.
 
-| Vendor(s)     | Browser(s)                   | Rendering engine | Bug reporting website(s)                               | Notes                                                    |
-| ------------- | ---------------------------- | ---------------- | ------------------------------------------------------ | -------------------------------------------------------- |
-| Mozilla       | Firefox                      | Gecko            | https://bugzilla.mozilla.org/enter_bug.cgi             | "Core" is normally the right product option to choose.   |
-| Apple         | Safari                       | WebKit           | https://bugs.webkit.org/enter_bug.cgi?product=WebKit   | In Apple's bug reporter, choose "Safari" as the product. |
-| Google, Opera | Chrome, Chromium, Opera v15+ | Blink            | https://bugs.chromium.org/p/chromium/issues/list       | Click the "New issue" button.                            |
-| Microsoft     | Edge                         | Blink            | https://developer.microsoft.com/en-us/microsoft-edge/  | Go to "Help > Send Feedback" from the browser            |
-
+| Vendor(s)     | Browser(s)                   | Rendering engine | Bug reporting website(s)                              | Notes                                                    |
+| ------------- | ---------------------------- | ---------------- | ----------------------------------------------------- | -------------------------------------------------------- |
+| Mozilla       | Firefox                      | Gecko            | https://bugzilla.mozilla.org/enter_bug.cgi            | "Core" is normally the right product option to choose.   |
+| Apple         | Safari                       | WebKit           | https://bugs.webkit.org/enter_bug.cgi?product=WebKit  | In Apple's bug reporter, choose "Safari" as the product. |
+| Google, Opera | Chrome, Chromium, Opera v15+ | Blink            | https://bugs.chromium.org/p/chromium/issues/list      | Click the "New issue" button.                            |
+| Microsoft     | Edge                         | Blink            | https://developer.microsoft.com/en-us/microsoft-edge/ | Go to "Help > Send Feedback" from the browser            |
 
 ## Feature requests
 
 Feature requests are welcome. But take a moment to find out whether your idea
-fits with the scope and aims of the project. It's up to *you* to make a strong
+fits with the scope and aims of the project. It's up to _you_ to make a strong
 case to convince the project's developers of the merits of this feature. Please
 provide as much detail and context as possible.
-
 
 ## Pull requests
 
@@ -191,14 +185,13 @@ included in the project:
    ```
 
 7. [Open a Pull Request](https://help.github.com/articles/about-pull-requests/)
-    with a clear title and description against the `main` branch.
+   with a clear title and description against the `main` branch.
 
 **IMPORTANT**: By submitting a patch, you agree to allow the project owners to
 license your work under the terms of the [MIT License](../LICENSE) (if it
 includes code changes) and under the terms of the
 [Creative Commons Attribution 3.0 Unported License](https://creativecommons.org/licenses/by/3.0/)
 (if it includes documentation changes).
-
 
 ## Code guidelines
 
@@ -227,7 +220,6 @@ includes code changes) and under the terms of the
 ### Checking coding style
 
 Run `npm run test` before committing to ensure your changes follow our coding standards.
-
 
 ## License
 

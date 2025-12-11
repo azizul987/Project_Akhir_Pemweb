@@ -18,7 +18,7 @@ const eventRegistry = {} // Events storage
 let uidEvent = 1
 const customEvents = {
   mouseenter: 'mouseover',
-  mouseleave: 'mouseout'
+  mouseleave: 'mouseout',
 }
 
 const nativeEvents = new Set([
@@ -67,7 +67,7 @@ const nativeEvents = new Set([
   'readystatechange',
   'error',
   'abort',
-  'scroll'
+  'scroll',
 ])
 
 /**
@@ -103,7 +103,11 @@ function bootstrapDelegationHandler(element, selector, fn) {
   return function handler(event) {
     const domElements = element.querySelectorAll(selector)
 
-    for (let { target } = event; target && target !== this; target = target.parentNode) {
+    for (
+      let { target } = event;
+      target && target !== this;
+      target = target.parentNode
+    ) {
       for (const domElement of domElements) {
         if (domElement !== target) {
           continue
@@ -122,14 +126,19 @@ function bootstrapDelegationHandler(element, selector, fn) {
 }
 
 function findHandler(events, callable, delegationSelector = null) {
-  return Object.values(events)
-    .find(event => event.callable === callable && event.delegationSelector === delegationSelector)
+  return Object.values(events).find(
+    (event) =>
+      event.callable === callable &&
+      event.delegationSelector === delegationSelector
+  )
 }
 
 function normalizeParameters(originalTypeEvent, handler, delegationFunction) {
   const isDelegated = typeof handler === 'string'
   // todo: tooltip passes `false` instead of selector, so we need to check
-  const callable = isDelegated ? delegationFunction : (handler || delegationFunction)
+  const callable = isDelegated
+    ? delegationFunction
+    : handler || delegationFunction
   let typeEvent = getTypeEvent(originalTypeEvent)
 
   if (!nativeEvents.has(typeEvent)) {
@@ -139,19 +148,33 @@ function normalizeParameters(originalTypeEvent, handler, delegationFunction) {
   return [isDelegated, callable, typeEvent]
 }
 
-function addHandler(element, originalTypeEvent, handler, delegationFunction, oneOff) {
+function addHandler(
+  element,
+  originalTypeEvent,
+  handler,
+  delegationFunction,
+  oneOff
+) {
   if (typeof originalTypeEvent !== 'string' || !element) {
     return
   }
 
-  let [isDelegated, callable, typeEvent] = normalizeParameters(originalTypeEvent, handler, delegationFunction)
+  let [isDelegated, callable, typeEvent] = normalizeParameters(
+    originalTypeEvent,
+    handler,
+    delegationFunction
+  )
 
   // in case of mouseenter or mouseleave wrap the handler within a function that checks for its DOM position
   // this prevents the handler from being dispatched the same way as mouseover or mouseout does
   if (originalTypeEvent in customEvents) {
-    const wrapFunction = fn => {
+    const wrapFunction = (fn) => {
       return function (event) {
-        if (!event.relatedTarget || (event.relatedTarget !== event.delegateTarget && !event.delegateTarget.contains(event.relatedTarget))) {
+        if (
+          !event.relatedTarget ||
+          (event.relatedTarget !== event.delegateTarget &&
+            !event.delegateTarget.contains(event.relatedTarget))
+        ) {
           return fn.call(this, event)
         }
       }
@@ -162,7 +185,11 @@ function addHandler(element, originalTypeEvent, handler, delegationFunction, one
 
   const events = getElementEvents(element)
   const handlers = events[typeEvent] || (events[typeEvent] = {})
-  const previousFunction = findHandler(handlers, callable, isDelegated ? handler : null)
+  const previousFunction = findHandler(
+    handlers,
+    callable,
+    isDelegated ? handler : null
+  )
 
   if (previousFunction) {
     previousFunction.oneOff = previousFunction.oneOff && oneOff
@@ -170,10 +197,13 @@ function addHandler(element, originalTypeEvent, handler, delegationFunction, one
     return
   }
 
-  const uid = makeEventUid(callable, originalTypeEvent.replace(namespaceRegex, ''))
-  const fn = isDelegated ?
-    bootstrapDelegationHandler(element, handler, callable) :
-    bootstrapHandler(element, callable)
+  const uid = makeEventUid(
+    callable,
+    originalTypeEvent.replace(namespaceRegex, '')
+  )
+  const fn = isDelegated
+    ? bootstrapDelegationHandler(element, handler, callable)
+    : bootstrapHandler(element, callable)
 
   fn.delegationSelector = isDelegated ? handler : null
   fn.callable = callable
@@ -184,7 +214,13 @@ function addHandler(element, originalTypeEvent, handler, delegationFunction, one
   element.addEventListener(typeEvent, fn, isDelegated)
 }
 
-function removeHandler(element, events, typeEvent, handler, delegationSelector) {
+function removeHandler(
+  element,
+  events,
+  typeEvent,
+  handler,
+  delegationSelector
+) {
   const fn = findHandler(events[typeEvent], handler, delegationSelector)
 
   if (!fn) {
@@ -201,7 +237,13 @@ function removeNamespacedHandlers(element, events, typeEvent, namespace) {
   for (const handlerKey of Object.keys(storeElementEvent)) {
     if (handlerKey.includes(namespace)) {
       const event = storeElementEvent[handlerKey]
-      removeHandler(element, events, typeEvent, event.callable, event.delegationSelector)
+      removeHandler(
+        element,
+        events,
+        typeEvent,
+        event.callable,
+        event.delegationSelector
+      )
     }
   }
 }
@@ -226,7 +268,11 @@ const EventHandler = {
       return
     }
 
-    const [isDelegated, callable, typeEvent] = normalizeParameters(originalTypeEvent, handler, delegationFunction)
+    const [isDelegated, callable, typeEvent] = normalizeParameters(
+      originalTypeEvent,
+      handler,
+      delegationFunction
+    )
     const inNamespace = typeEvent !== originalTypeEvent
     const events = getElementEvents(element)
     const storeElementEvent = events[typeEvent] || {}
@@ -238,13 +284,24 @@ const EventHandler = {
         return
       }
 
-      removeHandler(element, events, typeEvent, callable, isDelegated ? handler : null)
+      removeHandler(
+        element,
+        events,
+        typeEvent,
+        callable,
+        isDelegated ? handler : null
+      )
       return
     }
 
     if (isNamespace) {
       for (const elementEvent of Object.keys(events)) {
-        removeNamespacedHandlers(element, events, elementEvent, originalTypeEvent.slice(1))
+        removeNamespacedHandlers(
+          element,
+          events,
+          elementEvent,
+          originalTypeEvent.slice(1)
+        )
       }
     }
 
@@ -253,7 +310,13 @@ const EventHandler = {
 
       if (!inNamespace || originalTypeEvent.includes(handlerKey)) {
         const event = storeElementEvent[keyHandlers]
-        removeHandler(element, events, typeEvent, event.callable, event.delegationSelector)
+        removeHandler(
+          element,
+          events,
+          typeEvent,
+          event.callable,
+          event.delegationSelector
+        )
       }
     }
   },
@@ -297,7 +360,7 @@ const EventHandler = {
     }
 
     return evt
-  }
+  },
 }
 
 function hydrateObj(obj, meta) {
@@ -309,7 +372,7 @@ function hydrateObj(obj, meta) {
         configurable: true,
         get() {
           return value
-        }
+        },
       })
     }
   }

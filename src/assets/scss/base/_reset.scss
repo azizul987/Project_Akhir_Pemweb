@@ -3,7 +3,6 @@
 body {
   background-color: $body-bg;
 
-  // COPY PERSIS DARI KODE HTML KAMU:
   background-image:
     radial-gradient(
       circle at 15% 50%,
@@ -21,7 +20,6 @@ body {
   scroll-behavior: smooth;
 }
 
-// Helper class text muted
 .text-muted-custom,
 .muted {
   color: rgba($light, 0.7) !important;

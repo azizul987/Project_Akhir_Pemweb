@@ -2,11 +2,12 @@
 layout: single
 title: Examples
 description: Quickly get a project started with any of our examples ranging from using parts of the framework to custom components and layouts.
-aliases: "/examples/"
+aliases: '/examples/'
 ---
 
 {{< list-examples.inline >}}
 {{ range $entry := $.Site.Data.examples -}}
+
 <div class="row g-lg-5 mb-5">
   <div class="bd-content col-lg-3">
     <h2 id="{{ $entry.category | urlize }}">{{ $entry.category }}</h2>

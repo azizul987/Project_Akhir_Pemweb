@@ -1,5 +1,10 @@
 import Toast from '../../src/toast'
-import { clearFixture, createEvent, getFixture, jQueryMock } from '../helpers/fixture'
+import {
+  clearFixture,
+  createEvent,
+  getFixture,
+  jQueryMock,
+} from '../helpers/fixture'
 
 describe('Toast', () => {
   let fixtureEl
@@ -37,18 +42,18 @@ describe('Toast', () => {
     })
 
     it('should allow to config in js', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div class="toast">',
           '  <div class="toast-body">',
           '    a simple toast',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const toastEl = fixtureEl.querySelector('div')
         const toast = new Toast(toastEl, {
-          delay: 1
+          delay: 1,
         })
 
         toastEl.addEventListener('shown.bs.toast', () => {
@@ -61,11 +66,11 @@ describe('Toast', () => {
     })
 
     it('should close toast when close element with data-bs-dismiss attribute is set', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div class="toast" data-bs-delay="1" data-bs-autohide="false" data-bs-animation="false">',
           '  <button type="button" class="ms-2 mb-1 btn-close" data-bs-dismiss="toast" aria-label="Close"></button>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const toastEl = fixtureEl.querySelector('div')
@@ -98,7 +103,7 @@ describe('Toast', () => {
       fixtureEl.innerHTML = [
         '<div class="toast" data-bs-autohide="false" data-bs-animation="false">',
         '  <button type="button" class="ms-2 mb-1 btn-close" data-bs-dismiss="toast" aria-label="Close"></button>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const toastEl = fixtureEl.querySelector('div')
@@ -116,13 +121,13 @@ describe('Toast', () => {
 
   describe('show', () => {
     it('should auto hide', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div class="toast" data-bs-delay="1">',
           '  <div class="toast-body">',
           '    a simple toast',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const toastEl = fixtureEl.querySelector('.toast')
@@ -138,13 +143,13 @@ describe('Toast', () => {
     })
 
     it('should not add fade class', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div class="toast" data-bs-delay="1" data-bs-animation="false">',
           '  <div class="toast-body">',
           '    a simple toast',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const toastEl = fixtureEl.querySelector('.toast')
@@ -166,7 +171,7 @@ describe('Toast', () => {
           '  <div class="toast-body">',
           '    a simple toast',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const toastEl = fixtureEl.querySelector('.toast')
@@ -179,13 +184,17 @@ describe('Toast', () => {
           }, 20)
         }
 
-        toastEl.addEventListener('show.bs.toast', event => {
+        toastEl.addEventListener('show.bs.toast', (event) => {
           event.preventDefault()
           assertDone()
         })
 
         toastEl.addEventListener('shown.bs.toast', () => {
-          reject(new Error('shown event should not be triggered if show is prevented'))
+          reject(
+            new Error(
+              'shown event should not be triggered if show is prevented'
+            )
+          )
         })
 
         toast.show()
@@ -193,13 +202,13 @@ describe('Toast', () => {
     })
 
     it('should clear timeout if toast is shown again before it is hidden', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div class="toast">',
           '  <div class="toast-body">',
           '    a simple toast',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const toastEl = fixtureEl.querySelector('.toast')
@@ -222,13 +231,13 @@ describe('Toast', () => {
     })
 
     it('should clear timeout if toast is interacted with mouse', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div class="toast">',
           '  <div class="toast-body">',
           '    a simple toast',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const toastEl = fixtureEl.querySelector('.toast')
@@ -253,7 +262,7 @@ describe('Toast', () => {
     })
 
     it('should clear timeout if toast is interacted with keyboard', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<button id="outside-focusable">outside focusable</button>',
           '<div class="toast">',
@@ -261,7 +270,7 @@ describe('Toast', () => {
           '    a simple toast',
           '    <button>with a button</button>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const toastEl = fixtureEl.querySelector('.toast')
@@ -286,7 +295,7 @@ describe('Toast', () => {
     })
 
     it('should still auto hide after being interacted with mouse and keyboard', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<button id="outside-focusable">outside focusable</button>',
           '<div class="toast">',
@@ -294,7 +303,7 @@ describe('Toast', () => {
           '    a simple toast',
           '    <button>with a button</button>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const toastEl = fixtureEl.querySelector('.toast')
@@ -312,7 +321,8 @@ describe('Toast', () => {
           })
 
           toastEl.addEventListener('mouseout', () => {
-            const outsideFocusable = document.getElementById('outside-focusable')
+            const outsideFocusable =
+              document.getElementById('outside-focusable')
             outsideFocusable.focus()
           })
 
@@ -330,7 +340,7 @@ describe('Toast', () => {
     })
 
     it('should not auto hide if focus leaves but mouse pointer remains inside', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<button id="outside-focusable">outside focusable</button>',
           '<div class="toast">',
@@ -338,7 +348,7 @@ describe('Toast', () => {
           '    a simple toast',
           '    <button>with a button</button>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const toastEl = fixtureEl.querySelector('.toast')
@@ -351,7 +361,8 @@ describe('Toast', () => {
           })
 
           toastEl.addEventListener('focusin', () => {
-            const outsideFocusable = document.getElementById('outside-focusable')
+            const outsideFocusable =
+              document.getElementById('outside-focusable')
             outsideFocusable.focus()
           })
 
@@ -369,7 +380,7 @@ describe('Toast', () => {
     })
 
     it('should not auto hide if mouse pointer leaves but focus remains inside', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<button id="outside-focusable">outside focusable</button>',
           '<div class="toast">',
@@ -377,7 +388,7 @@ describe('Toast', () => {
           '    a simple toast',
           '    <button>with a button</button>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const toastEl = fixtureEl.querySelector('.toast')
@@ -410,13 +421,13 @@ describe('Toast', () => {
 
   describe('hide', () => {
     it('should allow to hide toast manually', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div class="toast" data-bs-delay="1" data-bs-autohide="false">',
           '  <div class="toast-body">',
           '    a simple toast',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const toastEl = fixtureEl.querySelector('.toast')
@@ -455,7 +466,7 @@ describe('Toast', () => {
           '  <div class="toast-body">',
           '    a simple toast',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const toastEl = fixtureEl.querySelector('.toast')
@@ -472,13 +483,17 @@ describe('Toast', () => {
           toast.hide()
         })
 
-        toastEl.addEventListener('hide.bs.toast', event => {
+        toastEl.addEventListener('hide.bs.toast', (event) => {
           event.preventDefault()
           assertDone()
         })
 
         toastEl.addEventListener('hidden.bs.toast', () => {
-          reject(new Error('hidden event should not be triggered if hide is prevented'))
+          reject(
+            new Error(
+              'hidden event should not be triggered if hide is prevented'
+            )
+          )
         })
 
         toast.show()
@@ -502,13 +517,13 @@ describe('Toast', () => {
     })
 
     it('should allow to destroy toast and hide it before that', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div class="toast" data-bs-delay="0" data-bs-autohide="false">',
           '  <div class="toast-body">',
           '    a simple toast',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const toastEl = fixtureEl.querySelector('div')
@@ -642,7 +657,7 @@ describe('Toast', () => {
 
       expect(Toast.getInstance(div)).toBeNull()
       const toast = Toast.getOrCreateInstance(div, {
-        delay: 1
+        delay: 1,
       })
       expect(toast).toBeInstanceOf(Toast)
 
@@ -654,12 +669,12 @@ describe('Toast', () => {
 
       const div = fixtureEl.querySelector('div')
       const toast = new Toast(div, {
-        delay: 1
+        delay: 1,
       })
       expect(Toast.getInstance(div)).toEqual(toast)
 
       const toast2 = Toast.getOrCreateInstance(div, {
-        delay: 2
+        delay: 2,
       })
       expect(toast).toBeInstanceOf(Toast)
       expect(toast2).toEqual(toast)

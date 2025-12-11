@@ -5,7 +5,7 @@ html.light {
 
   --surface: #{$light-surface};
   --glass-bg: #{$light-glass-bg};
-  --glass-border: #{$light-glass-border};
+  --glass-border: rgba(148, 148, 148, 0.08);
   --shadow-soft: 0 12px 36px rgba(10, 18, 34, 0.08);
 
   --bg-image:

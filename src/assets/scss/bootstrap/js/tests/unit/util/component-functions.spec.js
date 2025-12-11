@@ -34,7 +34,7 @@ describe('Plugin functions', () => {
       fixtureEl.innerHTML = [
         '<div id="foo" class="test">',
         '  <button type="button" data-bs-dismiss="test" data-bs-target="#foo"></button>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const spyGet = spyOn(DummyClass2, 'getOrCreateInstance').and.callThrough()
@@ -54,7 +54,7 @@ describe('Plugin functions', () => {
       fixtureEl.innerHTML = [
         '<div id="foo" class="test">',
         '  <button type="button" data-bs-dismiss="test"></button>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const spyGet = spyOn(DummyClass2, 'getOrCreateInstance').and.callThrough()
@@ -74,7 +74,7 @@ describe('Plugin functions', () => {
       fixtureEl.innerHTML = [
         '<div id="foo" class="test">',
         '  <button type="button" disabled data-bs-dismiss="test"></button>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const spy = spyOn(DummyClass2, 'getOrCreateInstance').and.callThrough()
@@ -91,7 +91,7 @@ describe('Plugin functions', () => {
       fixtureEl.innerHTML = [
         '<div id="foo" class="test">',
         '  <a type="button" data-bs-dismiss="test"></a>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const btnClose = fixtureEl.querySelector('[data-bs-dismiss="test"]')

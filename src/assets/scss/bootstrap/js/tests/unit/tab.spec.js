@@ -1,5 +1,10 @@
 import Tab from '../../src/tab'
-import { clearFixture, createEvent, getFixture, jQueryMock } from '../helpers/fixture'
+import {
+  clearFixture,
+  createEvent,
+  getFixture,
+  jQueryMock,
+} from '../helpers/fixture'
 
 describe('Tab', () => {
   let fixtureEl
@@ -26,7 +31,7 @@ describe('Tab', () => {
         '</ul>',
         '<ul>',
         '  <li id="home"></li>',
-        '</ul>'
+        '</ul>',
       ].join('')
 
       const tabEl = fixtureEl.querySelector('[href="#home"]')
@@ -39,7 +44,8 @@ describe('Tab', () => {
 
     it('Do not Throw exception if not parent', () => {
       fixtureEl.innerHTML = [
-        fixtureEl.innerHTML = '<div class=""><div class="nav-link"></div></div>'
+        (fixtureEl.innerHTML =
+          '<div class=""><div class="nav-link"></div></div>'),
       ].join('')
       const navEl = fixtureEl.querySelector('.nav-link')
 
@@ -51,7 +57,7 @@ describe('Tab', () => {
 
   describe('show', () => {
     it('should activate element by tab id (using buttons, the preferred semantic way)', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<ul class="nav" role="tablist">',
           '  <li><button type="button" data-bs-target="#home" role="tab">Home</button></li>',
@@ -60,7 +66,7 @@ describe('Tab', () => {
           '<ul>',
           '  <li id="home" role="tabpanel"></li>',
           '  <li id="profile" role="tabpanel"></li>',
-          '</ul>'
+          '</ul>',
         ].join('')
 
         const profileTriggerEl = fixtureEl.querySelector('#triggerProfile')
@@ -77,7 +83,7 @@ describe('Tab', () => {
     })
 
     it('should activate element by tab id (using links for tabs - not ideal, but still supported)', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<ul class="nav" role="tablist">',
           '  <li><a href="#home" role="tab">Home</a></li>',
@@ -86,7 +92,7 @@ describe('Tab', () => {
           '<ul>',
           '  <li id="home" role="tabpanel"></li>',
           '  <li id="profile" role="tabpanel"></li>',
-          '</ul>'
+          '</ul>',
         ].join('')
 
         const profileTriggerEl = fixtureEl.querySelector('#triggerProfile')
@@ -103,7 +109,7 @@ describe('Tab', () => {
     })
 
     it('should activate element by tab id in ordered list', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<ol class="nav nav-pills">',
           '  <li><button type="button" data-bs-target="#home" role="tab">Home</button></li>',
@@ -112,7 +118,7 @@ describe('Tab', () => {
           '<ol>',
           '  <li id="home" role="tabpanel"></li>',
           '  <li id="profile" role="tabpanel"></li>',
-          '</ol>'
+          '</ol>',
         ].join('')
 
         const profileTriggerEl = fixtureEl.querySelector('#triggerProfile')
@@ -128,7 +134,7 @@ describe('Tab', () => {
     })
 
     it('should activate element by tab id in nav list', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<nav class="nav">',
           '  <button type="button" data-bs-target="#home" role="tab">Home</button>',
@@ -137,7 +143,7 @@ describe('Tab', () => {
           '<div>',
           '  <div id="home" role="tabpanel"></div>',
           '  <div id="profile" role="tabpanel"></div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const profileTriggerEl = fixtureEl.querySelector('#triggerProfile')
@@ -153,7 +159,7 @@ describe('Tab', () => {
     })
 
     it('should activate element by tab id in list group', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div class="list-group" role="tablist">',
           '  <button type="button" data-bs-target="#home" role="tab">Home</button>',
@@ -162,7 +168,7 @@ describe('Tab', () => {
           '<div>',
           '  <div id="home" role="tabpanel"></div>',
           '  <div id="profile" role="tabpanel"></div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const profileTriggerEl = fixtureEl.querySelector('#triggerProfile')
@@ -179,7 +185,8 @@ describe('Tab', () => {
 
     it('should not fire shown when show is prevented', () => {
       return new Promise((resolve, reject) => {
-        fixtureEl.innerHTML = '<div class="nav"><div class="nav-link"></div></div>'
+        fixtureEl.innerHTML =
+          '<div class="nav"><div class="nav-link"></div></div>'
 
         const navEl = fixtureEl.querySelector('.nav > div')
         const tab = new Tab(navEl)
@@ -190,7 +197,7 @@ describe('Tab', () => {
           }, 30)
         }
 
-        navEl.addEventListener('show.bs.tab', ev => {
+        navEl.addEventListener('show.bs.tab', (ev) => {
           ev.preventDefault()
           expectDone()
         })
@@ -213,7 +220,7 @@ describe('Tab', () => {
           '<div class="tab-content">',
           '  <div class="tab-pane active" id="home" role="tabpanel"></div>',
           '  <div class="tab-pane" id="profile" role="tabpanel"></div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const triggerActive = fixtureEl.querySelector('button.active')
@@ -232,7 +239,7 @@ describe('Tab', () => {
     })
 
     it('show and shown events should reference correct relatedTarget', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<ul class="nav nav-tabs" role="tablist">',
           '  <li class="nav-item" role="presentation"><button type="button" data-bs-target="#home" class="nav-link active" role="tab" aria-selected="true">Home</button></li>',
@@ -241,20 +248,28 @@ describe('Tab', () => {
           '<div class="tab-content">',
           '  <div class="tab-pane active" id="home" role="tabpanel"></div>',
           '  <div class="tab-pane" id="profile" role="tabpanel"></div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const secondTabTrigger = fixtureEl.querySelector('#triggerProfile')
         const secondTab = new Tab(secondTabTrigger)
 
-        secondTabTrigger.addEventListener('show.bs.tab', ev => {
-          expect(ev.relatedTarget.getAttribute('data-bs-target')).toEqual('#home')
+        secondTabTrigger.addEventListener('show.bs.tab', (ev) => {
+          expect(ev.relatedTarget.getAttribute('data-bs-target')).toEqual(
+            '#home'
+          )
         })
 
-        secondTabTrigger.addEventListener('shown.bs.tab', ev => {
-          expect(ev.relatedTarget.getAttribute('data-bs-target')).toEqual('#home')
+        secondTabTrigger.addEventListener('shown.bs.tab', (ev) => {
+          expect(ev.relatedTarget.getAttribute('data-bs-target')).toEqual(
+            '#home'
+          )
           expect(secondTabTrigger.getAttribute('aria-selected')).toEqual('true')
-          expect(fixtureEl.querySelector('button:not(.active)').getAttribute('aria-selected')).toEqual('false')
+          expect(
+            fixtureEl
+              .querySelector('button:not(.active)')
+              .getAttribute('aria-selected')
+          ).toEqual('false')
           resolve()
         })
 
@@ -263,12 +278,12 @@ describe('Tab', () => {
     })
 
     it('should fire hide and hidden events', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<ul class="nav" role="tablist">',
           '  <li><button type="button" data-bs-target="#home" role="tab">Home</button></li>',
           '  <li><button type="button" data-bs-target="#profile" role="tab">Profile</button></li>',
-          '</ul>'
+          '</ul>',
         ].join('')
 
         const triggerList = fixtureEl.querySelectorAll('button')
@@ -280,14 +295,18 @@ describe('Tab', () => {
           secondTab.show()
         })
 
-        triggerList[0].addEventListener('hide.bs.tab', ev => {
+        triggerList[0].addEventListener('hide.bs.tab', (ev) => {
           hideCalled = true
-          expect(ev.relatedTarget.getAttribute('data-bs-target')).toEqual('#profile')
+          expect(ev.relatedTarget.getAttribute('data-bs-target')).toEqual(
+            '#profile'
+          )
         })
 
-        triggerList[0].addEventListener('hidden.bs.tab', ev => {
+        triggerList[0].addEventListener('hidden.bs.tab', (ev) => {
           expect(hideCalled).toBeTrue()
-          expect(ev.relatedTarget.getAttribute('data-bs-target')).toEqual('#profile')
+          expect(ev.relatedTarget.getAttribute('data-bs-target')).toEqual(
+            '#profile'
+          )
           resolve()
         })
 
@@ -301,7 +320,7 @@ describe('Tab', () => {
           '<ul class="nav" role="tablist">',
           '  <li><button type="button" data-bs-target="#home" role="tab">Home</button></li>',
           '  <li><button type="button" data-bs-target="#profile" role="tab">Profile</button></li>',
-          '</ul>'
+          '</ul>',
         ].join('')
 
         const triggerList = fixtureEl.querySelectorAll('button')
@@ -318,7 +337,7 @@ describe('Tab', () => {
           secondTab.show()
         })
 
-        triggerList[0].addEventListener('hide.bs.tab', ev => {
+        triggerList[0].addEventListener('hide.bs.tab', (ev) => {
           ev.preventDefault()
           expectDone()
         })
@@ -332,7 +351,7 @@ describe('Tab', () => {
     })
 
     it('should handle removed tabs', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<ul class="nav nav-tabs" role="tablist">',
           '  <li class="nav-item" role="presentation">',
@@ -355,7 +374,7 @@ describe('Tab', () => {
           '  <div role="tabpanel" class="tab-pane fade show active" id="profile">test 1</div>',
           '  <div role="tabpanel" class="tab-pane fade" id="buzz">test 2</div>',
           '  <div role="tabpanel" class="tab-pane fade" id="references">test 3</div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const secondNavEl = fixtureEl.querySelector('#secondNav')
@@ -383,7 +402,7 @@ describe('Tab', () => {
     })
 
     it('should not focus on opened tab', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<ul class="nav" role="tablist">',
           '  <li><button type="button" id="home" data-bs-target="#home" role="tab">Home</button></li>',
@@ -392,7 +411,7 @@ describe('Tab', () => {
           '<ul>',
           '  <li id="home" role="tabpanel"></li>',
           '  <li id="profile" role="tabpanel"></li>',
-          '</ul>'
+          '</ul>',
         ].join('')
 
         const firstTab = fixtureEl.querySelector('#home')
@@ -414,7 +433,8 @@ describe('Tab', () => {
 
   describe('dispose', () => {
     it('should dispose a tab', () => {
-      fixtureEl.innerHTML = '<div class="nav"><div class="nav-link"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="nav"><div class="nav-link"></div></div>'
 
       const el = fixtureEl.querySelector('.nav > div')
       const tab = new Tab(fixtureEl.querySelector('.nav > div'))
@@ -432,7 +452,7 @@ describe('Tab', () => {
       fixtureEl.innerHTML = [
         '<ul class="nav" role="tablist">',
         '  <li class="nav-link"></li>',
-        '</ul>'
+        '</ul>',
       ].join('')
 
       const tabEl = fixtureEl.querySelector('.nav-link')
@@ -454,7 +474,7 @@ describe('Tab', () => {
         '  <li class="nav-link" data-bs-target="#panel2"></li>',
         '</ul>',
         '<div id="panel"></div>',
-        '<div id="panel2"></div>'
+        '<div id="panel2"></div>',
       ].join('')
 
       const tabEl = fixtureEl.querySelector('.nav-link')
@@ -487,7 +507,7 @@ describe('Tab', () => {
       fixtureEl.innerHTML = [
         '<ul class="nav">',
         '  <li class="nav-link" data-bs-toggle="tab"></li>',
-        '</ul>'
+        '</ul>',
       ].join('')
 
       const tabEl = fixtureEl.querySelector('.nav-link')
@@ -495,8 +515,14 @@ describe('Tab', () => {
 
       const keydown = createEvent('keydown')
       keydown.key = 'Enter'
-      const spyStop = spyOn(Event.prototype, 'stopPropagation').and.callThrough()
-      const spyPrevent = spyOn(Event.prototype, 'preventDefault').and.callThrough()
+      const spyStop = spyOn(
+        Event.prototype,
+        'stopPropagation'
+      ).and.callThrough()
+      const spyPrevent = spyOn(
+        Event.prototype,
+        'preventDefault'
+      ).and.callThrough()
       const spyKeydown = spyOn(tab, '_keydown')
       const spyGet = spyOn(tab, '_getChildren')
 
@@ -514,7 +540,7 @@ describe('Tab', () => {
         '  <span id="tab1" class="nav-link" data-bs-toggle="tab"></span>',
         '  <span id="tab2" class="nav-link" data-bs-toggle="tab"></span>',
         '  <span id="tab3" class="nav-link" data-bs-toggle="tab"></span>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const tabEl1 = fixtureEl.querySelector('#tab1')
@@ -530,8 +556,14 @@ describe('Tab', () => {
       const spyFocus2 = spyOn(tabEl2, 'focus').and.callThrough()
       const spyFocus3 = spyOn(tabEl3, 'focus').and.callThrough()
 
-      const spyStop = spyOn(Event.prototype, 'stopPropagation').and.callThrough()
-      const spyPrevent = spyOn(Event.prototype, 'preventDefault').and.callThrough()
+      const spyStop = spyOn(
+        Event.prototype,
+        'stopPropagation'
+      ).and.callThrough()
+      const spyPrevent = spyOn(
+        Event.prototype,
+        'preventDefault'
+      ).and.callThrough()
 
       let keydown = createEvent('keydown')
       keydown.key = 'ArrowRight'
@@ -560,7 +592,7 @@ describe('Tab', () => {
         '<div class="nav">',
         '  <span id="tab1" class="nav-link" data-bs-toggle="tab"></span>',
         '  <span id="tab2" class="nav-link" data-bs-toggle="tab"></span>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const tabEl1 = fixtureEl.querySelector('#tab1')
@@ -572,8 +604,14 @@ describe('Tab', () => {
       const spyFocus1 = spyOn(tabEl1, 'focus').and.callThrough()
       const spyFocus2 = spyOn(tabEl2, 'focus').and.callThrough()
 
-      const spyStop = spyOn(Event.prototype, 'stopPropagation').and.callThrough()
-      const spyPrevent = spyOn(Event.prototype, 'preventDefault').and.callThrough()
+      const spyStop = spyOn(
+        Event.prototype,
+        'stopPropagation'
+      ).and.callThrough()
+      const spyPrevent = spyOn(
+        Event.prototype,
+        'preventDefault'
+      ).and.callThrough()
 
       let keydown = createEvent('keydown')
       keydown.key = 'ArrowLeft'
@@ -600,7 +638,7 @@ describe('Tab', () => {
         '  <span id="tab2" class="nav-link" data-bs-toggle="tab" disabled></span>',
         '  <span id="tab3" class="nav-link disabled" data-bs-toggle="tab"></span>',
         '  <span id="tab4" class="nav-link" data-bs-toggle="tab"></span>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const tabEl = fixtureEl.querySelector('#tab1')
@@ -641,7 +679,7 @@ describe('Tab', () => {
         '  <span id="tab2" class="nav-link" data-bs-toggle="tab" disabled></span>',
         '  <span id="tab3" class="nav-link disabled" data-bs-toggle="tab"></span>',
         '  <span id="tab4" class="nav-link" data-bs-toggle="tab"></span>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const tabEl = fixtureEl.querySelector('#tab1')
@@ -678,7 +716,8 @@ describe('Tab', () => {
 
   describe('jQueryInterface', () => {
     it('should create a tab', () => {
-      fixtureEl.innerHTML = '<div class="nav"><div class="nav-link"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="nav"><div class="nav-link"></div></div>'
 
       const div = fixtureEl.querySelector('.nav > div')
 
@@ -691,7 +730,8 @@ describe('Tab', () => {
     })
 
     it('should not re create a tab', () => {
-      fixtureEl.innerHTML = '<div class="nav"><div class="nav-link"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="nav"><div class="nav-link"></div></div>'
 
       const div = fixtureEl.querySelector('.nav > div')
       const tab = new Tab(div)
@@ -705,7 +745,8 @@ describe('Tab', () => {
     })
 
     it('should call a tab method', () => {
-      fixtureEl.innerHTML = '<div class="nav"><div class="nav-link"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="nav"><div class="nav-link"></div></div>'
 
       const div = fixtureEl.querySelector('.nav > div')
       const tab = new Tab(div)
@@ -722,7 +763,8 @@ describe('Tab', () => {
     })
 
     it('should throw error on undefined method', () => {
-      fixtureEl.innerHTML = '<div class="nav"><div class="nav-link"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="nav"><div class="nav-link"></div></div>'
 
       const div = fixtureEl.querySelector('.nav > div')
       const action = 'undefinedMethod'
@@ -742,7 +784,8 @@ describe('Tab', () => {
     })
 
     it('should return this instance', () => {
-      fixtureEl.innerHTML = '<div class="nav"><div class="nav-link"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="nav"><div class="nav-link"></div></div>'
 
       const divEl = fixtureEl.querySelector('.nav > div')
       const tab = new Tab(divEl)
@@ -754,7 +797,8 @@ describe('Tab', () => {
 
   describe('getOrCreateInstance', () => {
     it('should return tab instance', () => {
-      fixtureEl.innerHTML = '<div class="nav"><div class="nav-link"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="nav"><div class="nav-link"></div></div>'
 
       const div = fixtureEl.querySelector('div')
       const tab = new Tab(div)
@@ -765,7 +809,8 @@ describe('Tab', () => {
     })
 
     it('should return new instance when there is no tab instance', () => {
-      fixtureEl.innerHTML = '<div class="nav"><div class="nav-link"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="nav"><div class="nav-link"></div></div>'
 
       const div = fixtureEl.querySelector('div')
 
@@ -776,7 +821,7 @@ describe('Tab', () => {
 
   describe('data-api', () => {
     it('should create dynamically a tab', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<ul class="nav nav-tabs" role="tablist">',
           '  <li class="nav-item" role="presentation"><button type="button" data-bs-target="#home" class="nav-link active" role="tab" aria-selected="true">Home</button></li>',
@@ -785,7 +830,7 @@ describe('Tab', () => {
           '<div class="tab-content">',
           '  <div class="tab-pane active" id="home" role="tabpanel"></div>',
           '  <div class="tab-pane" id="profile" role="tabpanel"></div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const secondTabTrigger = fixtureEl.querySelector('#triggerProfile')
@@ -812,15 +857,19 @@ describe('Tab', () => {
         '      <a class="dropdown-item" href="#dropdown2" id="dropdown2-tab" data-bs-toggle="tab">@mdo</a>',
         '    </div>',
         '  </li>',
-        '</ul>'
+        '</ul>',
       ].join('')
 
       const firstLiLinkEl = fixtureEl.querySelector('li:first-child a')
 
       firstLiLinkEl.click()
       expect(firstLiLinkEl).toHaveClass('active')
-      expect(fixtureEl.querySelector('li:last-child a')).not.toHaveClass('active')
-      expect(fixtureEl.querySelector('li:last-child .dropdown-menu a:first-child')).not.toHaveClass('active')
+      expect(fixtureEl.querySelector('li:last-child a')).not.toHaveClass(
+        'active'
+      )
+      expect(
+        fixtureEl.querySelector('li:last-child .dropdown-menu a:first-child')
+      ).not.toHaveClass('active')
     })
 
     it('selecting a dropdown tab does not activate another', () => {
@@ -833,7 +882,7 @@ describe('Tab', () => {
         '      <a class="dropdown-item" href="#dropdown1" id="dropdown1-tab" data-bs-toggle="tab">@fat</a>',
         '    </div>',
         '  </li>',
-        '</ul>'
+        '</ul>',
       ].join('')
       const nav2 = [
         '<ul class="nav nav-tabs" id="nav2">',
@@ -844,7 +893,7 @@ describe('Tab', () => {
         '      <a class="dropdown-item" href="#dropdown1" id="dropdown1-tab" data-bs-toggle="tab">@fat</a>',
         '    </div>',
         '  </li>',
-        '</ul>'
+        '</ul>',
       ].join('')
 
       fixtureEl.innerHTML = nav1 + nav2
@@ -853,9 +902,15 @@ describe('Tab', () => {
 
       firstDropItem.click()
       expect(firstDropItem).toHaveClass('active')
-      expect(fixtureEl.querySelector('#nav1 .dropdown-toggle')).toHaveClass('active')
-      expect(fixtureEl.querySelector('#nav2 .dropdown-toggle')).not.toHaveClass('active')
-      expect(fixtureEl.querySelector('#nav2 .dropdown-item')).not.toHaveClass('active')
+      expect(fixtureEl.querySelector('#nav1 .dropdown-toggle')).toHaveClass(
+        'active'
+      )
+      expect(fixtureEl.querySelector('#nav2 .dropdown-toggle')).not.toHaveClass(
+        'active'
+      )
+      expect(fixtureEl.querySelector('#nav2 .dropdown-item')).not.toHaveClass(
+        'active'
+      )
     })
 
     it('should support li > .dropdown-item', () => {
@@ -870,7 +925,7 @@ describe('Tab', () => {
         '      <li><a class="dropdown-item" href="#dropdown2" id="dropdown2-tab" data-bs-toggle="tab">@mdo</a></li>',
         '    </ul>',
         '  </li>',
-        '</ul>'
+        '</ul>',
       ].join('')
 
       const dropItems = fixtureEl.querySelectorAll('.dropdown-item')
@@ -882,7 +937,7 @@ describe('Tab', () => {
     })
 
     it('should handle nested tabs', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<nav class="nav nav-tabs" role="tablist">',
           '  <button type="button" id="tab1" data-bs-target="#x-tab1" class="nav-link" data-bs-toggle="tab" role="tab" aria-controls="x-tab1">Tab 1</button>',
@@ -902,7 +957,7 @@ describe('Tab', () => {
           '  </div>',
           '  <div class="tab-pane active" id="x-tab2" role="tabpanel">Tab2 Content</div>',
           '  <div class="tab-pane" id="x-tab3" role="tabpanel">Tab3 Content</div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const tab1El = fixtureEl.querySelector('#tab1')
@@ -924,7 +979,7 @@ describe('Tab', () => {
     })
 
     it('should not remove fade class if no active pane is present', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<ul class="nav nav-tabs" role="tablist">',
           '  <li class="nav-item" role="presentation"><button type="button" id="tab-home" data-bs-target="#home" class="nav-link" data-bs-toggle="tab" role="tab">Home</button></li>',
@@ -933,7 +988,7 @@ describe('Tab', () => {
           '<div class="tab-content">',
           '  <div class="tab-pane fade" id="home" role="tabpanel"></div>',
           '  <div class="tab-pane fade" id="profile" role="tabpanel"></div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const triggerTabProfileEl = fixtureEl.querySelector('#tab-profile')
@@ -966,7 +1021,7 @@ describe('Tab', () => {
     })
 
     it('should add `show` class to tab panes if there is no `.fade` class', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<ul class="nav nav-tabs" role="tablist">',
           '  <li class="nav-item" role="presentation">',
@@ -979,7 +1034,7 @@ describe('Tab', () => {
           '<div class="tab-content">',
           '  <div role="tabpanel" class="tab-pane" id="home">test 1</div>',
           '  <div role="tabpanel" class="tab-pane" id="profile">test 2</div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const secondNavEl = fixtureEl.querySelector('#secondNav')
@@ -994,7 +1049,7 @@ describe('Tab', () => {
     })
 
     it('should add show class to tab panes if there is a `.fade` class', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<ul class="nav nav-tabs" role="tablist">',
           '  <li class="nav-item" role="presentation">',
@@ -1007,7 +1062,7 @@ describe('Tab', () => {
           '<div class="tab-content">',
           '  <div role="tabpanel" class="tab-pane fade" id="home">test 1</div>',
           '  <div role="tabpanel" class="tab-pane fade" id="profile">test 2</div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const secondNavEl = fixtureEl.querySelector('#secondNav')
@@ -1024,12 +1079,12 @@ describe('Tab', () => {
     })
 
     it('should prevent default when the trigger is <a> or <area>', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<ul class="nav" role="tablist">',
           '  <li><a type="button" href="#test"  class="active" role="tab" data-bs-toggle="tab">Home</a></li>',
           '  <li><a type="button" href="#test2" role="tab" data-bs-toggle="tab">Home</a></li>',
-          '</ul>'
+          '</ul>',
         ].join('')
 
         const tabEl = fixtureEl.querySelector('[href="#test2"]')
@@ -1055,7 +1110,7 @@ describe('Tab', () => {
           '<div class="tab-content">',
           '  <div class="tab-pane active" id="home" role="tabpanel"></div>',
           '  <div class="tab-pane" id="profile" role="tabpanel"></div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const triggerDisabled = fixtureEl.querySelector('button[disabled]')
@@ -1081,7 +1136,7 @@ describe('Tab', () => {
           '<div class="tab-content">',
           '  <div class="tab-pane active" id="home" role="tabpanel"></div>',
           '  <div class="tab-pane" id="profile" role="tabpanel"></div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const triggerDisabled = fixtureEl.querySelector('a.disabled')

@@ -1,7 +1,13 @@
 import Modal from '../../src/modal'
 import EventHandler from '../../src/dom/event-handler'
 import ScrollBarHelper from '../../src/util/scrollbar'
-import { clearBodyAndDocument, clearFixture, createEvent, getFixture, jQueryMock } from '../helpers/fixture'
+import {
+  clearBodyAndDocument,
+  clearFixture,
+  createEvent,
+  getFixture,
+  jQueryMock,
+} from '../helpers/fixture'
 
 describe('Modal', () => {
   let fixtureEl
@@ -44,7 +50,8 @@ describe('Modal', () => {
 
   describe('constructor', () => {
     it('should take care of element either passed as a CSS selector or DOM element', () => {
-      fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="modal"><div class="modal-dialog"></div></div>'
 
       const modalEl = fixtureEl.querySelector('.modal')
       const modalBySelector = new Modal('.modal')
@@ -57,11 +64,18 @@ describe('Modal', () => {
 
   describe('toggle', () => {
     it('should call ScrollBarHelper to handle scrollBar on body', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      return new Promise((resolve) => {
+        fixtureEl.innerHTML =
+          '<div class="modal"><div class="modal-dialog"></div></div>'
 
-        const spyHide = spyOn(ScrollBarHelper.prototype, 'hide').and.callThrough()
-        const spyReset = spyOn(ScrollBarHelper.prototype, 'reset').and.callThrough()
+        const spyHide = spyOn(
+          ScrollBarHelper.prototype,
+          'hide'
+        ).and.callThrough()
+        const spyReset = spyOn(
+          ScrollBarHelper.prototype,
+          'reset'
+        ).and.callThrough()
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl)
 
@@ -82,13 +96,14 @@ describe('Modal', () => {
 
   describe('show', () => {
     it('should show a modal', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      return new Promise((resolve) => {
+        fixtureEl.innerHTML =
+          '<div class="modal"><div class="modal-dialog"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl)
 
-        modalEl.addEventListener('show.bs.modal', event => {
+        modalEl.addEventListener('show.bs.modal', (event) => {
           expect(event).toBeDefined()
         })
 
@@ -106,15 +121,16 @@ describe('Modal', () => {
     })
 
     it('should show a modal without backdrop', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      return new Promise((resolve) => {
+        fixtureEl.innerHTML =
+          '<div class="modal"><div class="modal-dialog"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl, {
-          backdrop: false
+          backdrop: false,
         })
 
-        modalEl.addEventListener('show.bs.modal', event => {
+        modalEl.addEventListener('show.bs.modal', (event) => {
           expect(event).toBeDefined()
         })
 
@@ -132,7 +148,7 @@ describe('Modal', () => {
     })
 
     it('should show a modal and append the element', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         const modalEl = document.createElement('div')
         const id = 'dynamicModal'
 
@@ -154,7 +170,8 @@ describe('Modal', () => {
     })
 
     it('should do nothing if a modal is shown', () => {
-      fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="modal"><div class="modal-dialog"></div></div>'
 
       const modalEl = fixtureEl.querySelector('.modal')
       const modal = new Modal(modalEl)
@@ -168,7 +185,8 @@ describe('Modal', () => {
     })
 
     it('should do nothing if a modal is transitioning', () => {
-      fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="modal"><div class="modal-dialog"></div></div>'
 
       const modalEl = fixtureEl.querySelector('.modal')
       const modal = new Modal(modalEl)
@@ -183,12 +201,13 @@ describe('Modal', () => {
 
     it('should not fire shown event when show is prevented', () => {
       return new Promise((resolve, reject) => {
-        fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+        fixtureEl.innerHTML =
+          '<div class="modal"><div class="modal-dialog"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl)
 
-        modalEl.addEventListener('show.bs.modal', event => {
+        modalEl.addEventListener('show.bs.modal', (event) => {
           event.preventDefault()
 
           const expectedDone = () => {
@@ -208,14 +227,15 @@ describe('Modal', () => {
     })
 
     it('should be shown after the first call to show() has been prevented while fading is enabled ', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<div class="modal fade"><div class="modal-dialog"></div></div>'
+      return new Promise((resolve) => {
+        fixtureEl.innerHTML =
+          '<div class="modal fade"><div class="modal-dialog"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl)
 
         let prevented = false
-        modalEl.addEventListener('show.bs.modal', event => {
+        modalEl.addEventListener('show.bs.modal', (event) => {
           if (!prevented) {
             event.preventDefault()
             prevented = true
@@ -236,8 +256,9 @@ describe('Modal', () => {
       })
     })
     it('should set is transitioning if fade class is present', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<div class="modal fade"><div class="modal-dialog"></div></div>'
+      return new Promise((resolve) => {
+        fixtureEl.innerHTML =
+          '<div class="modal fade"><div class="modal-dialog"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl)
@@ -258,7 +279,7 @@ describe('Modal', () => {
     })
 
     it('should close modal when a click occurred on data-bs-dismiss="modal" inside modal', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div class="modal fade">',
           '  <div class="modal-dialog">',
@@ -266,7 +287,7 @@ describe('Modal', () => {
           '      <button type="button" data-bs-dismiss="modal"></button>',
           '    </div>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const modalEl = fixtureEl.querySelector('.modal')
@@ -289,12 +310,12 @@ describe('Modal', () => {
     })
 
     it('should close modal when a click occurred on a data-bs-dismiss="modal" with "bs-target" outside of modal element', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<button type="button" data-bs-dismiss="modal" data-bs-target="#modal1"></button>',
           '<div id="modal1" class="modal fade">',
           '  <div class="modal-dialog"></div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const modalEl = fixtureEl.querySelector('.modal')
@@ -316,12 +337,12 @@ describe('Modal', () => {
       })
     })
 
-    it('should set .modal\'s scroll top to 0', () => {
-      return new Promise(resolve => {
+    it("should set .modal's scroll top to 0", () => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div class="modal fade">',
           '  <div class="modal-dialog"></div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const modalEl = fixtureEl.querySelector('.modal')
@@ -337,13 +358,13 @@ describe('Modal', () => {
     })
 
     it('should set modal body scroll top to 0 if modal body do not exists', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div class="modal fade">',
           '  <div class="modal-dialog">',
           '    <div class="modal-body"></div>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const modalEl = fixtureEl.querySelector('.modal')
@@ -360,12 +381,13 @@ describe('Modal', () => {
     })
 
     it('should not trap focus if focus equal to false', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<div class="modal fade"><div class="modal-dialog"></div></div>'
+      return new Promise((resolve) => {
+        fixtureEl.innerHTML =
+          '<div class="modal fade"><div class="modal-dialog"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl, {
-          focus: false
+          focus: false,
         })
 
         const spy = spyOn(modal._focustrap, 'activate').and.callThrough()
@@ -380,8 +402,9 @@ describe('Modal', () => {
     })
 
     it('should add listener when escape touch is pressed', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      return new Promise((resolve) => {
+        fixtureEl.innerHTML =
+          '<div class="modal"><div class="modal-dialog"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl)
@@ -405,8 +428,9 @@ describe('Modal', () => {
     })
 
     it('should do nothing when the pressed key is not escape', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      return new Promise((resolve) => {
+        fixtureEl.innerHTML =
+          '<div class="modal"><div class="modal-dialog"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl)
@@ -432,8 +456,9 @@ describe('Modal', () => {
     })
 
     it('should adjust dialog on resize', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      return new Promise((resolve) => {
+        fixtureEl.innerHTML =
+          '<div class="modal"><div class="modal-dialog"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl)
@@ -464,7 +489,7 @@ describe('Modal', () => {
           '  <div class="modal-dialog">',
           '    <div class="modal-content"></div>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const modalEl = fixtureEl.querySelector('.modal')
@@ -493,11 +518,12 @@ describe('Modal', () => {
 
     it('should not close modal when clicking outside of modal-content if backdrop = false', () => {
       return new Promise((resolve, reject) => {
-        fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+        fixtureEl.innerHTML =
+          '<div class="modal"><div class="modal-dialog"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl, {
-          backdrop: false
+          backdrop: false,
         })
 
         const shownCallback = () => {
@@ -522,11 +548,12 @@ describe('Modal', () => {
 
     it('should not close modal when clicking outside of modal-content if backdrop = static', () => {
       return new Promise((resolve, reject) => {
-        fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+        fixtureEl.innerHTML =
+          '<div class="modal"><div class="modal-dialog"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl, {
-          backdrop: 'static'
+          backdrop: 'static',
         })
 
         const shownCallback = () => {
@@ -549,13 +576,14 @@ describe('Modal', () => {
       })
     })
     it('should close modal when escape key is pressed with keyboard = true and backdrop is static', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      return new Promise((resolve) => {
+        fixtureEl.innerHTML =
+          '<div class="modal"><div class="modal-dialog"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl, {
           backdrop: 'static',
-          keyboard: true
+          keyboard: true,
         })
 
         const shownCallback = () => {
@@ -579,11 +607,12 @@ describe('Modal', () => {
 
     it('should not close modal when escape key is pressed with keyboard = false', () => {
       return new Promise((resolve, reject) => {
-        fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+        fixtureEl.innerHTML =
+          '<div class="modal"><div class="modal-dialog"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl, {
-          keyboard: false
+          keyboard: false,
         })
 
         const shownCallback = () => {
@@ -610,12 +639,13 @@ describe('Modal', () => {
     })
 
     it('should not overflow when clicking outside of modal-content if backdrop = static', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog" style="transition-duration: 20ms;"></div></div>'
+      return new Promise((resolve) => {
+        fixtureEl.innerHTML =
+          '<div class="modal"><div class="modal-dialog" style="transition-duration: 20ms;"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl, {
-          backdrop: 'static'
+          backdrop: 'static',
         })
 
         modalEl.addEventListener('shown.bs.modal', () => {
@@ -631,12 +661,13 @@ describe('Modal', () => {
     })
 
     it('should not queue multiple callbacks when clicking outside of modal-content and backdrop = static', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog" style="transition-duration: 50ms;"></div></div>'
+      return new Promise((resolve) => {
+        fixtureEl.innerHTML =
+          '<div class="modal"><div class="modal-dialog" style="transition-duration: 50ms;"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl, {
-          backdrop: 'static'
+          backdrop: 'static',
         })
 
         modalEl.addEventListener('shown.bs.modal', () => {
@@ -659,8 +690,9 @@ describe('Modal', () => {
     })
 
     it('should trap focus', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      return new Promise((resolve) => {
+        fixtureEl.innerHTML =
+          '<div class="modal"><div class="modal-dialog"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl)
@@ -679,8 +711,9 @@ describe('Modal', () => {
 
   describe('hide', () => {
     it('should hide a modal', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      return new Promise((resolve) => {
+        fixtureEl.innerHTML =
+          '<div class="modal"><div class="modal-dialog"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl)
@@ -690,7 +723,7 @@ describe('Modal', () => {
           modal.hide()
         })
 
-        modalEl.addEventListener('hide.bs.modal', event => {
+        modalEl.addEventListener('hide.bs.modal', (event) => {
           expect(event).toBeDefined()
         })
 
@@ -708,8 +741,9 @@ describe('Modal', () => {
     })
 
     it('should close modal when clicking outside of modal-content', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      return new Promise((resolve) => {
+        fixtureEl.innerHTML =
+          '<div class="modal"><div class="modal-dialog"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const dialogEl = modalEl.querySelector('.modal-dialog')
@@ -735,13 +769,13 @@ describe('Modal', () => {
     })
 
     it('should not close modal when clicking on an element removed from modal content', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div class="modal">',
           ' <div class="modal-dialog">',
           '   <button class="btn">BTN</button>',
           ' </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const modalEl = fixtureEl.querySelector('.modal')
@@ -765,7 +799,8 @@ describe('Modal', () => {
     })
 
     it('should do nothing is the modal is not shown', () => {
-      fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="modal"><div class="modal-dialog"></div></div>'
 
       const modalEl = fixtureEl.querySelector('.modal')
       const modal = new Modal(modalEl)
@@ -776,7 +811,8 @@ describe('Modal', () => {
     })
 
     it('should do nothing is the modal is transitioning', () => {
-      fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="modal"><div class="modal-dialog"></div></div>'
 
       const modalEl = fixtureEl.querySelector('.modal')
       const modal = new Modal(modalEl)
@@ -789,7 +825,8 @@ describe('Modal', () => {
 
     it('should not hide a modal if hide is prevented', () => {
       return new Promise((resolve, reject) => {
-        fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+        fixtureEl.innerHTML =
+          '<div class="modal"><div class="modal-dialog"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl)
@@ -805,7 +842,7 @@ describe('Modal', () => {
           }, 10)
         }
 
-        modalEl.addEventListener('hide.bs.modal', event => {
+        modalEl.addEventListener('hide.bs.modal', (event) => {
           event.preventDefault()
           hideCallback()
         })
@@ -819,8 +856,9 @@ describe('Modal', () => {
     })
 
     it('should release focus trap', () => {
-      return new Promise(resolve => {
-        fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      return new Promise((resolve) => {
+        fixtureEl.innerHTML =
+          '<div class="modal"><div class="modal-dialog"></div></div>'
 
         const modalEl = fixtureEl.querySelector('.modal')
         const modal = new Modal(modalEl)
@@ -842,7 +880,8 @@ describe('Modal', () => {
 
   describe('dispose', () => {
     it('should dispose a modal', () => {
-      fixtureEl.innerHTML = '<div id="exampleModal" class="modal"><div class="modal-dialog"></div></div>'
+      fixtureEl.innerHTML =
+        '<div id="exampleModal" class="modal"><div class="modal-dialog"></div></div>'
 
       const modalEl = fixtureEl.querySelector('.modal')
       const modal = new Modal(modalEl)
@@ -863,7 +902,8 @@ describe('Modal', () => {
 
   describe('handleUpdate', () => {
     it('should call adjust dialog', () => {
-      fixtureEl.innerHTML = '<div id="exampleModal" class="modal"><div class="modal-dialog"></div></div>'
+      fixtureEl.innerHTML =
+        '<div id="exampleModal" class="modal"><div class="modal-dialog"></div></div>'
 
       const modalEl = fixtureEl.querySelector('.modal')
       const modal = new Modal(modalEl)
@@ -878,10 +918,10 @@ describe('Modal', () => {
 
   describe('data-api', () => {
     it('should toggle modal', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>',
-          '<div id="exampleModal" class="modal"><div class="modal-dialog"></div></div>'
+          '<div id="exampleModal" class="modal"><div class="modal-dialog"></div></div>',
         ].join('')
 
         const modalEl = fixtureEl.querySelector('.modal')
@@ -910,10 +950,10 @@ describe('Modal', () => {
     })
 
     it('should not recreate a new modal', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>',
-          '<div id="exampleModal" class="modal"><div class="modal-dialog"></div></div>'
+          '<div id="exampleModal" class="modal"><div class="modal-dialog"></div></div>',
         ].join('')
 
         const modalEl = fixtureEl.querySelector('.modal')
@@ -932,10 +972,10 @@ describe('Modal', () => {
     })
 
     it('should prevent default when the trigger is <a> or <area>', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"></a>',
-          '<div id="exampleModal" class="modal"><div class="modal-dialog"></div></div>'
+          '<div id="exampleModal" class="modal"><div class="modal-dialog"></div></div>',
         ].join('')
 
         const modalEl = fixtureEl.querySelector('.modal')
@@ -958,10 +998,10 @@ describe('Modal', () => {
     })
 
     it('should focus the trigger on hide', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"></a>',
-          '<div id="exampleModal" class="modal"><div class="modal-dialog"></div></div>'
+          '<div id="exampleModal" class="modal"><div class="modal-dialog"></div></div>',
         ].join('')
 
         const modalEl = fixtureEl.querySelector('.modal')
@@ -990,17 +1030,19 @@ describe('Modal', () => {
       })
     })
     it('should not prevent default when a click occurred on data-bs-dismiss="modal" where tagName is DIFFERENT than <a> or <area>', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div class="modal">',
           '  <div class="modal-dialog">',
           '    <button type="button" data-bs-dismiss="modal"></button>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const modalEl = fixtureEl.querySelector('.modal')
-        const btnClose = fixtureEl.querySelector('button[data-bs-dismiss="modal"]')
+        const btnClose = fixtureEl.querySelector(
+          'button[data-bs-dismiss="modal"]'
+        )
         const modal = new Modal(modalEl)
 
         const spy = spyOn(Event.prototype, 'preventDefault').and.callThrough()
@@ -1019,13 +1061,13 @@ describe('Modal', () => {
     })
 
     it('should prevent default when a click occurred on data-bs-dismiss="modal" where tagName is <a> or <area>', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<div class="modal">',
           '  <div class="modal-dialog">',
           '    <a type="button" data-bs-dismiss="modal"></a>',
           '  </div>',
-          '</div>'
+          '</div>',
         ].join('')
 
         const modalEl = fixtureEl.querySelector('.modal')
@@ -1047,10 +1089,10 @@ describe('Modal', () => {
       })
     })
     it('should not focus the trigger if the modal is not visible', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" style="display: none;"></a>',
-          '<div id="exampleModal" class="modal" style="display: none;"><div class="modal-dialog"></div></div>'
+          '<div id="exampleModal" class="modal" style="display: none;"><div class="modal-dialog"></div></div>',
         ].join('')
 
         const modalEl = fixtureEl.querySelector('.modal')
@@ -1079,10 +1121,10 @@ describe('Modal', () => {
       })
     })
     it('should not focus the trigger if the modal is not shown', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"></a>',
-          '<div id="exampleModal" class="modal"><div class="modal-dialog"></div></div>'
+          '<div id="exampleModal" class="modal"><div class="modal-dialog"></div></div>',
         ].join('')
 
         const modalEl = fixtureEl.querySelector('.modal')
@@ -1097,7 +1139,7 @@ describe('Modal', () => {
           }, 10)
         }
 
-        modalEl.addEventListener('show.bs.modal', event => {
+        modalEl.addEventListener('show.bs.modal', (event) => {
           event.preventDefault()
           showListener()
         })
@@ -1107,11 +1149,11 @@ describe('Modal', () => {
     })
 
     it('should call hide first, if another modal is open', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = [
           '<button data-bs-toggle="modal"  data-bs-target="#modal2"></button>',
           '<div id="modal1" class="modal fade"><div class="modal-dialog"></div></div>',
-          '<div id="modal2" class="modal"><div class="modal-dialog"></div></div>'
+          '<div id="modal2" class="modal"><div class="modal-dialog"></div></div>',
         ].join('')
 
         const trigger2 = fixtureEl.querySelector('button')
@@ -1133,7 +1175,8 @@ describe('Modal', () => {
   })
   describe('jQueryInterface', () => {
     it('should create a modal', () => {
-      fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="modal"><div class="modal-dialog"></div></div>'
 
       const div = fixtureEl.querySelector('div')
 
@@ -1146,7 +1189,8 @@ describe('Modal', () => {
     })
 
     it('should create a modal with given config', () => {
-      fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="modal"><div class="modal-dialog"></div></div>'
 
       const div = fixtureEl.querySelector('div')
 
@@ -1163,7 +1207,8 @@ describe('Modal', () => {
     })
 
     it('should not re create a modal', () => {
-      fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="modal"><div class="modal-dialog"></div></div>'
 
       const div = fixtureEl.querySelector('div')
       const modal = new Modal(div)
@@ -1177,7 +1222,8 @@ describe('Modal', () => {
     })
 
     it('should throw error on undefined method', () => {
-      fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="modal"><div class="modal-dialog"></div></div>'
 
       const div = fixtureEl.querySelector('div')
       const action = 'undefinedMethod'
@@ -1191,7 +1237,8 @@ describe('Modal', () => {
     })
 
     it('should call show method', () => {
-      fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="modal"><div class="modal-dialog"></div></div>'
 
       const div = fixtureEl.querySelector('div')
       const modal = new Modal(div)
@@ -1207,7 +1254,8 @@ describe('Modal', () => {
     })
 
     it('should not call show method', () => {
-      fixtureEl.innerHTML = '<div class="modal" data-bs-show="false"><div class="modal-dialog"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="modal" data-bs-show="false"><div class="modal-dialog"></div></div>'
 
       const div = fixtureEl.querySelector('div')
 
@@ -1224,7 +1272,8 @@ describe('Modal', () => {
 
   describe('getInstance', () => {
     it('should return modal instance', () => {
-      fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="modal"><div class="modal-dialog"></div></div>'
 
       const div = fixtureEl.querySelector('div')
       const modal = new Modal(div)
@@ -1234,7 +1283,8 @@ describe('Modal', () => {
     })
 
     it('should return null when there is no modal instance', () => {
-      fixtureEl.innerHTML = '<div class="modal"><div class="modal-dialog"></div></div>'
+      fixtureEl.innerHTML =
+        '<div class="modal"><div class="modal-dialog"></div></div>'
 
       const div = fixtureEl.querySelector('div')
 
@@ -1270,7 +1320,7 @@ describe('Modal', () => {
 
       expect(Modal.getInstance(div)).toBeNull()
       const modal = Modal.getOrCreateInstance(div, {
-        backdrop: true
+        backdrop: true,
       })
       expect(modal).toBeInstanceOf(Modal)
 
@@ -1282,12 +1332,12 @@ describe('Modal', () => {
 
       const div = fixtureEl.querySelector('div')
       const modal = new Modal(div, {
-        backdrop: true
+        backdrop: true,
       })
       expect(Modal.getInstance(div)).toEqual(modal)
 
       const modal2 = Modal.getOrCreateInstance(div, {
-        backdrop: false
+        backdrop: false,
       })
       expect(modal).toBeInstanceOf(Modal)
       expect(modal2).toEqual(modal)

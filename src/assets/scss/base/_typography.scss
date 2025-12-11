@@ -10,10 +10,10 @@ h5,
 .h3,
 .h4,
 .h5 {
-  font-family: $headings-font-family; // Mengambil dari _variables.scss
+  font-family: $headings-font-family;
   font-weight: 700;
-  color: $white; // Variabel bawaan Bootstrap
-  letter-spacing: -0.02em; // Sedikit dirapatkan agar modern
+  color: $white;
+  letter-spacing: -0.02em;
   margin-bottom: 1rem;
 }
 
@@ -23,7 +23,7 @@ p {
   color: rgba($light, 0.8);
 }
 
-// Styling khusus untuk link agar tidak biru standar
+
 a {
   text-decoration: none;
   transition: color 0.2s ease;
@@ -33,7 +33,6 @@ a {
   }
 }
 
-// Utility class untuk teks pudar (pengganti .muted)
 .text-muted-custom {
   color: rgba($light, 0.6) !important;
 }

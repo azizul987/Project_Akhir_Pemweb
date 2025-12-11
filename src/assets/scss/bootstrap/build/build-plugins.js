@@ -22,20 +22,22 @@ const jsFiles = globby.sync(sourcePath + '/**/*.js')
 const resolvedPlugins = []
 
 // Trims the "js" extension and uppercases => first letter, hyphens, backslashes & slashes
-const filenameToEntity = filename => filename.replace('.js', '')
-  .replace(/(?:^|-|\/|\\)[a-z]/g, str => str.slice(-1).toUpperCase())
+const filenameToEntity = (filename) =>
+  filename
+    .replace('.js', '')
+    .replace(/(?:^|-|\/|\\)[a-z]/g, (str) => str.slice(-1).toUpperCase())
 
 for (const file of jsFiles) {
   resolvedPlugins.push({
     src: file.replace('.js', ''),
     dist: file.replace('src', 'dist'),
     fileName: path.basename(file),
-    className: filenameToEntity(path.basename(file))
+    className: filenameToEntity(path.basename(file)),
     // safeClassName: filenameToEntity(path.relative(sourcePath, file))
   })
 }
 
-const build = async plugin => {
+const build = async (plugin) => {
   const globals = {}
 
   const bundle = await rollup.rollup({
@@ -45,8 +47,8 @@ const build = async plugin => {
         // Only transpile our source code
         exclude: 'node_modules/**',
         // Include the helpers in each file, at most one copy of each
-        babelHelpers: 'bundled'
-      })
+        babelHelpers: 'bundled',
+      }),
     ],
     external(source) {
       // Pattern to identify local files
@@ -58,7 +60,7 @@ const build = async plugin => {
         return true
       }
 
-      const usedPlugin = resolvedPlugins.find(plugin => {
+      const usedPlugin = resolvedPlugins.find((plugin) => {
         return plugin.src.includes(source.replace(pattern, ''))
       })
 
@@ -70,7 +72,7 @@ const build = async plugin => {
       // `safeClassName` instead of `className` everywhere
       globals[path.normalize(usedPlugin.src)] = usedPlugin.className
       return true
-    }
+    },
   })
 
   await bundle.write({
@@ -80,13 +82,13 @@ const build = async plugin => {
     sourcemap: true,
     globals,
     generatedCode: 'es2015',
-    file: plugin.dist
+    file: plugin.dist,
   })
 
   console.log(`Built ${plugin.className}`)
 }
 
-(async () => {
+;(async () => {
   try {
     const basename = path.basename(__filename)
     const timeLabel = `[${basename}] finished`
@@ -94,7 +96,9 @@ const build = async plugin => {
     console.log('Building individual plugins...')
     console.time(timeLabel)
 
-    await Promise.all(Object.values(resolvedPlugins).map(plugin => build(plugin)))
+    await Promise.all(
+      Object.values(resolvedPlugins).map((plugin) => build(plugin))
+    )
 
     console.timeEnd(timeLabel)
   } catch (error) {

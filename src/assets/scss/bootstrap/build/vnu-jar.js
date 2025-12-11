@@ -30,7 +30,7 @@ execFile('java', ['-version'], (error, stdout, stderr) => {
     // Per https://www.w3.org/TR/html-aria/#docconformance having "aria-disabled" on a link is
     // NOT RECOMMENDED, but it's still valid - we explain in the docs that it's not ideal,
     // and offer more robust alternatives, but also need to show a less-than-ideal example
-    'An “aria-disabled” attribute whose value is “true” should not be specified on an “a” element that has an “href” attribute.'
+    'An “aria-disabled” attribute whose value is “true” should not be specified on an “a” element that has an “href” attribute.',
   ].join('|')
 
   const args = [
@@ -41,7 +41,7 @@ execFile('java', ['-version'], (error, stdout, stderr) => {
     '--Werror',
     `--filterpattern "${ignores}"`,
     '_site/',
-    'js/tests/'
+    'js/tests/',
   ]
 
   // For the 32-bit Java we need to pass `-Xss512k`
@@ -51,7 +51,6 @@ execFile('java', ['-version'], (error, stdout, stderr) => {
 
   return spawn('java', args, {
     shell: true,
-    stdio: 'inherit'
-  })
-    .on('exit', process.exit)
+    stdio: 'inherit',
+  }).on('exit', process.exit)
 })

@@ -5,8 +5,8 @@ module.exports = {
       {
         loose: true,
         bugfixes: true,
-        modules: false
-      }
-    ]
-  ]
-};
+        modules: false,
+      },
+    ],
+  ],
+}

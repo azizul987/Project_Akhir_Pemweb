@@ -1,17 +1,17 @@
 // abstracts/_variables.scss
 
-// --- 1. Color System (Sesuai Kode HTML Kamu) ---
+// --- Color System ---
 $primary: #6f42c1; // Ungu
 $secondary: #0dcaf0; // Cyan
 $info: #0dcaf0;
 $light: #e7e9ee; // Text Light
 $dark: #050507; // BG Dark (Hitam Kebiruan)
 
-// --- 2. Body Settings ---
+// --- Body Settings ---
 $body-bg: $dark;
 $body-color: $light;
 
-// --- 3. Typography ---
+// --- Typography ---
 $font-family-sans-serif:
   'Inter',
   system-ui,
@@ -19,12 +19,12 @@ $font-family-sans-serif:
   sans-serif;
 $headings-font-family: 'Outfit', sans-serif;
 
-// --- 4. Custom Variables ---
+// --- Custom Variables ---
 // Glass effect persis seperti di CSS kamu
 $glass-bg: rgba(255, 255, 255, 0.05);
 $glass-border: rgba(255, 255, 255, 0.1);
 
-// --- 5. Light-theme overrides (for clearer, balanced light mode)
+// --- Light-theme overrides (for clearer, balanced light mode)
 $light-bg: #f7f8fb; // page background in light mode
 $light-text: #0f1724; // main text in light mode (deep slate)
 $light-muted: rgba(15, 23, 36, 0.62); // muted text for light mode
@@ -42,7 +42,7 @@ $card-elevation: 0 8px 28px rgba(10, 18, 34, 0.06);
 $accent-warm: #ff7a59; // soft coral for CTA accents
 $accent-cool: $secondary; // reuse cyan as cool accent
 
-// --- 6. Navbar / header light-mode helpers
+// --- Navbar / header light-mode helpers
 // Use these to balance navbar (not just gray) when body has `.light`
 $light-navbar-bg: rgba(255, 255, 255, 0.95);
 $light-navbar-text: #0b1a28; // slightly darker than body text for nav labels

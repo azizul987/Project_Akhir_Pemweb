@@ -10,7 +10,7 @@
  * For details, see https://creativecommons.org/licenses/by/3.0/.
  */
 
-(() => {
+;(() => {
   'use strict'
 
   // Scroll the active sidebar link into view
@@ -24,7 +24,8 @@
     const viewportBottom = viewportTop - sidenavHeight + sidenavActiveLinkHeight
 
     if (sidenav.scrollTop > viewportTop || sidenav.scrollTop < viewportBottom) {
-      sidenav.scrollTop = viewportTop - (sidenavHeight / 2) + (sidenavActiveLinkHeight / 2)
+      sidenav.scrollTop =
+        viewportTop - sidenavHeight / 2 + sidenavActiveLinkHeight / 2
     }
   }
 })()

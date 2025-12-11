@@ -35,7 +35,10 @@ class Button extends BaseComponent {
   // Public
   toggle() {
     // Toggle class and sync the `aria-pressed` attribute with the return value of the `.toggle()` method
-    this._element.setAttribute('aria-pressed', this._element.classList.toggle(CLASS_NAME_ACTIVE))
+    this._element.setAttribute(
+      'aria-pressed',
+      this._element.classList.toggle(CLASS_NAME_ACTIVE)
+    )
   }
 
   // Static
@@ -54,14 +57,19 @@ class Button extends BaseComponent {
  * Data API implementation
  */
 
-EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, event => {
-  event.preventDefault()
+EventHandler.on(
+  document,
+  EVENT_CLICK_DATA_API,
+  SELECTOR_DATA_TOGGLE,
+  (event) => {
+    event.preventDefault()
 
-  const button = event.target.closest(SELECTOR_DATA_TOGGLE)
-  const data = Button.getOrCreateInstance(button)
+    const button = event.target.closest(SELECTOR_DATA_TOGGLE)
+    const data = Button.getOrCreateInstance(button)
 
-  data.toggle()
-})
+    data.toggle()
+  }
+)
 
 /**
  * jQuery

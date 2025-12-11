@@ -98,7 +98,9 @@ Add, remove, or modify values within the map to update how they're used in many 
 Here's how you can use these in your Sass:
 
 ```scss
-.alpha { color: $purple; }
+.alpha {
+  color: $purple;
+}
 .beta {
   color: $yellow-300;
   background-color: $indigo-900;
@@ -120,32 +122,41 @@ Bootstrap doesn't include `color` and `background-color` utilities for every col
 Here's an example that generates text color utilities (e.g., `.text-purple-500`) using the above steps.
 
 ```scss
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/maps";
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/utilities";
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
 
-$all-colors: map-merge-multiple($blues, $indigos, $purples, $pinks, $reds, $oranges, $yellows, $greens, $teals, $cyans);
+$all-colors: map-merge-multiple(
+  $blues,
+  $indigos,
+  $purples,
+  $pinks,
+  $reds,
+  $oranges,
+  $yellows,
+  $greens,
+  $teals,
+  $cyans
+);
 
 $utilities: map-merge(
   $utilities,
   (
-    "color": map-merge(
-      map-get($utilities, "color"),
-      (
-        values: map-merge(
-          map-get(map-get($utilities, "color"), "values"),
-          (
-            $all-colors
-          ),
-        ),
+    'color': map-merge(
+        map-get($utilities, 'color'),
+        (
+          values: map-merge(
+              map-get(map-get($utilities, 'color'), 'values'),
+              ($all-colors)
+            ),
+        )
       ),
-    ),
   )
 );
 
-@import "bootstrap/scss/utilities/api";
+@import 'bootstrap/scss/utilities/api';
 ```
 
 This will generate new `.text-{color}-{level}` utilities for every color and level. You can do the same for any other utility and property as well.

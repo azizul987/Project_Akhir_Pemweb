@@ -4,7 +4,7 @@ title: Forms
 description: Examples and usage guidelines for form control styles, layout options, and custom components for creating a wide variety of forms.
 group: forms
 toc: true
-aliases: "/docs/5.2/forms/"
+aliases: '/docs/5.2/forms/'
 sections:
   - title: Form control
     description: Style textual inputs and textareas with support for multiple states.
@@ -33,6 +33,7 @@ Be sure to use an appropriate `type` attribute on all inputs (e.g., `email` for 
 Here's a quick example to demonstrate Bootstrap's form styles. Keep reading for documentation on required classes, form layout, and more.
 
 {{< example >}}
+
 <form>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -56,6 +57,7 @@ Here's a quick example to demonstrate Bootstrap's form styles. Keep reading for 
 Block-level or inline-level form text can be created using `.form-text`.
 
 {{< callout warning >}}
+
 ##### Associating form text with form controls
 
 Form text should be explicitly associated with the form control it relates to using the `aria-describedby` attribute. This will ensure that assistive technologies—such as screen readers—will announce this form text when the user focuses or enters the control.
@@ -66,6 +68,7 @@ Form text below inputs can be styled with `.form-text`. If a block-level element
 {{< example >}}
 <label for="inputPassword5" class="form-label">Password</label>
 <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+
 <div id="passwordHelpBlock" class="form-text">
   Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
 </div>
@@ -74,6 +77,7 @@ Form text below inputs can be styled with `.form-text`. If a block-level element
 Inline text can use any typical inline HTML element (be it a `<span>`, `<small>`, or something else) with nothing more than the `.form-text` class.
 
 {{< example >}}
+
 <div class="row g-3 align-items-center">
   <div class="col-auto">
     <label for="inputPassword6" class="col-form-label">Password</label>
@@ -94,7 +98,13 @@ Inline text can use any typical inline HTML element (be it a `<span>`, `<small>`
 Add the `disabled` boolean attribute on an input to prevent user interactions and make it appear lighter.
 
 ```html
-<input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled>
+<input
+  class="form-control"
+  id="disabledInput"
+  type="text"
+  placeholder="Disabled input here..."
+  disabled
+/>
 ```
 
 Add the `disabled` attribute to a `<fieldset>` to disable all the controls within. Browsers treat all native form controls (`<input>`, `<select>`, and `<button>` elements) inside a `<fieldset disabled>` as disabled, preventing both keyboard and mouse interactions on them.
@@ -102,6 +112,7 @@ Add the `disabled` attribute to a `<fieldset>` to disable all the controls withi
 However, if your form also includes custom button-like elements such as `<a class="btn btn-*">...</a>`, these will only be given a style of `pointer-events: none`, meaning they are still focusable and operable using the keyboard. In this case, you must manually modify these controls by adding `tabindex="-1"` to prevent them from receiving focus and `aria-disabled="disabled"` to signal their state to assistive technologies.
 
 {{< example >}}
+
 <form>
   <fieldset disabled>
     <legend>Disabled fieldset example</legend>

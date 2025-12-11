@@ -13,6 +13,7 @@ We recommend getting familiar with Bootstrap first by reading through our [Getti
 You may also want to read up on [the RTLCSS project](https://rtlcss.com/), as it powers our approach to RTL.
 
 {{< callout warning >}}
+
 ### Experimental feature
 
 The RTL feature is still **experimental** and will probably evolve according to user feedback. Spotted something or have an improvement to suggest? [Open an issue]({{< param repo >}}/issues/new/choose), we'd love to get your insights.
@@ -77,7 +78,7 @@ Our approach to building RTL support into Bootstrap comes with two important dec
 
 2. **Second, we've renamed a handful of directional classes to adopt a logical properties approach.** Most of you have already interacted with logical properties thanks to our flex utilities—they replace direction properties like `left` and `right` in favor `start` and `end`. That makes the class names and values appropriate for LTR and RTL without any overhead.
 
-  For example, instead of `.ml-3` for `margin-left`, use `.ms-3`.
+For example, instead of `.ml-3` for `margin-left`, use `.ms-3`.
 
 Working with RTL, through our source Sass or compiled CSS, shouldn't be much different from our default LTR though.
 
@@ -115,7 +116,7 @@ For example, to switch from `Helvetica Neue` font for LTR to `Helvetica Neue Ara
 
 ```scss
 $font-family-sans-serif:
-  Helvetica Neue #{"/* rtl:insert:Arabic */"},
+  Helvetica Neue #{'/* rtl:insert:Arabic */'},
   // Cross-platform generic font family (default user interface font)
   system-ui,
   // Safari for macOS and iOS (San Francisco)
@@ -123,17 +124,20 @@ $font-family-sans-serif:
   // Chrome < 56 for macOS (San Francisco)
   BlinkMacSystemFont,
   // Windows
-  "Segoe UI",
+  'Segoe UI',
   // Android
   Roboto,
   // Basic web fallback
   Arial,
   // Linux
-  "Noto Sans",
+  'Noto Sans',
   // Sans serif fallback
   sans-serif,
   // Emoji fonts
-  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+  'Apple Color Emoji',
+  'Segoe UI Emoji',
+  'Segoe UI Symbol',
+  'Noto Color Emoji' !default;
 ```
 
 ### LTR and RTL at the same time
@@ -155,7 +159,7 @@ Need both LTR and RTL on the same page? Thanks to [RTLCSS String Maps](https://r
   } ]
 } */
 .ltr {
-  @import "../node_modules/bootstrap/scss/bootstrap";
+  @import '../node_modules/bootstrap/scss/bootstrap';
 }
 /*rtl:end:options*/
 ```
@@ -163,6 +167,7 @@ Need both LTR and RTL on the same page? Thanks to [RTLCSS String Maps](https://r
 After running Sass then RTLCSS, each selector in your CSS files will be prepended by `.ltr`, and `.rtl` for RTL files. Now you're able to use both files on the same page, and simply use `.ltr` or `.rtl` on your components wrappers to use one or the other direction.
 
 {{< callout warning >}}
+
 #### Edge cases and known limitations
 
 While this approach is understandable, please pay attention to the following:
@@ -170,7 +175,7 @@ While this approach is understandable, please pay attention to the following:
 1. When switching `.ltr` and `.rtl`, make sure you add `dir` and `lang` attributes accordingly.
 2. Loading both files can be a real performance bottleneck: consider some [optimization]({{< docsref "/customize/optimize" >}}), and maybe try to [load one of those files asynchronously](https://www.filamentgroup.com/lab/load-css-simpler/).
 3. Nesting styles this way will prevent our `form-validation-state()` mixin from working as intended, thus require you tweak it a bit by yourself. [See #31223](https://github.com/twbs/bootstrap/issues/31223).
-{{< /callout >}}
+   {{< /callout >}}
 
 ## The breadcrumb case
 

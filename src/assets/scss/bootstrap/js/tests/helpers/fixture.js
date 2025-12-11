@@ -34,7 +34,7 @@ export const jQueryMock = {
     for (const element of this.elements) {
       fn.call(element)
     }
-  }
+  },
 }
 
 export const clearBodyAndDocument = () => {

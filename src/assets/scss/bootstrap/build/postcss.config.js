@@ -3,17 +3,17 @@
 const mapConfig = {
   inline: false,
   annotation: true,
-  sourcesContent: true
+  sourcesContent: true,
 }
 
-module.exports = context => {
+module.exports = (context) => {
   return {
     map: context.file.dirname.includes('examples') ? false : mapConfig,
     plugins: {
       autoprefixer: {
-        cascade: false
+        cascade: false,
       },
-      rtlcss: context.env === 'RTL'
-    }
+      rtlcss: context.env === 'RTL',
+    },
   }
 }

@@ -14,15 +14,14 @@ const path = require('node:path')
 const globby = require('globby')
 
 const VERBOSE = process.argv.includes('--verbose')
-const DRY_RUN = process.argv.includes('--dry') || process.argv.includes('--dry-run')
+const DRY_RUN =
+  process.argv.includes('--dry') || process.argv.includes('--dry-run')
 
 // These are the filetypes we only care about replacing the version
-const GLOB = [
-  '**/*.{css,html,js,json,md,scss,txt,yml}'
-]
+const GLOB = ['**/*.{css,html,js,json,md,scss,txt,yml}']
 const GLOBBY_OPTIONS = {
   cwd: path.join(__dirname, '..'),
-  gitignore: true
+  gitignore: true,
 }
 
 // Blame TC39... https://github.com/benjamingr/RegExp.escape/issues/37
@@ -37,7 +36,8 @@ function regExpQuoteReplacement(string) {
 async function replaceRecursively(file, oldVersion, newVersion) {
   const originalString = await fs.readFile(file, 'utf8')
   const newString = originalString.replace(
-    new RegExp(regExpQuote(oldVersion), 'g'), regExpQuoteReplacement(newVersion)
+    new RegExp(regExpQuote(oldVersion), 'g'),
+    regExpQuoteReplacement(newVersion)
   )
 
   // No need to move any further if the strings are identical
@@ -60,18 +60,24 @@ async function main(args) {
   let [oldVersion, newVersion] = args
 
   if (!oldVersion || !newVersion) {
-    console.error('USAGE: change-version old_version new_version [--verbose] [--dry[-run]]')
+    console.error(
+      'USAGE: change-version old_version new_version [--verbose] [--dry[-run]]'
+    )
     console.error('Got arguments:', args)
     process.exit(1)
   }
 
   // Strip any leading `v` from arguments because otherwise we will end up with duplicate `v`s
-  [oldVersion, newVersion] = [oldVersion, newVersion].map(arg => arg.startsWith('v') ? arg.slice(1) : arg)
+  ;[oldVersion, newVersion] = [oldVersion, newVersion].map((arg) =>
+    arg.startsWith('v') ? arg.slice(1) : arg
+  )
 
   try {
     const files = await globby(GLOB, GLOBBY_OPTIONS)
 
-    await Promise.all(files.map(file => replaceRecursively(file, oldVersion, newVersion)))
+    await Promise.all(
+      files.map((file) => replaceRecursively(file, oldVersion, newVersion))
+    )
   } catch (error) {
     console.error(error)
     process.exit(1)

@@ -46,7 +46,7 @@ describe('Swipe', () => {
       '    width: 300px;',
       '    height: 300px;',
       '  }',
-      '</style>'
+      '</style>',
     ].join('')
 
     fixtureEl.innerHTML = `<div id="swipeEl"></div>${cssStyle}`
@@ -79,7 +79,7 @@ describe('Swipe', () => {
 
   describe('Config', () => {
     it('Test leftCallback', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         const spyRight = jasmine.createSpy('spy')
         clearPointerEvents()
         defineDocumentElementOntouchstart()
@@ -90,18 +90,18 @@ describe('Swipe', () => {
             restorePointerEvents()
             resolve()
           },
-          rightCallback: spyRight
+          rightCallback: spyRight,
         })
 
         mockSwipeGesture(swipeEl, {
           pos: [300, 10],
-          deltaX: -300
+          deltaX: -300,
         })
       })
     })
 
     it('Test rightCallback', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         const spyLeft = jasmine.createSpy('spy')
         clearPointerEvents()
         defineDocumentElementOntouchstart()
@@ -112,18 +112,18 @@ describe('Swipe', () => {
             restorePointerEvents()
             resolve()
           },
-          leftCallback: spyLeft
+          leftCallback: spyLeft,
         })
 
         mockSwipeGesture(swipeEl, {
           pos: [10, 10],
-          deltaX: 300
+          deltaX: 300,
         })
       })
     })
 
     it('Test endCallback', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         clearPointerEvents()
         defineDocumentElementOntouchstart()
         let isFirstTime = true
@@ -141,16 +141,16 @@ describe('Swipe', () => {
 
         // eslint-disable-next-line no-new
         new Swipe(swipeEl, {
-          endCallback: callback
+          endCallback: callback,
         })
         mockSwipeGesture(swipeEl, {
           pos: [10, 10],
-          deltaX: 300
+          deltaX: 300,
         })
 
         mockSwipeGesture(swipeEl, {
           pos: [300, 10],
-          deltaX: -300
+          deltaX: -300,
         })
       })
     })
@@ -169,7 +169,7 @@ describe('Swipe', () => {
         pos: [300, 10],
         deltaX: -300,
         deltaY: 0,
-        touches: 2
+        touches: 2,
       })
 
       restorePointerEvents()
@@ -177,14 +177,15 @@ describe('Swipe', () => {
     })
 
     it('should allow swipeRight and call "rightCallback" with pointer events', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         if (!supportPointerEvent) {
           expect().nothing()
           resolve()
           return
         }
 
-        const style = '#fixture .pointer-event { touch-action: none !important; }'
+        const style =
+          '#fixture .pointer-event { touch-action: none !important; }'
         fixtureEl.innerHTML += style
 
         defineDocumentElementOntouchstart()
@@ -194,7 +195,7 @@ describe('Swipe', () => {
             deleteDocumentElementOntouchstart()
             expect().nothing()
             resolve()
-          }
+          },
         })
 
         mockSwipeGesture(swipeEl, { deltaX: 300 }, 'pointer')
@@ -202,14 +203,15 @@ describe('Swipe', () => {
     })
 
     it('should allow swipeLeft and call "leftCallback" with pointer events', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         if (!supportPointerEvent) {
           expect().nothing()
           resolve()
           return
         }
 
-        const style = '#fixture .pointer-event { touch-action: none !important; }'
+        const style =
+          '#fixture .pointer-event { touch-action: none !important; }'
         fixtureEl.innerHTML += style
 
         defineDocumentElementOntouchstart()
@@ -219,13 +221,17 @@ describe('Swipe', () => {
             expect().nothing()
             deleteDocumentElementOntouchstart()
             resolve()
-          }
+          },
         })
 
-        mockSwipeGesture(swipeEl, {
-          pos: [300, 10],
-          deltaX: -300
-        }, 'pointer')
+        mockSwipeGesture(
+          swipeEl,
+          {
+            pos: [300, 10],
+            deltaX: -300,
+          },
+          'pointer'
+        )
       })
     })
   })
@@ -247,16 +253,15 @@ describe('Swipe', () => {
 
       const swipe = new Swipe(fixtureEl)
 
-      const expectedArgs =
-        swipe._supportPointerEvents ?
-          [
+      const expectedArgs = swipe._supportPointerEvents
+        ? [
             ['pointerdown', jasmine.any(Function), jasmine.any(Boolean)],
-            ['pointerup', jasmine.any(Function), jasmine.any(Boolean)]
-          ] :
-          [
+            ['pointerup', jasmine.any(Function), jasmine.any(Boolean)],
+          ]
+        : [
             ['touchstart', jasmine.any(Function), jasmine.any(Boolean)],
             ['touchmove', jasmine.any(Function), jasmine.any(Boolean)],
-            ['touchend', jasmine.any(Function), jasmine.any(Boolean)]
+            ['touchend', jasmine.any(Function), jasmine.any(Boolean)],
           ]
 
       expect(addEventSpy.calls.allArgs()).toEqual(expectedArgs)

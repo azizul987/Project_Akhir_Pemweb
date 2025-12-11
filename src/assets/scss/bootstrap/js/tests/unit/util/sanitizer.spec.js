@@ -15,7 +15,7 @@ describe('Sanitizer', () => {
         '<div>',
         '  <a href="javascript:alert(7)">Click me</a>',
         '  <span>Some content</span>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const result = sanitizeHtml(template, DefaultAllowlist, null)
@@ -28,7 +28,7 @@ describe('Sanitizer', () => {
         '<div>',
         '  <a href="javascript:alert(7)" aria-label="This is a link" data-foo="bar">Click me</a>',
         '  <span>Some content</span>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const myDefaultAllowList = DefaultAllowlist
@@ -52,7 +52,7 @@ describe('Sanitizer', () => {
       const template = [
         '<div aria-pressed="true">',
         '  <span class="test">Some content</span>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const result = sanitizeHtml(template, DefaultAllowlist, null)
@@ -62,11 +62,9 @@ describe('Sanitizer', () => {
     })
 
     it('should remove tags not in allowlist', () => {
-      const template = [
-        '<div>',
-        '  <script>alert(7)</script>',
-        '</div>'
-      ].join('')
+      const template = ['<div>', '  <script>alert(7)</script>', '</div>'].join(
+        ''
+      )
 
       const result = sanitizeHtml(template, DefaultAllowlist, null)
 
@@ -74,11 +72,9 @@ describe('Sanitizer', () => {
     })
 
     it('should not use native api to sanitize if a custom function passed', () => {
-      const template = [
-        '<div>',
-        '  <span>Some content</span>',
-        '</div>'
-      ].join('')
+      const template = ['<div>', '  <span>Some content</span>', '</div>'].join(
+        ''
+      )
 
       function mySanitize(htmlUnsafe) {
         return htmlUnsafe

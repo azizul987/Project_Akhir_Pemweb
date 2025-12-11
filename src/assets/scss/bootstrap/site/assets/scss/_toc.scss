@@ -11,7 +11,7 @@
   }
 
   nav {
-    @include font-size(.875rem);
+    @include font-size(0.875rem);
 
     ul {
       padding-left: 0;
@@ -20,12 +20,12 @@
 
       ul {
         padding-left: 1rem;
-        margin-top: .25rem;
+        margin-top: 0.25rem;
       }
     }
 
     li {
-      margin-bottom: .25rem;
+      margin-bottom: 0.25rem;
     }
 
     a {
@@ -53,20 +53,20 @@
 
   @include media-breakpoint-down(md) {
     border: 1px solid $border-color;
-    @include border-radius(.4rem);
+    @include border-radius(0.4rem);
 
     &:hover,
     &:focus,
     &:active,
-    &[aria-expanded="true"] {
+    &[aria-expanded='true'] {
       color: var(--bd-violet);
       background-color: $white;
       border-color: var(--bd-violet);
     }
 
     &:focus,
-    &[aria-expanded="true"] {
-      box-shadow: 0 0 0 3px rgba(var(--bd-violet-rgb), .25);
+    &[aria-expanded='true'] {
+      box-shadow: 0 0 0 3px rgba(var(--bd-violet-rgb), 0.25);
     }
   }
 }
@@ -77,7 +77,7 @@
       padding: 1.25rem;
       background-color: var(--bs-gray-100);
       border: 1px solid $border-color;
-      @include border-radius(.25rem);
+      @include border-radius(0.25rem);
     }
   }
 

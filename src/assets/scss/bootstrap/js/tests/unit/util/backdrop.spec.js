@@ -24,10 +24,10 @@ describe('Backdrop', () => {
 
   describe('show', () => {
     it('should append the backdrop html once on show and include the "show" class if it is "shown"', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         const instance = new Backdrop({
           isVisible: true,
-          isAnimated: false
+          isAnimated: false,
         })
         const getElements = () => document.querySelectorAll(CLASS_BACKDROP)
 
@@ -46,10 +46,10 @@ describe('Backdrop', () => {
     })
 
     it('should not append the backdrop html if it is not "shown"', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         const instance = new Backdrop({
           isVisible: false,
-          isAnimated: true
+          isAnimated: true,
         })
         const getElements = () => document.querySelectorAll(CLASS_BACKDROP)
 
@@ -62,10 +62,10 @@ describe('Backdrop', () => {
     })
 
     it('should append the backdrop html once and include the "fade" class if it is "shown" and "animated"', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         const instance = new Backdrop({
           isVisible: true,
-          isAnimated: true
+          isAnimated: true,
         })
         const getElements = () => document.querySelectorAll(CLASS_BACKDROP)
 
@@ -85,10 +85,10 @@ describe('Backdrop', () => {
 
   describe('hide', () => {
     it('should remove the backdrop html', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         const instance = new Backdrop({
           isVisible: true,
-          isAnimated: true
+          isAnimated: true,
         })
 
         const getElements = () => document.body.querySelectorAll(CLASS_BACKDROP)
@@ -105,10 +105,10 @@ describe('Backdrop', () => {
     })
 
     it('should remove the "show" class', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         const instance = new Backdrop({
           isVisible: true,
-          isAnimated: true
+          isAnimated: true,
         })
         const elem = instance._getElement()
 
@@ -121,10 +121,10 @@ describe('Backdrop', () => {
     })
 
     it('should not try to remove Node on remove method if it is not "shown"', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         const instance = new Backdrop({
           isVisible: false,
-          isAnimated: true
+          isAnimated: true,
         })
         const getElements = () => document.querySelectorAll(CLASS_BACKDROP)
         const spy = spyOn(instance, 'dispose').and.callThrough()
@@ -143,14 +143,14 @@ describe('Backdrop', () => {
     })
 
     it('should not error if the backdrop no longer has a parent', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         fixtureEl.innerHTML = '<div id="wrapper"></div>'
 
         const wrapper = fixtureEl.querySelector('#wrapper')
         const instance = new Backdrop({
           isVisible: true,
           isAnimated: true,
-          rootElement: wrapper
+          rootElement: wrapper,
         })
 
         const getElements = () => document.querySelectorAll(CLASS_BACKDROP)
@@ -168,13 +168,13 @@ describe('Backdrop', () => {
 
   describe('click callback', () => {
     it('should execute callback on click', () => {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         const spy = jasmine.createSpy('spy')
 
         const instance = new Backdrop({
           isVisible: true,
           isAnimated: false,
-          clickCallback: () => spy()
+          clickCallback: () => spy(),
         })
         const endTest = () => {
           setTimeout(() => {
@@ -184,7 +184,10 @@ describe('Backdrop', () => {
         }
 
         instance.show(() => {
-          const clickEvent = new Event('mousedown', { bubbles: true, cancelable: true })
+          const clickEvent = new Event('mousedown', {
+            bubbles: true,
+            cancelable: true,
+          })
           document.querySelector(CLASS_BACKDROP).dispatchEvent(clickEvent)
           endTest()
         })
@@ -193,10 +196,10 @@ describe('Backdrop', () => {
 
     describe('animation callbacks', () => {
       it('should show and hide backdrop after counting transition duration if it is animated', () => {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           const instance = new Backdrop({
             isVisible: true,
-            isAnimated: true
+            isAnimated: true,
           })
           const spy2 = jasmine.createSpy('spy2')
 
@@ -217,11 +220,11 @@ describe('Backdrop', () => {
       })
 
       it('should show and hide backdrop without a delay if it is not animated', () => {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           const spy = jasmine.createSpy('spy', getTransitionDurationFromElement)
           const instance = new Backdrop({
             isVisible: true,
-            isAnimated: false
+            isAnimated: false,
           })
           const spy2 = jasmine.createSpy('spy2')
 
@@ -237,10 +240,10 @@ describe('Backdrop', () => {
       })
 
       it('should not call delay callbacks if it is not "shown"', () => {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           const instance = new Backdrop({
             isVisible: false,
-            isAnimated: true
+            isAnimated: true,
           })
           const spy = jasmine.createSpy('spy', getTransitionDurationFromElement)
 
@@ -256,9 +259,9 @@ describe('Backdrop', () => {
     describe('Config', () => {
       describe('rootElement initialization', () => {
         it('should be appended on "document.body" by default', () => {
-          return new Promise(resolve => {
+          return new Promise((resolve) => {
             const instance = new Backdrop({
-              isVisible: true
+              isVisible: true,
             })
             const getElement = () => document.querySelector(CLASS_BACKDROP)
             instance.show(() => {
@@ -269,10 +272,10 @@ describe('Backdrop', () => {
         })
 
         it('should find the rootElement if passed as a string', () => {
-          return new Promise(resolve => {
+          return new Promise((resolve) => {
             const instance = new Backdrop({
               isVisible: true,
-              rootElement: 'body'
+              rootElement: 'body',
             })
             const getElement = () => document.querySelector(CLASS_BACKDROP)
             instance.show(() => {
@@ -283,13 +286,13 @@ describe('Backdrop', () => {
         })
 
         it('should be appended on any element given by the proper config', () => {
-          return new Promise(resolve => {
+          return new Promise((resolve) => {
             fixtureEl.innerHTML = '<div id="wrapper"></div>'
 
             const wrapper = fixtureEl.querySelector('#wrapper')
             const instance = new Backdrop({
               isVisible: true,
-              rootElement: wrapper
+              rootElement: wrapper,
             })
             const getElement = () => document.querySelector(CLASS_BACKDROP)
             instance.show(() => {
@@ -302,10 +305,10 @@ describe('Backdrop', () => {
 
       describe('ClassName', () => {
         it('should allow configuring className', () => {
-          return new Promise(resolve => {
+          return new Promise((resolve) => {
             const instance = new Backdrop({
               isVisible: true,
-              className: 'foo'
+              className: 'foo',
             })
             const getElement = () => document.querySelector('.foo')
             instance.show(() => {

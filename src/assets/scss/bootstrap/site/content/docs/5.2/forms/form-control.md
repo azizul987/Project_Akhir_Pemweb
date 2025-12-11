@@ -9,6 +9,7 @@ toc: true
 ## Example
 
 {{< example >}}
+
 <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">Email address</label>
   <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
@@ -51,6 +52,7 @@ Add the `readonly` boolean attribute on an input to prevent modification of the 
 If you want to have `<input readonly>` elements in your form styled as plain text, replace `.form-control` with `.form-control-plaintext` to remove the default form field styling and preserve the correct `margin` and `padding`.
 
 {{< example >}}
+
   <div class="mb-3 row">
     <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
     <div class="col-sm-10">
@@ -66,6 +68,7 @@ If you want to have `<input readonly>` elements in your form styled as plain tex
 {{< /example >}}
 
 {{< example >}}
+
 <form class="row g-3">
   <div class="col-auto">
     <label for="staticEmail2" class="visually-hidden">Email</label>
@@ -84,6 +87,7 @@ If you want to have `<input readonly>` elements in your form styled as plain tex
 ## File input
 
 {{< example >}}
+
 <div class="mb-3">
   <label for="formFile" class="form-label">Default file input example</label>
   <input class="form-control" type="file" id="formFile">
@@ -125,6 +129,7 @@ Learn more about [support for datalist elements](https://caniuse.com/datalist).
 <label for="exampleDataList" class="form-label">Datalist example</label>
 <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
 <datalist id="datalistOptions">
+
   <option value="San Francisco">
   <option value="New York">
   <option value="Seattle">

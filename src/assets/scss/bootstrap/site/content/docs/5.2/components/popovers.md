@@ -38,8 +38,12 @@ Keep reading to see how popovers work with some examples.
 As mentioned above, you must initialize popovers before they can be used. One way to initialize all popovers on a page would be to select them by their `data-bs-toggle` attribute, like so:
 
 ```js
-const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+const popoverTriggerList = document.querySelectorAll(
+  '[data-bs-toggle="popover"]'
+)
+const popoverList = [...popoverTriggerList].map(
+  (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
+)
 ```
 
 ### Live demo
@@ -60,16 +64,16 @@ Four options are available: top, right, bottom, and left. Directions are mirrore
 
 {{< example stackblitz_add_js="true" >}}
 <button type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Top popover">
-  Popover on top
+Popover on top
 </button>
 <button type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Right popover">
-  Popover on right
+Popover on right
 </button>
 <button type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
-  Popover on bottom
+Popover on bottom
 </button>
 <button type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="left" data-bs-content="Left popover">
-  Popover on left
+Popover on left
 </button>
 {{< /example >}}
 
@@ -79,7 +83,7 @@ When you have some styles on a parent element that interfere with a popover, you
 
 ```js
 const popover = new bootstrap.Popover('.example-popover', {
-  container: 'body'
+  container: 'body',
 })
 ```
 
@@ -87,7 +91,7 @@ Another situation where you'll want to set an explicit custom `container` are po
 
 ```js
 const popover = new bootstrap.Popover('.example-popover', {
-  container: '.modal-body'
+  container: '.modal-body',
 })
 ```
 
@@ -105,7 +109,7 @@ You can customize the appearance of popovers using [CSS variables](#variables). 
         data-bs-custom-class="custom-popover"
         data-bs-title="Custom popover"
         data-bs-content="This popover is themed via CSS variables.">
-  Custom popover
+Custom popover
 </button>
 {{< /example >}}
 
@@ -114,6 +118,7 @@ You can customize the appearance of popovers using [CSS variables](#variables). 
 Use the `focus` trigger to dismiss popovers on the user's next click of a different element than the toggle element.
 
 {{< callout danger >}}
+
 #### Specific markup required for dismiss-on-next-click
 
 For proper cross-browser and cross-platform behavior, you must use the `<a>` tag, _not_ the `<button>` tag, and you also must include a [`tabindex`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) attribute.
@@ -125,7 +130,7 @@ For proper cross-browser and cross-platform behavior, you must use the `<a>` tag
 
 ```js
 const popover = new bootstrap.Popover('.popover-dismiss', {
-  trigger: 'focus'
+  trigger: 'focus',
 })
 ```
 
@@ -137,7 +142,7 @@ For disabled popover triggers, you may also prefer `data-bs-trigger="hover focus
 
 {{< example stackblitz_add_js="true" >}}
 <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Disabled popover">
-  <button class="btn btn-primary" type="button" disabled>Disabled button</button>
+<button class="btn btn-primary" type="button" disabled>Disabled button</button>
 </span>
 {{< /example >}}
 
@@ -165,6 +170,7 @@ const popover = new bootstrap.Popover(exampleEl, options)
 ```
 
 {{< callout warning >}}
+
 ### Making popovers work for keyboard and assistive technology users
 
 To allow keyboard users to activate your popovers, you should only add them to HTML elements that are traditionally keyboard-focusable and interactive (such as links or form controls). Although arbitrary HTML elements (such as `<span>`s) can be made focusable by adding the `tabindex="0"` attribute, this will add potentially annoying and confusing tab stops on non-interactive elements for keyboard users, and most assistive technologies currently do not announce the popover's content in this situation. Additionally, do not rely solely on `hover` as the trigger for your popovers, as this will make them impossible to trigger for keyboard users.
@@ -208,6 +214,7 @@ Note that for security reasons the `sanitize`, `sanitizeFn`, and `allowList` opt
 {{< /bs-table >}}
 
 {{< callout info >}}
+
 #### Data attributes for individual popovers
 
 Options for individual popovers can alternatively be specified through the use of data attributes, as explained above.
@@ -221,7 +228,7 @@ const popover = new bootstrap.Popover(element, {
     // const newPopperConfig = {...}
     // use defaultBsPopperConfig if needed...
     // return newPopperConfig
-  }
+  },
 })
 ```
 
@@ -238,7 +245,7 @@ const popover = new bootstrap.Popover(element, {
 | `dispose` | Hides and destroys an element's popover (Removes stored data on the DOM element). Popovers that use delegation (which are created using [the `selector` option](#options)) cannot be individually destroyed on descendant trigger elements. |
 | `enable` | Gives an element's popover the ability to be shown. **Popovers are enabled by default.** |
 | `getInstance` | _Static_ method which allows you to get the popover instance associated with a DOM element. |
-| `getOrCreateInstance` | *Static* method which allows you to get the popover instance associated with a DOM element, or create a new one in case it wasn't initialized. |
+| `getOrCreateInstance` | _Static_ method which allows you to get the popover instance associated with a DOM element, or create a new one in case it wasn't initialized. |
 | `hide` | Hides an element's popover. **Returns to the caller before the popover has actually been hidden** (i.e. before the `hidden.bs.popover` event occurs). This is considered a "manual" triggering of the popover. |
 | `setContent` | Gives a way to change the popover's content after its initialization. |
 | `show` | Reveals an element's popover. **Returns to the caller before the popover has actually been shown** (i.e. before the `shown.bs.popover` event occurs). This is considered a "manual" triggering of the popover. Popovers whose title and content are both zero-length are never displayed. |
@@ -247,7 +254,6 @@ const popover = new bootstrap.Popover(element, {
 | `update` | Updates the position of an element's popover. |
 {{< /bs-table >}}
 
-
 ```js
 // getOrCreateInstance example
 const popover = bootstrap.Popover.getOrCreateInstance('#example') // Returns a Bootstrap popover instance
@@ -255,9 +261,8 @@ const popover = bootstrap.Popover.getOrCreateInstance('#example') // Returns a B
 // setContent example
 myPopover.setContent({
   '.popover-header': 'another title',
-  '.popover-body': 'another content'
+  '.popover-body': 'another content',
 })
-
 ```
 
 {{< callout info >}}

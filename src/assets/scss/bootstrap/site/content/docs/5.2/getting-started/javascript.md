@@ -34,16 +34,18 @@ We provide a version of Bootstrap built as `ESM` (`bootstrap.esm.js` and `bootst
 <script type="module">
   import { Toast } from 'bootstrap.esm.min.js'
 
-  Array.from(document.querySelectorAll('.toast'))
-    .forEach(toastNode => new Toast(toastNode))
+  Array.from(document.querySelectorAll('.toast')).forEach(
+    (toastNode) => new Toast(toastNode)
+  )
 </script>
 ```
 
 Compared to JS bundlers, using ESM in the browser requires you to use the full path and filename instead of the module name. [Read more about JS modules in the browser.](https://v8.dev/features/modules#specifiers) That's why we use `'bootstrap.esm.min.js'` instead of `'bootstrap'` above. However, this is further complicated by our Popper dependency, which imports Popper into our JavaScript like so:
 
 <!-- eslint-skip -->
+
 ```js
-import * as Popper from "@popperjs/core"
+import * as Popper from '@popperjs/core'
 ```
 
 If you try this as-is, you'll see an error in the console like the following:
@@ -112,7 +114,7 @@ All infinitive events provide [`preventDefault()`](https://developer.mozilla.org
 ```js
 const myModal = document.querySelector('#myModal')
 
-myModal.addEventListener('show.bs.modal', event => {
+myModal.addEventListener('show.bs.modal', (event) => {
   if (!data) {
     return event.preventDefault() // stops modal from being shown
   }
@@ -166,7 +168,7 @@ All programmatic API methods are **asynchronous** and return to the caller once 
 ```js
 const myCollapseEl = document.querySelector('#myCollapse')
 
-myCollapseEl.addEventListener('shown.bs.collapse', event => {
+myCollapseEl.addEventListener('shown.bs.collapse', (event) => {
   // Action to execute once the collapsible area is expanded
 })
 ```
@@ -177,7 +179,7 @@ In addition, a method call on a **transitioning component will be ignored**.
 const myCarouselEl = document.querySelector('#myCarousel')
 const carousel = bootstrap.Carousel.getInstance(myCarouselEl) // Retrieve a Carousel instance
 
-myCarouselEl.addEventListener('slid.bs.carousel', event => {
+myCarouselEl.addEventListener('slid.bs.carousel', (event) => {
   carousel.to('2') // Will slide to the slide 2 as soon as the transition to slide 1 is finished
 })
 
@@ -193,7 +195,7 @@ While it may seem correct to use the `dispose` method immediately after `hide()`
 const myModal = document.querySelector('#myModal')
 myModal.hide() // it is asynchronous
 
-myModal.addEventListener('shown.bs.hidden', event => {
+myModal.addEventListener('shown.bs.hidden', (event) => {
   myModal.dispose()
 })
 ```
@@ -215,8 +217,8 @@ Every Bootstrap plugin exposes the following methods and static properties.
 | Method | Description |
 | --- | --- |
 | `dispose` | Destroys an element's modal. (Removes stored data on the DOM element) |
-| `getInstance` | *Static* method which allows you to get the modal instance associated with a DOM element. |
-| `getOrCreateInstance` | *Static* method which allows you to get the modal instance associated with a DOM element, or create a new one in case it wasn't initialized. |
+| `getInstance` | _Static_ method which allows you to get the modal instance associated with a DOM element. |
+| `getOrCreateInstance` | _Static_ method which allows you to get the modal instance associated with a DOM element, or create a new one in case it wasn't initialized. |
 {{< /bs-table >}}
 
 {{< bs-table "table" >}}
@@ -265,7 +267,7 @@ const DefaultAllowlist = {
   sup: [],
   strong: [],
   u: [],
-  ul: []
+  ul: [],
 }
 ```
 
@@ -293,7 +295,7 @@ const yourTooltipEl = document.querySelector('#yourTooltip')
 const tooltip = new bootstrap.Tooltip(yourTooltipEl, {
   sanitizeFn(content) {
     return DOMPurify.sanitize(content)
-  }
+  },
 })
 ```
 
@@ -304,7 +306,10 @@ const tooltip = new bootstrap.Tooltip(yourTooltipEl, {
 ```js
 $('[data-bs-toggle="tooltip"]').tooltip() // to enable tooltips, with default configuration
 
-$('[data-bs-toggle="tooltip"]').tooltip({ boundary: 'clippingParents', customClass: 'myClass' }) // to initialize tooltips with given configuration
+$('[data-bs-toggle="tooltip"]').tooltip({
+  boundary: 'clippingParents',
+  customClass: 'myClass',
+}) // to initialize tooltips with given configuration
 
 $('#myTooltip').tooltip('show') // to trigger `show` method
 ```

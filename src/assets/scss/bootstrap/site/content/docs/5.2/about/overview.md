@@ -4,8 +4,8 @@ title: About
 description: Learn more about the team maintaining Bootstrap, how and why the project started, and how to get involved.
 group: about
 aliases:
-  - "/about/"
-  - "/docs/5.2/about/"
+  - '/about/'
+  - '/docs/5.2/about/'
 ---
 
 ## Team

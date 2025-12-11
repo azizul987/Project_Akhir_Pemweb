@@ -51,12 +51,13 @@ describe('getInstance', () => {
 
 // Asynchronous test
 it('should show a tooltip without the animation', () => {
-  return new Promise(resolve => {
-    fixtureEl.innerHTML = '<a href="#" rel="tooltip" title="Another tooltip"></a>'
+  return new Promise((resolve) => {
+    fixtureEl.innerHTML =
+      '<a href="#" rel="tooltip" title="Another tooltip"></a>'
 
     const tooltipEl = fixtureEl.querySelector('a')
     const tooltip = new Tooltip(tooltipEl, {
-      animation: false
+      animation: false,
     })
 
     tooltipEl.addEventListener('shown.bs.tooltip', () => {

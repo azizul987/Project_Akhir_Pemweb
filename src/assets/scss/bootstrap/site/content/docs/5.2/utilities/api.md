@@ -3,7 +3,7 @@ layout: docs
 title: Utility API
 description: The utility API is a Sass-based tool to generate utility classes.
 group: utilities
-aliases: "/docs/5.2/utilities/"
+aliases: '/docs/5.2/utilities/'
 toc: true
 ---
 
@@ -33,27 +33,37 @@ All utility variables are added to the `$utilities` variable within our `_utilit
 
 ```scss
 $utilities: (
-  "opacity": (
+  'opacity': (
     property: opacity,
     values: (
       0: 0,
-      25: .25,
-      50: .5,
-      75: .75,
+      25: 0.25,
+      50: 0.5,
+      75: 0.75,
       100: 1,
-    )
-  )
+    ),
+  ),
 );
 ```
 
 Which outputs the following:
 
 ```css
-.opacity-0 { opacity: 0; }
-.opacity-25 { opacity: .25; }
-.opacity-50 { opacity: .5; }
-.opacity-75 { opacity: .75; }
-.opacity-100 { opacity: 1; }
+.opacity-0 {
+  opacity: 0;
+}
+.opacity-25 {
+  opacity: 0.25;
+}
+.opacity-50 {
+  opacity: 0.5;
+}
+.opacity-75 {
+  opacity: 0.75;
+}
+.opacity-100 {
+  opacity: 1;
+}
 ```
 
 ### Property
@@ -62,19 +72,25 @@ The required `property` key must be set for any utility, and it must contain a v
 
 ```scss
 $utilities: (
-  "text-decoration": (
+  'text-decoration': (
     property: text-decoration,
-    values: none underline line-through
-  )
+    values: none underline line-through,
+  ),
 );
 ```
 
 Output:
 
 ```css
-.text-decoration-none { text-decoration: none !important; }
-.text-decoration-underline { text-decoration: underline !important; }
-.text-decoration-line-through { text-decoration: line-through !important; }
+.text-decoration-none {
+  text-decoration: none !important;
+}
+.text-decoration-underline {
+  text-decoration: underline !important;
+}
+.text-decoration-line-through {
+  text-decoration: line-through !important;
+}
 ```
 
 ### Values
@@ -84,25 +100,19 @@ Use the `values` key to specify which values for the specified `property` should
 As a list, like with [`text-decoration` utilities]({{< docsref "/utilities/text#text-decoration" >}}):
 
 ```scss
-values: none underline line-through
+values: none underline line-through;
 ```
 
 As a map, like with [`opacity` utilities]({{< docsref "/utilities/opacity" >}}):
 
 ```scss
-values: (
-  0: 0,
-  25: .25,
-  50: .5,
-  75: .75,
-  100: 1,
-)
+values: (0: 0, 25: 0.25, 50: 0.5, 75: 0.75, 100: 1);
 ```
 
 As a Sass variable that sets the list or map, as in our [`position` utilities]({{< docsref "/utilities/position" >}}):
 
 ```scss
-values: $position-values
+values: $position-values;
 ```
 
 ### Class
@@ -111,50 +121,64 @@ Use the `class` option to change the class prefix used in the compiled CSS. For 
 
 ```scss
 $utilities: (
-  "opacity": (
+  'opacity': (
     property: opacity,
     class: o,
     values: (
       0: 0,
-      25: .25,
-      50: .5,
-      75: .75,
+      25: 0.25,
+      50: 0.5,
+      75: 0.75,
       100: 1,
-    )
-  )
+    ),
+  ),
 );
 ```
 
 Output:
 
 ```css
-.o-0 { opacity: 0 !important; }
-.o-25 { opacity: .25 !important; }
-.o-50 { opacity: .5 !important; }
-.o-75 { opacity: .75 !important; }
-.o-100 { opacity: 1 !important; }
+.o-0 {
+  opacity: 0 !important;
+}
+.o-25 {
+  opacity: 0.25 !important;
+}
+.o-50 {
+  opacity: 0.5 !important;
+}
+.o-75 {
+  opacity: 0.75 !important;
+}
+.o-100 {
+  opacity: 1 !important;
+}
 ```
 
 If `class: null`, generates classes for each of the `values` keys:
 
 ```scss
 $utilities: (
-  "visibility": (
+  'visibility': (
     property: visibility,
     class: null,
     values: (
       visible: visible,
       invisible: hidden,
-    )
-  )
+    ),
+  ),
 );
 ```
 
 Output:
 
 ```css
-.visible { visibility: visible !important; }
-.invisible { visibility: hidden !important; }
+.visible {
+  visibility: visible !important;
+}
+.invisible {
+  visibility: hidden !important;
+}
 ```
 
 ### CSS variable utilities
@@ -165,16 +189,16 @@ Consider our `.text-opacity-*` utilities. If we add the `css-variable-name` opti
 
 ```scss
 $utilities: (
-  "text-opacity": (
+  'text-opacity': (
     css-var: true,
     css-variable-name: text-alpha,
     class: text-opacity,
     values: (
-      25: .25,
-      50: .5,
-      75: .75,
-      100: 1
-    )
+      25: 0.25,
+      50: 0.5,
+      75: 0.75,
+      100: 1,
+    ),
   ),
 );
 ```
@@ -182,10 +206,18 @@ $utilities: (
 Output:
 
 ```css
-.text-opacity-25 { --bs-text-alpha: .25; }
-.text-opacity-50 { --bs-text-alpha: .5; }
-.text-opacity-75 { --bs-text-alpha: .75; }
-.text-opacity-100 { --bs-text-alpha: 1; }
+.text-opacity-25 {
+  --bs-text-alpha: 0.25;
+}
+.text-opacity-50 {
+  --bs-text-alpha: 0.5;
+}
+.text-opacity-75 {
+  --bs-text-alpha: 0.75;
+}
+.text-opacity-100 {
+  --bs-text-alpha: 1;
+}
 ```
 
 ### Local CSS variables
@@ -194,19 +226,19 @@ Use the `local-vars` option to specify a Sass map that will generate local CSS v
 
 ```scss
 $utilities: (
-  "background-color": (
+  'background-color': (
     property: background-color,
     class: bg,
     local-vars: (
-      "bg-opacity": 1
+      'bg-opacity': 1,
     ),
     values: map-merge(
-      $utilities-bg-colors,
-      (
-        "transparent": transparent
-      )
-    )
-  )
+        $utilities-bg-colors,
+        (
+          'transparent': transparent,
+        )
+      ),
+  ),
 );
 ```
 
@@ -215,7 +247,10 @@ Output:
 ```css
 .bg-primary {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+  background-color: rgba(
+    var(--bs-primary-rgb),
+    var(--bs-bg-opacity)
+  ) !important;
 }
 ```
 
@@ -227,29 +262,39 @@ Need multiple pseudo-classes? Use a space-separated list of states: `state: hove
 
 ```scss
 $utilities: (
-  "opacity": (
+  'opacity': (
     property: opacity,
     class: opacity,
     state: hover,
     values: (
       0: 0,
-      25: .25,
-      50: .5,
-      75: .75,
+      25: 0.25,
+      50: 0.5,
+      75: 0.75,
       100: 1,
-    )
-  )
+    ),
+  ),
 );
 ```
 
 Output:
 
 ```css
-.opacity-0-hover:hover { opacity: 0 !important; }
-.opacity-25-hover:hover { opacity: .25 !important; }
-.opacity-50-hover:hover { opacity: .5 !important; }
-.opacity-75-hover:hover { opacity: .75 !important; }
-.opacity-100-hover:hover { opacity: 1 !important; }
+.opacity-0-hover:hover {
+  opacity: 0 !important;
+}
+.opacity-25-hover:hover {
+  opacity: 0.25 !important;
+}
+.opacity-50-hover:hover {
+  opacity: 0.5 !important;
+}
+.opacity-75-hover:hover {
+  opacity: 0.75 !important;
+}
+.opacity-100-hover:hover {
+  opacity: 1 !important;
+}
 ```
 
 ### Responsive
@@ -258,67 +303,127 @@ Add the `responsive` boolean to generate responsive utilities (e.g., `.opacity-m
 
 ```scss
 $utilities: (
-  "opacity": (
+  'opacity': (
     property: opacity,
     responsive: true,
     values: (
       0: 0,
-      25: .25,
-      50: .5,
-      75: .75,
+      25: 0.25,
+      50: 0.5,
+      75: 0.75,
       100: 1,
-    )
-  )
+    ),
+  ),
 );
 ```
 
 Output:
 
 ```css
-.opacity-0 { opacity: 0 !important; }
-.opacity-25 { opacity: .25 !important; }
-.opacity-50 { opacity: .5 !important; }
-.opacity-75 { opacity: .75 !important; }
-.opacity-100 { opacity: 1 !important; }
+.opacity-0 {
+  opacity: 0 !important;
+}
+.opacity-25 {
+  opacity: 0.25 !important;
+}
+.opacity-50 {
+  opacity: 0.5 !important;
+}
+.opacity-75 {
+  opacity: 0.75 !important;
+}
+.opacity-100 {
+  opacity: 1 !important;
+}
 
 @media (min-width: 576px) {
-  .opacity-sm-0 { opacity: 0 !important; }
-  .opacity-sm-25 { opacity: .25 !important; }
-  .opacity-sm-50 { opacity: .5 !important; }
-  .opacity-sm-75 { opacity: .75 !important; }
-  .opacity-sm-100 { opacity: 1 !important; }
+  .opacity-sm-0 {
+    opacity: 0 !important;
+  }
+  .opacity-sm-25 {
+    opacity: 0.25 !important;
+  }
+  .opacity-sm-50 {
+    opacity: 0.5 !important;
+  }
+  .opacity-sm-75 {
+    opacity: 0.75 !important;
+  }
+  .opacity-sm-100 {
+    opacity: 1 !important;
+  }
 }
 
 @media (min-width: 768px) {
-  .opacity-md-0 { opacity: 0 !important; }
-  .opacity-md-25 { opacity: .25 !important; }
-  .opacity-md-50 { opacity: .5 !important; }
-  .opacity-md-75 { opacity: .75 !important; }
-  .opacity-md-100 { opacity: 1 !important; }
+  .opacity-md-0 {
+    opacity: 0 !important;
+  }
+  .opacity-md-25 {
+    opacity: 0.25 !important;
+  }
+  .opacity-md-50 {
+    opacity: 0.5 !important;
+  }
+  .opacity-md-75 {
+    opacity: 0.75 !important;
+  }
+  .opacity-md-100 {
+    opacity: 1 !important;
+  }
 }
 
 @media (min-width: 992px) {
-  .opacity-lg-0 { opacity: 0 !important; }
-  .opacity-lg-25 { opacity: .25 !important; }
-  .opacity-lg-50 { opacity: .5 !important; }
-  .opacity-lg-75 { opacity: .75 !important; }
-  .opacity-lg-100 { opacity: 1 !important; }
+  .opacity-lg-0 {
+    opacity: 0 !important;
+  }
+  .opacity-lg-25 {
+    opacity: 0.25 !important;
+  }
+  .opacity-lg-50 {
+    opacity: 0.5 !important;
+  }
+  .opacity-lg-75 {
+    opacity: 0.75 !important;
+  }
+  .opacity-lg-100 {
+    opacity: 1 !important;
+  }
 }
 
 @media (min-width: 1200px) {
-  .opacity-xl-0 { opacity: 0 !important; }
-  .opacity-xl-25 { opacity: .25 !important; }
-  .opacity-xl-50 { opacity: .5 !important; }
-  .opacity-xl-75 { opacity: .75 !important; }
-  .opacity-xl-100 { opacity: 1 !important; }
+  .opacity-xl-0 {
+    opacity: 0 !important;
+  }
+  .opacity-xl-25 {
+    opacity: 0.25 !important;
+  }
+  .opacity-xl-50 {
+    opacity: 0.5 !important;
+  }
+  .opacity-xl-75 {
+    opacity: 0.75 !important;
+  }
+  .opacity-xl-100 {
+    opacity: 1 !important;
+  }
 }
 
 @media (min-width: 1400px) {
-  .opacity-xxl-0 { opacity: 0 !important; }
-  .opacity-xxl-25 { opacity: .25 !important; }
-  .opacity-xxl-50 { opacity: .5 !important; }
-  .opacity-xxl-75 { opacity: .75 !important; }
-  .opacity-xxl-100 { opacity: 1 !important; }
+  .opacity-xxl-0 {
+    opacity: 0 !important;
+  }
+  .opacity-xxl-25 {
+    opacity: 0.25 !important;
+  }
+  .opacity-xxl-50 {
+    opacity: 0.5 !important;
+  }
+  .opacity-xxl-75 {
+    opacity: 0.75 !important;
+  }
+  .opacity-xxl-100 {
+    opacity: 1 !important;
+  }
 }
 ```
 
@@ -328,35 +433,55 @@ Enabling the `print` option will **also** generate utility classes for print, wh
 
 ```scss
 $utilities: (
-  "opacity": (
+  'opacity': (
     property: opacity,
     print: true,
     values: (
       0: 0,
-      25: .25,
-      50: .5,
-      75: .75,
+      25: 0.25,
+      50: 0.5,
+      75: 0.75,
       100: 1,
-    )
-  )
+    ),
+  ),
 );
 ```
 
 Output:
 
 ```css
-.opacity-0 { opacity: 0 !important; }
-.opacity-25 { opacity: .25 !important; }
-.opacity-50 { opacity: .5 !important; }
-.opacity-75 { opacity: .75 !important; }
-.opacity-100 { opacity: 1 !important; }
+.opacity-0 {
+  opacity: 0 !important;
+}
+.opacity-25 {
+  opacity: 0.25 !important;
+}
+.opacity-50 {
+  opacity: 0.5 !important;
+}
+.opacity-75 {
+  opacity: 0.75 !important;
+}
+.opacity-100 {
+  opacity: 1 !important;
+}
 
 @media print {
-  .opacity-print-0 { opacity: 0 !important; }
-  .opacity-print-25 { opacity: .25 !important; }
-  .opacity-print-50 { opacity: .5 !important; }
-  .opacity-print-75 { opacity: .75 !important; }
-  .opacity-print-100 { opacity: 1 !important; }
+  .opacity-print-0 {
+    opacity: 0 !important;
+  }
+  .opacity-print-25 {
+    opacity: 0.25 !important;
+  }
+  .opacity-print-50 {
+    opacity: 0.5 !important;
+  }
+  .opacity-print-75 {
+    opacity: 0.75 !important;
+  }
+  .opacity-print-100 {
+    opacity: 1 !important;
+  }
 }
 ```
 
@@ -374,7 +499,7 @@ Override existing utilities by using the same key. For example, if you want addi
 
 ```scss
 $utilities: (
-  "overflow": (
+  'overflow': (
     responsive: true,
     property: overflow,
     values: visible hidden scroll auto,
@@ -387,25 +512,25 @@ $utilities: (
 New utilities can be added to the default `$utilities` map with a `map-merge`. Make sure our required Sass files and `_utilities.scss` are imported first, then use the `map-merge` to add your additional utilities. For example, here's how to add a responsive `cursor` utility with three values.
 
 ```scss
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/maps";
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/utilities";
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
 
 $utilities: map-merge(
   $utilities,
   (
-    "cursor": (
+    'cursor': (
       property: cursor,
       class: cursor,
       responsive: true,
       values: auto pointer grab,
-    )
+    ),
   )
 );
 
-@import "bootstrap/scss/utilities/api";
+@import 'bootstrap/scss/utilities/api';
 ```
 
 ### Modify utilities
@@ -413,28 +538,30 @@ $utilities: map-merge(
 Modify existing utilities in the default `$utilities` map with `map-get` and `map-merge` functions. In the example below, we're adding an additional value to the `width` utilities. Start with an initial `map-merge` and then specify which utility you want to modify. From there, fetch the nested `"width"` map with `map-get` to access and modify the utility's options and values.
 
 ```scss
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/maps";
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/utilities";
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
 
 $utilities: map-merge(
   $utilities,
   (
-    "width": map-merge(
-      map-get($utilities, "width"),
-      (
-        values: map-merge(
-          map-get(map-get($utilities, "width"), "values"),
-          (10: 10%),
-        ),
+    'width': map-merge(
+        map-get($utilities, 'width'),
+        (
+          values: map-merge(
+              map-get(map-get($utilities, 'width'), 'values'),
+              (
+                10: 10%,
+              )
+            ),
+        )
       ),
-    ),
   )
 );
 
-@import "bootstrap/scss/utilities/api";
+@import 'bootstrap/scss/utilities/api';
 ```
 
 #### Enable responsive
@@ -442,22 +569,25 @@ $utilities: map-merge(
 You can enable responsive classes for an existing set of utilities that are not currently responsive by default. For example, to make the `border` classes responsive:
 
 ```scss
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/maps";
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/utilities";
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
 
 $utilities: map-merge(
-  $utilities, (
-    "border": map-merge(
-      map-get($utilities, "border"),
-      ( responsive: true ),
-    ),
+  $utilities,
+  (
+    'border': map-merge(
+        map-get($utilities, 'border'),
+        (
+          responsive: true,
+        )
+      ),
   )
 );
 
-@import "bootstrap/scss/utilities/api";
+@import 'bootstrap/scss/utilities/api';
 ```
 
 This will now generate responsive variations of `.border` and `.border-0` for each breakpoint. Your generated CSS will look like this:
@@ -497,22 +627,25 @@ This will now generate responsive variations of `.border` and `.border-0` for ea
 Missing v4 utilities, or used to another naming convention? The utilities API can be used to override the resulting `class` of a given utility—for example, to rename `.ms-*` utilities to oldish `.ml-*`:
 
 ```scss
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/maps";
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/utilities";
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
 
 $utilities: map-merge(
-  $utilities, (
-    "margin-start": map-merge(
-      map-get($utilities, "margin-start"),
-      ( class: ml ),
-    ),
+  $utilities,
+  (
+    'margin-start': map-merge(
+        map-get($utilities, 'margin-start'),
+        (
+          class: ml,
+        )
+      ),
   )
 );
 
-@import "bootstrap/scss/utilities/api";
+@import 'bootstrap/scss/utilities/api';
 ```
 
 ### Remove utilities
@@ -520,35 +653,35 @@ $utilities: map-merge(
 Remove any of the default utilities with the [`map-remove()` Sass function](https://sass-lang.com/documentation/modules/map#remove).
 
 ```scss
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/maps";
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/utilities";
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
 
 // Remove multiple utilities with a comma-separated list
-$utilities: map-remove($utilities, "width", "float");
+$utilities: map-remove($utilities, 'width', 'float');
 
-@import "bootstrap/scss/utilities/api";
+@import 'bootstrap/scss/utilities/api';
 ```
 
 You can also use the [`map-merge()` Sass function](https://sass-lang.com/documentation/modules/map#merge) and set the group key to `null` to remove the utility.
 
 ```scss
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/maps";
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/utilities";
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
 
 $utilities: map-merge(
   $utilities,
   (
-    "width": null
+    'width': null,
   )
 );
 
-@import "bootstrap/scss/utilities/api";
+@import 'bootstrap/scss/utilities/api';
 ```
 
 ### Add, remove, modify
@@ -556,35 +689,36 @@ $utilities: map-merge(
 You can add, remove, and modify many utilities all at once with the [`map-merge()` Sass function](https://sass-lang.com/documentation/modules/map#merge). Here's how you can combine the previous examples into one larger map.
 
 ```scss
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/maps";
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/utilities";
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
 
 $utilities: map-merge(
   $utilities,
   (
     // Remove the `width` utility
-    "width": null,
+    'width': null,
 
     // Make an existing utility responsive
-    "border": map-merge(
-      map-get($utilities, "border"),
-      ( responsive: true ),
-    ),
-
+    'border': map-merge(
+        map-get($utilities, 'border'),
+        (
+          responsive: true,
+        )
+      ),
     // Add new utilities
-    "cursor": (
-      property: cursor,
-      class: cursor,
-      responsive: true,
-      values: auto pointer grab,
-    )
+    'cursor': (
+        property: cursor,
+        class: cursor,
+        responsive: true,
+        values: auto pointer grab,
+      )
   )
 );
 
-@import "bootstrap/scss/utilities/api";
+@import 'bootstrap/scss/utilities/api';
 ```
 
 #### Remove utility in RTL
@@ -593,11 +727,13 @@ Some edge cases make [RTL styling difficult](https://rtlstyling.com/posts/rtl-st
 
 ```scss
 $utilities: (
-  "word-wrap": (
+  'word-wrap': (
     property: word-wrap word-break,
     class: text,
-    values: (break: break-word),
-    rtl: false
+    values: (
+      break: break-word,
+    ),
+    rtl: false,
   ),
 );
 ```

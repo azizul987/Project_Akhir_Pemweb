@@ -29,22 +29,26 @@ describe('TemplateFactory', () => {
       it('should use "sanitizeHtml" to sanitize template', () => {
         const factory = new TemplateFactory({
           sanitize: true,
-          template: '<div><a href="javascript:alert(7)">Click me</a></div>'
+          template: '<div><a href="javascript:alert(7)">Click me</a></div>',
         })
         const spy = spyOn(factory, '_maybeSanitize').and.callThrough()
 
-        expect(factory.toHtml().innerHTML).not.toContain('href="javascript:alert(7)')
+        expect(factory.toHtml().innerHTML).not.toContain(
+          'href="javascript:alert(7)'
+        )
         expect(spy).toHaveBeenCalled()
       })
 
       it('should not sanitize template', () => {
         const factory = new TemplateFactory({
           sanitize: false,
-          template: '<div><a href="javascript:alert(7)">Click me</a></div>'
+          template: '<div><a href="javascript:alert(7)">Click me</a></div>',
         })
         const spy = spyOn(factory, '_maybeSanitize').and.callThrough()
 
-        expect(factory.toHtml().innerHTML).toContain('href="javascript:alert(7)')
+        expect(factory.toHtml().innerHTML).toContain(
+          'href="javascript:alert(7)'
+        )
         expect(spy).toHaveBeenCalled()
       })
 
@@ -53,9 +57,11 @@ describe('TemplateFactory', () => {
           sanitize: true,
           html: true,
           template: '<div id="foo"></div>',
-          content: { '#foo': '<a href="javascript:alert(7)">Click me</a>' }
+          content: { '#foo': '<a href="javascript:alert(7)">Click me</a>' },
         })
-        expect(factory.toHtml().innerHTML).not.toContain('href="javascript:alert(7)')
+        expect(factory.toHtml().innerHTML).not.toContain(
+          'href="javascript:alert(7)'
+        )
       })
 
       it('should not sanitize content', () => {
@@ -63,9 +69,11 @@ describe('TemplateFactory', () => {
           sanitize: false,
           html: true,
           template: '<div id="foo"></div>',
-          content: { '#foo': '<a href="javascript:alert(7)">Click me</a>' }
+          content: { '#foo': '<a href="javascript:alert(7)">Click me</a>' },
         })
-        expect(factory.toHtml().innerHTML).toContain('href="javascript:alert(7)')
+        expect(factory.toHtml().innerHTML).toContain(
+          'href="javascript:alert(7)'
+        )
       })
 
       it('should sanitize content only if "config.html" is enabled', () => {
@@ -73,7 +81,7 @@ describe('TemplateFactory', () => {
           sanitize: true,
           html: false,
           template: '<div id="foo"></div>',
-          content: { '#foo': '<a href="javascript:alert(7)">Click me</a>' }
+          content: { '#foo': '<a href="javascript:alert(7)">Click me</a>' },
         })
         const spy = spyOn(factory, '_maybeSanitize').and.callThrough()
 
@@ -84,14 +92,14 @@ describe('TemplateFactory', () => {
     describe('Extra Class', () => {
       it('should add extra class', () => {
         const factory = new TemplateFactory({
-          extraClass: 'testClass'
+          extraClass: 'testClass',
         })
         expect(factory.toHtml()).toHaveClass('testClass')
       })
 
       it('should add extra classes', () => {
         const factory = new TemplateFactory({
-          extraClass: 'testClass testClass2'
+          extraClass: 'testClass testClass2',
         })
         expect(factory.toHtml()).toHaveClass('testClass')
         expect(factory.toHtml()).toHaveClass('testClass2')
@@ -102,7 +110,7 @@ describe('TemplateFactory', () => {
           extraClass(arg) {
             expect(arg).toEqual(factory)
             return 'testClass'
-          }
+          },
         })
 
         expect(factory.toHtml()).toHaveClass('testClass')
@@ -116,15 +124,15 @@ describe('TemplateFactory', () => {
         '<div>',
         '  <div class="foo"></div>',
         '  <div class="foo2"></div>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const factory = new TemplateFactory({
         template,
         content: {
           '.foo': 'bar',
-          '.foo2': 'bar2'
-        }
+          '.foo2': 'bar2',
+        },
       })
 
       const html = factory.toHtml()
@@ -137,7 +145,7 @@ describe('TemplateFactory', () => {
         sanitize: true,
         html: true,
         template: '<div id="foo"></div>',
-        content: { '#bar': 'test' }
+        content: { '#bar': 'test' },
       })
 
       expect(factory.toHtml().outerHTML).toEqual('<div id="foo"></div>')
@@ -148,7 +156,7 @@ describe('TemplateFactory', () => {
         sanitize: true,
         html: true,
         template: '<div><div id="foo"></div></div>',
-        content: { '#foo': null }
+        content: { '#foo': null },
       })
 
       expect(factory.toHtml().outerHTML).toEqual('<div></div>')
@@ -159,7 +167,7 @@ describe('TemplateFactory', () => {
         sanitize: true,
         html: true,
         template: '<div><div id="foo"></div></div>',
-        content: { '#foo': () => null }
+        content: { '#foo': () => null },
       })
 
       expect(factory.toHtml().outerHTML).toEqual('<div></div>')
@@ -172,7 +180,7 @@ describe('TemplateFactory', () => {
       const factory = new TemplateFactory({
         html: false,
         template: '<div><div id="foo"></div></div>',
-        content: { '#foo': contentElement }
+        content: { '#foo': contentElement },
       })
 
       const fooEl = factory.toHtml().querySelector('#foo')
@@ -188,7 +196,7 @@ describe('TemplateFactory', () => {
       const factory = new TemplateFactory({
         html: true,
         template: '<div><div id="foo"></div></div>',
-        content: { '#foo': contentElement }
+        content: { '#foo': contentElement },
       })
 
       const fooEl = factory.toHtml().querySelector('#foo')
@@ -202,8 +210,8 @@ describe('TemplateFactory', () => {
       const factory = new TemplateFactory({
         content: {
           '.foo': 'bar',
-          '.foo2': 'bar2'
-        }
+          '.foo2': 'bar2',
+        },
       })
       expect(factory.getContent()).toEqual(['bar', 'bar2'])
     })
@@ -215,8 +223,8 @@ describe('TemplateFactory', () => {
           '.foo2': '',
           '.foo3': null,
           '.foo4': () => 2,
-          '.foo5': () => null
-        }
+          '.foo5': () => null,
+        },
       })
       expect(factory.getContent()).toEqual(['bar', 2])
     })
@@ -228,8 +236,8 @@ describe('TemplateFactory', () => {
         content: {
           '.foo': 'bar',
           '.foo2': 'bar2',
-          '.foo3': ''
-        }
+          '.foo3': '',
+        },
       })
       expect(factory.hasContent()).toBeTrue()
     })
@@ -239,8 +247,8 @@ describe('TemplateFactory', () => {
         content: {
           '.foo2': '',
           '.foo3': null,
-          '.foo4': () => null
-        }
+          '.foo4': () => null,
+        },
       })
       expect(factory.hasContent()).toBeFalse()
     })
@@ -252,23 +260,24 @@ describe('TemplateFactory', () => {
         '<div>',
         '  <div class="foo"></div>',
         '  <div class="foo2"></div>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const factory = new TemplateFactory({
         template,
         content: {
           '.foo': 'bar',
-          '.foo2': 'bar2'
-        }
+          '.foo2': 'bar2',
+        },
       })
 
-      const html = selector => factory.toHtml().querySelector(selector).textContent
+      const html = (selector) =>
+        factory.toHtml().querySelector(selector).textContent
       expect(html('.foo')).toEqual('bar')
       expect(html('.foo2')).toEqual('bar2')
       factory.changeContent({
         '.foo': 'test',
-        '.foo2': 'test2'
+        '.foo2': 'test2',
       })
 
       expect(html('.foo')).toEqual('test')
@@ -280,23 +289,24 @@ describe('TemplateFactory', () => {
         '<div>',
         '  <div class="foo"></div>',
         '  <div class="foo2"></div>',
-        '</div>'
+        '</div>',
       ].join('')
 
       const factory = new TemplateFactory({
         template,
         content: {
           '.foo': 'bar',
-          '.foo2': 'bar2'
-        }
+          '.foo2': 'bar2',
+        },
       })
 
-      const html = selector => factory.toHtml().querySelector(selector).textContent
+      const html = (selector) =>
+        factory.toHtml().querySelector(selector).textContent
       expect(html('.foo')).toEqual('bar')
       expect(html('.foo2')).toEqual('bar2')
       factory.changeContent({
         '.foo': 'test',
-        '.wrong': 'wrong'
+        '.wrong': 'wrong',
       })
 
       expect(html('.foo')).toEqual('test')

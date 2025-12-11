@@ -19,7 +19,6 @@ body.light .nav-logo.tint {
   filter: none;
 }
 
-/* Fallback tanpa backdrop-filter */
 @supports not (
   (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
 ) {
